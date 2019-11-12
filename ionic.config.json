@@ -1,0 +1,7 @@
+{
+  "name": "studentPortal",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
