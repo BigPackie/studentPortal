@@ -1,8 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab One
+      {{ 'HOME.title' | translate:param }}
     </ion-title>
+    <div>
+      {{ 'test' | translate }}
+    </div>
   </ion-toolbar>
 </ion-header>
 
@@ -14,6 +17,9 @@
         <ion-card-title>Welcome to Ionic</ion-card-title>
       </ion-card-header>
       <ion-card-content>
+        <p>{{ 'test' | translate }}</p>
+        <p>{{ 'test' | translate:params }}</p>
+        <p>{{ 'test' | translate:param }}</p>
         <p>Now that your app has been created, you'll want to start building out features and components. Check out some of the resources below for next steps.</p>
       </ion-card-content>
     </ion-card>
