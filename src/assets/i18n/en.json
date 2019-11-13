@@ -3,5 +3,11 @@
     "HOME" : {
         "title" : "Home",
         "tab" : "Home"
-    }
+    },
+    "SETTINGS":"Settings",
+    "SETTINGS.LANGUAGE":"Language (ภาษา)",
+    "LANGUAGE.THAI":"Thai",
+    "LANGUAGE.ENGLISH":"English",
+    "CONFIRM":"Confirm",
+    "DECLINE":"Cancel"
 }

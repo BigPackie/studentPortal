@@ -1,0 +1,11 @@
+<ion-list>
+    <ion-list-header>{{ 'SETTINGS' | translate }}</ion-list-header> 
+    <ion-item>
+      <ion-label>{{ 'SETTINGS.LANGUAGE' | translate }}</ion-label>
+      <ion-select [(ngModel)]="chosenLanguage" okText="{{ 'CONFIRM' | translate }}" cancelText="{{ 'DECLINE' | translate }}" (ionChange)="languageChanged()">
+        <ion-select-option value="en">{{ 'LANGUAGE.ENGLISH' | translate }}</ion-select-option>
+        <ion-select-option value="th">{{ 'LANGUAGE.THAI' | translate }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  
+  </ion-list>

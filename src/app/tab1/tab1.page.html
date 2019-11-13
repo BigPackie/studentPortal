@@ -1,11 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      {{ 'HOME.title' | translate:param }}
-    </ion-title>
-    <div>
-      {{ 'test' | translate }}
-    </div>
+    <ion-buttons slot="end">
+      <app-settings-popover></app-settings-popover>
+    </ion-buttons>
+    <ion-title>{{ 'HOME.title' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 

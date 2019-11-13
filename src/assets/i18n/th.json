@@ -1,0 +1,13 @@
+{
+    "test": "hakuna matata",
+    "HOME" : {
+        "title" : "บ้าน",
+        "tab" : "บ้าน"
+    },
+    "SETTINGS":"ตัวเลือก",
+    "SETTINGS.LANGUAGE":"ภาษา (Language)",
+    "LANGUAGE.THAI":"ภาษาไทย",
+    "LANGUAGE.ENGLISH":"ภาษาอังกฤษ",
+    "CONFIRM":"ยืนยัน",
+    "DECLINE":"ยกเลิก"
+}

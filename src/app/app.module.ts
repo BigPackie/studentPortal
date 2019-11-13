@@ -14,9 +14,9 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateConfigService } from './services/translate-config.service';
+import { ComponentsModule } from './components/components.module';
 
 export function LanguageLoader(http: HttpClient) {
-  //return new TranslateHttpLoader(http, '../assets/i18n/', '.json');
   return new TranslateHttpLoader(http);
 }
 
@@ -31,7 +31,6 @@ export function LanguageLoader(http: HttpClient) {
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        //useFactory: (LanguageLoader),
         useFactory: LanguageLoader,
         deps: [HttpClient]
       }
