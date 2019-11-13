@@ -1,11 +1,26 @@
 {
-    "test": "kowabunga",
-    "HOME" : {
-        "title" : "Home",
-        "tab" : "Home"
+    "test": "cowabunga",
+    "TAB1" : {
+        "TITLE" : "News & Promotions",
+        "TAB" : "Home"
+    },
+    "TAB2" : {
+        "TITLE" : "Service Benefits",
+        "TAB" : "Benefits"
+    },
+    "TAB3" : {
+        "TITLE" : "Rewards",
+        "TAB" : "Rewards"
+    },
+    "TAB4" : {
+        "TITLE" : "Contacts",
+        "TAB" : "Contacts"
     },
     "SETTINGS":"Settings",
     "SETTINGS.LANGUAGE":"Language (ภาษา)",
+    "INFO":"Information",
+    "ACCOUNT":"Account",
+    "ACCOUNT.USER":"User",
     "LANGUAGE.THAI":"Thai",
     "LANGUAGE.ENGLISH":"English",
     "CONFIRM":"Confirm",
