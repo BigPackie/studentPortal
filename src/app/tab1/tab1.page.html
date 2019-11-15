@@ -8,22 +8,18 @@
 </ion-header>
 
 <ion-content fullscreen class="ion-padding">
-  <ion-slides>
+    <ion-card>
+        News
+      <ion-slides id="news">
+          <ion-slide *ngFor="let item of newsObservable | async">
+            <img [src]="item.overviewImageSource" (error)="showNewsErrorPicture($event.srcElement)" alt="There might be some issues with the connection."/>
+          </ion-slide>
+      </ion-slides>
+      </ion-card>
+  <h2>News</h2>
+  <ion-slides id="news">
     <ion-slide *ngFor="let item of newsObservable | async">
       <img [src]="item.overviewImageSource" (error)="showNewsErrorPicture($event.srcElement)" alt="There might be some issues with the connection."/>
     </ion-slide>
-
-    <!-- <ion-slide>
-      <img [src]="assets/img/news/slide-2.jpg"/>
-    </ion-slide>
-
-    <ion-slide>
-      <img [src]="assets/img/news/slide-3.jpg"/>
-    </ion-slide>
-
-    <ion-slide>
-      <img [src]="assets/img/news/slide-4.jpg"/>
-    </ion-slide> -->
-
   </ion-slides>
 </ion-content>
