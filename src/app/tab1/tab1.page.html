@@ -9,8 +9,8 @@
 
 <ion-content fullscreen class="ion-padding">
   <ion-slides>
-    <ion-slide *ngFor="let item of news">
-      <img [src]="item.overviewImageSource" (error)="getNewsErrorPicture($event.srcElement)"/>
+    <ion-slide *ngFor="let item of newsObservable | async">
+      <img [src]="item.overviewImageSource" (error)="showNewsErrorPicture($event.srcElement)" alt="There might be some issues with the connection."/>
     </ion-slide>
 
     <!-- <ion-slide>

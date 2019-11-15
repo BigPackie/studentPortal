@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit,  } from '@angular/core';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { ErrorPictures } from '../services/errorPictures';
+import { DataService } from '../services/data.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tab1',
@@ -9,25 +11,28 @@ import { ErrorPictures } from '../services/errorPictures';
 })
 export class Tab1Page {
 
-  private localAssetsUrl = "assets/";
+  // news = [];
+  newsObservable : Observable<any[]>;
 
-  news = [];
 
+  constructor(private httpClient: HttpClient, private dataService: DataService) {}
 
-  constructor(private httpClient: HttpClient) {}
-
-  ngOnInit(){
-    this.getNews();
+  //reload data every time the user enters this tab
+  ionViewWillEnter(){
+    this.loadNews();
   }
 
-  getNews(){
-    this.httpClient.get(this.localAssetsUrl + 'dummy/dummy-news.json').subscribe((res : any[])=>{
-      console.log(res);
-      this.news = res;
-    });
+  
+
+  loadNews() {
+    // this.dataService.getNews()
+    //   .subscribe((res : any[]) => {
+    //     this.news = res;
+    //   });
+    this.newsObservable = this.dataService.getNews();
   }
 
-  getNewsErrorPicture(imgElement){
+  showNewsErrorPicture(imgElement){
     console.warn("Picture loading failed, loading error picture.");
     imgElement.src = ErrorPictures.newsErrorPicture;
   }
