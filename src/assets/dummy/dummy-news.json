@@ -1,0 +1,26 @@
+[
+    {
+        "id": "1",
+        "validFrom": "1.1.2018",
+        "validTo": "1.1.2028",
+        "overviewImageSource": "assets/img/news/slide-1.jpg"
+    },
+    {
+        "id": "2",
+        "validFrom": "1.1.2018",
+        "validTo": "1.1.2028",
+        "overviewImageSource": "assets/img/news/slide-2.jpg"
+    },
+    {
+        "id": "3",
+        "validFrom": "1.1.2018",
+        "validTo": "1.1.2028",
+        "overviewImageSource": "assets/img/news/slide-34.jpg"
+    },
+    {
+        "id": "4",
+        "validFrom": "1.1.2018",
+        "validTo": "1.1.2028",
+        "overviewImageSource": "assets/img/news/slide-4.jpg"
+    }
+]
