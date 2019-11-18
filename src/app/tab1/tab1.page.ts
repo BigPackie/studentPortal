@@ -16,7 +16,7 @@ export class Tab1Page {
 
   slideOpts = {
     autoplay: {
-      delay: 3000,
+      delay: 4000,
       disableOnInteraction: false,
     },
   }
@@ -31,7 +31,7 @@ export class Tab1Page {
 
   
 
-  loadNews() {
+  private loadNews() {
     // this.dataService.getNews()
     //   .subscribe((res : any[]) => {
     //     this.news = res;
@@ -43,4 +43,13 @@ export class Tab1Page {
     console.warn("Picture loading failed, loading error picture.");
     imgElement.src = ErrorPictures.newsErrorPicture;
   }
+
+  showNewsDetail(){
+    alert(`News detail not yet imlpemented.`);
+  }
+
+  showPromotionDetail(){
+    alert(`Promotion detail not yet imlpemented.`);
+  }
+
 }

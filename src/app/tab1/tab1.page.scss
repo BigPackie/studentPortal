@@ -3,8 +3,10 @@
   overflow: hidden;
 }
 
-ion-card.news {
-  // margin: 0;
+
+ion-card.news>div {
+  background-color: red;
+  color: black;
 }
 
 ion-slides.news {
@@ -12,7 +14,12 @@ ion-slides.news {
   height: 30vh;
 }
 
-ion-slides.news img{
+ion-slides.news img {
   width: auto;
   height: 100%;
+}
+
+.custom-card-header {
+  padding-left: 10px;
+  padding-top: 5px;
 }

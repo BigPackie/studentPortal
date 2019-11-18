@@ -9,20 +9,21 @@
 
 <ion-content id="home-tab">
   <ion-card class="news">
-    <div>{{ 'TAB1.NEWS' | translate }}</div>
+    <div class="custom-card-header">{{ 'TAB1.NEWS' | translate }}</div>
     <ion-slides class="news" [options]="slideOpts" pager="true">
       <ion-slide *ngFor="let item of newsObservable | async">
         <img [src]="item.overviewImageSource" (error)="showNewsErrorPicture($event.srcElement)"
-          alt="There might be some issues with the connection." />
+          alt="There might be some issues with the connection." (click)="showNewsDetail()"/>
       </ion-slide>
     </ion-slides>
   </ion-card>
-  <ion-card class="promotions">
-    <div>{{ 'TAB1.PROMOTIONS' | translate }}</div>
+  <ion-card color="dark" class="promotions" >
+    <div class="custom-card-header">{{ 'TAB1.PROMOTIONS' | translate }}</div>
     <ion-grid>
       <ion-row>
-        <ion-col size="6">
-          <img src="assets/img/promotions/promotion-1.jpg" />
+        <ion-col size="6" class="ion-activatable">
+          <ion-ripple-effect></ion-ripple-effect>
+          <img src="assets/img/promotions/promotion-1.jpg" (click)="showPromotionDetail()"/>
         </ion-col>
         <ion-col size="6">
           <img src="assets/img/promotions/promotion-1.jpg" />
