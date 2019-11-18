@@ -3,15 +3,16 @@
   overflow: hidden;
 }
 
-#news {
-  background-color: yellow;
+ion-card.news {
+  // margin: 0;
 }
 
-#news ion-slide {
-  height: 50vh;
+ion-slides.news {
+  background-color: black;
+  height: 30vh;
 }
 
-#news ion-slide img{
+ion-slides.news img{
   width: auto;
   height: 100%;
 }

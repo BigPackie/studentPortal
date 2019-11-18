@@ -14,6 +14,13 @@ export class Tab1Page {
   // news = [];
   newsObservable : Observable<any[]>;
 
+  slideOpts = {
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+  }
+
 
   constructor(private httpClient: HttpClient, private dataService: DataService) {}
 

@@ -2,7 +2,9 @@
     "test": "cowabunga",
     "TAB1" : {
         "TITLE" : "News & Promotions",
-        "TAB" : "Home"
+        "TAB" : "Home",
+        "NEWS" : "News",
+        "PROMOTIONS" : "Promotions"
     },
     "TAB2" : {
         "TITLE" : "Service Benefits",
