@@ -9,10 +9,12 @@ export interface TimedItem {
     validFrom: Date,
 
     validTo: Date,
+}
 
-    overviewImageBase64: Buffer; //image encoded in base 64 or maybe just binary, base64 needs 30% more data
+export interface NewsItem extends TimedItem {
+    overviewImageBase64: Buffer; //image encoded in base 64 string, only option for transfering in JSON. At mongo db, it can be stored as binary using binData type
 
-    detailImage: any; //this should be mongodb ObjectId again, we will load the image only when user wants to see the details
+    detailImageId: any; //this should be mongodb ObjectId again, we will load the image only when user wants to see the details
 
     detailText: any; //maybe not needed
 }

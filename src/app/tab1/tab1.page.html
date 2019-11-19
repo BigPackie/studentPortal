@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="light">
     <ion-buttons slot="end">
       <app-settings-popover></app-settings-popover>
     </ion-buttons>
@@ -7,18 +7,24 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content id="home-tab">
+<ion-content id="home-tab" color="medium"> 
   <ion-card class="news">
-    <div class="custom-card-header">{{ 'TAB1.NEWS' | translate }}</div>
+    <div class="custom-card-header">
+      <span>{{ 'TAB1.NEWS' | translate }}</span>
+      <ion-badge color="dark">42</ion-badge>
+    </div>
     <ion-slides class="news" [options]="slideOpts" pager="true">
       <ion-slide *ngFor="let item of newsObservable | async">
-        <img [src]="item.overviewImageSource" (error)="showNewsErrorPicture($event.srcElement)"
+        <img [src]="getNewsItemPicture(item)" (error)="showNewsErrorPicture($event.srcElement)"
           alt="There might be some issues with the connection." (click)="showNewsDetail()"/>
       </ion-slide>
     </ion-slides>
   </ion-card>
   <ion-card color="dark" class="promotions" >
-    <div class="custom-card-header">{{ 'TAB1.PROMOTIONS' | translate }}</div>
+    <div class="custom-card-header">
+      <span>{{ 'TAB1.PROMOTIONS' | translate }}</span>
+      <ion-badge color="light">9</ion-badge>
+    </div>
     <ion-grid>
       <ion-row>
         <ion-col size="6" class="ion-activatable">
@@ -26,7 +32,7 @@
           <img src="assets/img/promotions/promotion-1.jpg" (click)="showPromotionDetail()"/>
         </ion-col>
         <ion-col size="6">
-          <img src="assets/img/promotions/promotion-1.jpg" />
+          <img src="data:image/jpeg;base64," />
         </ion-col>
         <ion-col size="6">
           <img src="assets/img/promotions/promotion-1.jpg" />

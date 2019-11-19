@@ -4,14 +4,19 @@
 }
 
 
-ion-card.news>div {
-  background-color: red;
-  color: black;
+ion-card.news {
+  --background: var(--ion-color-dark);
+}
+ion-card.news>.custom-card-header {
+  background: linear-gradient(rgba(255, 0, 0, 0.9),rgba(255, 0, 0, 0.0));
+  color: var(--ion-color-dark-contrast,white);
+  font-weight: bold;
 }
 
 ion-slides.news {
-  background-color: black;
+  background-color: --ion-color-dark;
   height: 30vh;
+  --bullet-background-active: rgba(255, 0, 0, 0.5);
 }
 
 ion-slides.news img {
@@ -20,6 +25,15 @@ ion-slides.news img {
 }
 
 .custom-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding-left: 10px;
+  padding-right: 10px;
   padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+ion-card.promotions>ion-grid {
+  padding-top: 0;
 }

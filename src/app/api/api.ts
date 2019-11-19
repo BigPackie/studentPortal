@@ -16,7 +16,7 @@ export class Api {
 
   }
   
-  get(baseUrl: string = this.baseUrl, resource: string, params?: any, reqOpts?: any): Observable<any> {
+  get<T>(baseUrl: string = this.baseUrl, resource: string, params?: any, reqOpts?: any): Observable<any> {
     if (!reqOpts) {
       reqOpts = {
         params: new HttpParams()
@@ -31,7 +31,7 @@ export class Api {
       }
     }
 
-    return this.http.get(baseUrl + '/' + resource, reqOpts).pipe(
+    return this.http.get<T>(baseUrl + '/' + resource, reqOpts).pipe(
       smartRetry(),
       catchError(error => {
         console.error(error);

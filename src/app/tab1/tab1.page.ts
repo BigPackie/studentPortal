@@ -1,8 +1,9 @@
 import { Component, OnInit,  } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { ErrorPictures } from '../services/errorPictures';
-import { DataService } from '../services/data.service';
+import { DataService, IMG_SRC_TYPE_PREFIX } from '../services/data.service';
 import { Observable } from 'rxjs';
+import { TimedItem, NewsItem } from '../services/models';
 
 @Component({
   selector: 'app-tab1',
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs';
 export class Tab1Page {
 
   // news = [];
-  newsObservable : Observable<any[]>;
+  newsObservable : Observable<NewsItem[]>;
 
   slideOpts = {
     autoplay: {
@@ -42,6 +43,10 @@ export class Tab1Page {
   showNewsErrorPicture(imgElement){
     console.warn("Picture loading failed, loading error picture.");
     imgElement.src = ErrorPictures.newsErrorPicture;
+  }
+
+  getNewsItemPicture(newsItem: NewsItem): string{ 
+    return IMG_SRC_TYPE_PREFIX.Base64 + newsItem.overviewImageBase64;
   }
 
   showNewsDetail(){
