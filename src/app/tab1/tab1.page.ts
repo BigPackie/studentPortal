@@ -13,7 +13,7 @@ import { TimedItem, NewsItem } from '../services/models';
 export class Tab1Page {
 
   // news = [];
-  newsObservable : Observable<NewsItem[]>;
+  news$ : Observable<NewsItem[]>;
 
   slideOpts = {
     autoplay: {
@@ -37,7 +37,7 @@ export class Tab1Page {
     //   .subscribe((res : any[]) => {
     //     this.news = res;
     //   });
-    this.newsObservable = this.dataService.getNews();
+    this.news$ = this.dataService.getNews();
   }
 
   showNewsErrorPicture(imgElement){

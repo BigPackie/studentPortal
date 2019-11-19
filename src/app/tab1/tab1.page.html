@@ -11,12 +11,12 @@
   <ion-card class="news">
     <div class="custom-card-header">
       <span>{{ 'TAB1.NEWS' | translate }}</span>
-      <ion-badge color="dark">42</ion-badge>
+      <ion-badge *ngIf="news$ | async as news" color="dark">{{news.length}}</ion-badge>
     </div>
-    <ion-slides class="news" [options]="slideOpts" pager="true">
-      <ion-slide *ngFor="let item of newsObservable | async">
+    <ion-slides class="news" [options]="slideOpts" pager="true" *ngIf="news$ | async as news;else newsLoading">
+      <ion-slide *ngFor="let item of news">
         <img [src]="getNewsItemPicture(item)" (error)="showNewsErrorPicture($event.srcElement)"
-          alt="There might be some issues with the connection." (click)="showNewsDetail()"/>
+          alt="There might be some issues with the connection." (click)="showNewsDetail()" />
       </ion-slide>
     </ion-slides>
   </ion-card>
@@ -32,7 +32,7 @@
           <img src="assets/img/promotions/promotion-1.jpg" (click)="showPromotionDetail()"/>
         </ion-col>
         <ion-col size="6">
-          <img src="data:image/jpeg;base64," />
+          <img src="assets/img/promotions/promotion-1.jpg" />
         </ion-col>
         <ion-col size="6">
           <img src="assets/img/promotions/promotion-1.jpg" />
@@ -71,3 +71,5 @@
     </ion-grid>
   </ion-card>
 </ion-content>
+
+<ng-template #newsLoading>Loading news...</ng-template> <!--this does not handle error state of the observable-->

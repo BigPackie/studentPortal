@@ -11,9 +11,11 @@ ion-card.news>.custom-card-header {
   background: linear-gradient(rgba(255, 0, 0, 0.9),rgba(255, 0, 0, 0.0));
   color: var(--ion-color-dark-contrast,white);
   font-weight: bold;
+  padding: 5px;
 }
 
 ion-slides.news {
+  padding: 5px;
   background-color: --ion-color-dark;
   height: 30vh;
   --bullet-background-active: rgba(255, 0, 0, 0.5);
