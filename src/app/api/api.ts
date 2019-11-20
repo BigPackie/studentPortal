@@ -17,6 +17,7 @@ export class Api {
   }
   
   get<T>(baseUrl: string = this.baseUrl, resource: string, params?: any, reqOpts?: any): Observable<any> {
+   // debugger;
     if (!reqOpts) {
       reqOpts = {
         params: new HttpParams()

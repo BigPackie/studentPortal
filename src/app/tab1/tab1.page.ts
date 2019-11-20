@@ -28,6 +28,8 @@ export class Tab1Page {
   //reload data every time the user enters this tab
   ionViewWillEnter(){
     this.loadNews();
+    this.dataService.getTestMessage(666).subscribe((message) => console.log(message));
+    this.dataService.getAllNews().subscribe((message) => console.log(message));
   }
 
   
