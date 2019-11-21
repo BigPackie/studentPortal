@@ -40,7 +40,7 @@ export class DataService {
     return this.api.get("http://localhost:3000", "messages", {id: id});
   }
 
-  getAllNews(): Observable<any> {
-    return this.api.get("http://localhost:3000", "database/news");
+  getAllNews(): Observable<NewsItem[]> {
+    return this.api.get<NewsItem[]>("http://localhost:3000", "database/news");
   }
 }

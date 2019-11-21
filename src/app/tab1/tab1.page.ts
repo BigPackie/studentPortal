@@ -28,8 +28,13 @@ export class Tab1Page {
   //reload data every time the user enters this tab
   ionViewWillEnter(){
     this.loadNews();
+
+    //just for testing, if subscribing like this also have to unsubscrie in ng on destroy
     this.dataService.getTestMessage(666).subscribe((message) => console.log(message));
-    this.dataService.getAllNews().subscribe((message) => console.log(message));
+    this.dataService.getAllNews().subscribe((news) => {
+      console.log(news);
+      news.forEach(item => console.log(item._id))
+    });
   }
 
   

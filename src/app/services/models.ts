@@ -4,7 +4,7 @@ export interface TimedItem {
      * 
      * Inserting through admin portal does not require a manual input for id (created automatically by mongodb)
      * */
-    id: any, 
+    _id: any, 
 
     validFrom: Date,
 
