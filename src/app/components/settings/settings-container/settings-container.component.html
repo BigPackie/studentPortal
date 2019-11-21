@@ -1,0 +1,20 @@
+<ion-list>
+    <ion-list-header>{{ 'ACCOUNT' | translate }}</ion-list-header>
+    <ion-item detail (click)="buttonClick()">  <!-- show a modal with login or logout button based on context-->
+        <ion-label>{{ 'ACCOUNT.USER' | translate }}</ion-label>
+        <ion-note slot="end" color="default">Anonymus</ion-note>
+    </ion-item>
+    <ion-list-header>{{ 'SETTINGS' | translate }}</ion-list-header> 
+    <ion-item>
+      <ion-label>{{ 'SETTINGS.LANGUAGE' | translate }}</ion-label>
+      <ion-select [(ngModel)]="chosenLanguage" okText="{{ 'CONFIRM' | translate }}" cancelText="{{ 'DECLINE' | translate }}" (ionChange)="languageChanged()">
+        <ion-select-option value="en">{{ 'LANGUAGE.ENGLISH' | translate }}</ion-select-option>
+        <ion-select-option value="th">{{ 'LANGUAGE.THAI' | translate }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-list-header>{{ 'INFO' | translate }}</ion-list-header> 
+    <ion-item>
+      <ion-label>App version</ion-label>
+      <ion-note slot="end" color="default">0.01</ion-note>
+    </ion-item>
+  </ion-list>

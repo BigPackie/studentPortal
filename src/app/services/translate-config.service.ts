@@ -7,7 +7,7 @@ import { TranslateService } from "@ngx-translate/core";
 export class TranslateConfigService {
 
   //TODO move to config;
-  _allowedLanguages = ["en", "sk"];
+  _allowedLanguages = ["en", "th"];
 
   constructor(private translate: TranslateService) {
     translate.addLangs(this._allowedLanguages);
@@ -34,5 +34,9 @@ export class TranslateConfigService {
 
   _isAllowedLanguage(language: string): boolean {
     return this._allowedLanguages.includes(language);
+  }
+
+  getLanguage() : string {
+    return this.translate.currentLang;
   }
 }

@@ -1,8 +1,10 @@
 {
-  "name": "studentPortal",
+  "name": "student-portal",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "description": "ICIT student portal",
+  "author": "ppindes@gmail.com",
+  "homepage": "https://kmutnb.ac.th/faculty-and-agencies/bangkok/icit.aspx",
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -25,6 +27,7 @@
     "@ionic/angular": "^4.7.1",
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
+    "buffer": "^5.4.3",
     "core-js": "^2.5.4",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
@@ -42,7 +45,7 @@
     "@ionic/angular-toolkit": "~2.0.0",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "~8.9.4",
+    "@types/node": "^12.12.7",
     "codelyzer": "^5.0.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -55,6 +58,5 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.4.3"
-  },
-  "description": "An Ionic project"
+  }
 }
