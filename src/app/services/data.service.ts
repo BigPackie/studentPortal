@@ -22,7 +22,7 @@ export class DataService {
 
    constructor(private api: Api) { }
 
-  getNews(): Observable<NewsItem[]> {
+  getDummyNews(): Observable<NewsItem[]> {
     return this.api.get<NewsItem[]>(undefined, DATA_RESOURCES.News)
     //keeping it here as a reference on how to enrich data, so we can still use the async pipe in templates for auto unsubscription.
    // .pipe(
