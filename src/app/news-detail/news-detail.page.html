@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
+    </ion-buttons>
+    <ion-title>newsDetail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <div *ngIf="newsItemDetail$ | async as newsItemDetail; else newsDetailLoading">
+      <img [src]="getNewsDetailPicture(newsItemDetail)" (error)="showNewsDetailErrorPicture($event.srcElement)"
+      alt="There might be some issues with the connection."/>
+  </div>
+</ion-content>
+
+<ng-template #newsDetailLoading>Loading newsDetail...</ng-template> <!--this does not handle error state of the observable-->

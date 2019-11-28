@@ -3,7 +3,7 @@ import { Api } from '../api/api';
 import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { map } from "rxjs/operators";
-import { TimedItem, NewsItem } from './models';
+import { TimedItem, NewsItem, NewsItemDetail } from './models';
 import { toBase64String } from '@angular/compiler/src/output/source_map';
 
 export enum IMG_SRC_TYPE_PREFIX {
@@ -42,5 +42,9 @@ export class DataService {
 
   getAllNews(): Observable<NewsItem[]> {
     return this.api.get<NewsItem[]>("http://localhost:3000", "database/news");
+  }
+
+  getNewsDetail(id: string): Observable<NewsItemDetail> {
+    return this.api.get<NewsItemDetail>("http://localhost:3000", "database/newsDetail", {id});
   }
 }

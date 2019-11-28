@@ -16,7 +16,7 @@
     <ion-slides class="news" [options]="slideOpts" pager="true" *ngIf="news$ | async as news;else newsLoading">
       <ion-slide *ngFor="let item of news">
         <img [src]="getNewsItemPicture(item)" (error)="showNewsErrorPicture($event.srcElement)"
-          alt="There might be some issues with the connection." (click)="showNewsDetail()" />
+          alt="There might be some issues with the connection."  routerLink="/tabs/tab1/news-detail/{{item._id}}"/>
       </ion-slide>
     </ion-slides>
   </ion-card>

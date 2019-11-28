@@ -45,10 +45,11 @@ export class Tab1Page {
     //   .subscribe((res : any[]) => {
     //     this.news = res;
     //   });
-    this.news$ = forkJoin(this.dataService.getDummyNews(), this.dataService.getAllNews())
-      .pipe(
-        map(([s1, s2]) => [...s1, ...s2]),
-      );
+    // this.news$ = forkJoin(this.dataService.getDummyNews(), this.dataService.getAllNews())
+    //   .pipe(
+    //     map(([s1, s2]) => [...s1, ...s2]),
+    //   );
+    this.news$ = this.dataService.getAllNews();
   }
 
   showNewsErrorPicture(imgElement){
@@ -64,10 +65,6 @@ export class Tab1Page {
     }
 
     return IMG_SRC_TYPE_PREFIX.Base64 + newsItem.overviewImageBase64;
-  }
-
-  showNewsDetail(){
-    alert(`News detail not yet imlpemented.`);
   }
 
   showPromotionDetail(){
