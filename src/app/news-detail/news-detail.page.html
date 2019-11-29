@@ -14,4 +14,10 @@
   </div>
 </ion-content>
 
-<ng-template #newsDetailLoading>Loading newsDetail...</ng-template> <!--this does not handle error state of the observable-->
+<ng-template #newsDetailLoading>
+  <div class="center ion-text-center">
+      <ion-spinner></ion-spinner>
+      <div>Loading newsDetail...</div>
+  </div>
+ 
+</ng-template> <!--this does not handle error state of the observable-->

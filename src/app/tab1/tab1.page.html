@@ -72,4 +72,7 @@
   </ion-card>
 </ion-content>
 
-<ng-template #newsLoading>Loading news...</ng-template> <!--this does not handle error state of the observable-->
+<ng-template #newsLoading><div class="ion-text-center">
+    <ion-spinner></ion-spinner>
+    <div>Loading news...</div>
+</div></ng-template> <!--this does not handle error state of the observable-->
