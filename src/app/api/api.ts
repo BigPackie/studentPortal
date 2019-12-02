@@ -10,7 +10,9 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class Api {
   
-  private baseUrl: string = 'assets';
+  //private baseUrl: string = 'assets';
+
+  private baseUrl: string = "http://10.12.4.97:3000";
 
   constructor(public http: HttpClient) {
 

@@ -11,9 +11,9 @@
   <ion-card class="news">
     <div class="custom-card-header">
       <span>{{ 'TAB1.NEWS' | translate }}</span>
-      <ion-badge *ngIf="news$ | async as news" color="dark">{{news.length}}</ion-badge>
+      <ion-badge *ngIf="news" color="dark">{{news.length}}</ion-badge>
     </div>
-    <ion-slides class="news" [options]="slideOpts" pager="true" *ngIf="news$ | async as news;else newsLoading">
+    <ion-slides class="news" [options]="slideOpts" pager="true" *ngIf="news;else newsLoading">
       <ion-slide *ngFor="let item of news">
         <img [src]="getNewsItemPicture(item)" (error)="showNewsErrorPicture($event.srcElement)"
           alt="There might be some issues with the connection."  routerLink="/tabs/tab1/news-detail/{{item._id}}"/>

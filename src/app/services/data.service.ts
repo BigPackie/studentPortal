@@ -37,14 +37,14 @@ export class DataService {
   }
 
   getTestMessage(id: number): Observable<any> {
-    return this.api.get("http://localhost:3000", "messages", {id: id});
+    return this.api.get(undefined, "messages", {id: id});
   }
 
   getAllNews(): Observable<NewsItem[]> {
-    return this.api.get<NewsItem[]>("http://localhost:3000", "database/news");
+    return this.api.get<NewsItem[]>(undefined, "database/news");
   }
 
   getNewsDetail(id: string): Observable<NewsItemDetail> {
-    return this.api.get<NewsItemDetail>("http://localhost:3000", "database/newsDetail", {id});
+    return this.api.get<NewsItemDetail>(undefined, "database/newsDetail", {id});
   }
 }

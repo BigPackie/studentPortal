@@ -3,7 +3,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { ErrorPictures } from '../services/errorPictures';
 import { DataService, IMG_SRC_TYPE_PREFIX } from '../services/data.service';
 import { Observable, forkJoin } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { TimedItem, NewsItem } from '../services/models';
 
 @Component({
@@ -13,14 +13,17 @@ import { TimedItem, NewsItem } from '../services/models';
 })
 export class Tab1Page {
 
-  // news = [];
+  news : NewsItem[];
   news$ : Observable<NewsItem[]>;
 
   slideOpts = {
+    initialSlide: 1,
+    speed: 1000,
     autoplay: {
       delay: 4000,
       disableOnInteraction: false,
     },
+    zoom: true
   }
 
 
@@ -31,25 +34,25 @@ export class Tab1Page {
     this.loadNews();
 
     //just for testing, if subscribing like this also have to unsubscrie in ng on destroy
-    this.dataService.getTestMessage(666).subscribe((message) => console.log(message));
-    this.dataService.getAllNews().subscribe((news) => {
-      console.log(news);
-      news.forEach(item => console.log(item._id))
-    });
+    // this.dataService.getTestMessage(666).subscribe((message) => console.log(message));
+    // this.dataService.getAllNews().subscribe((news) => {
+    //   console.log(news);
+    //   news.forEach(item => console.log(item._id))
+    // });
   }
 
   
 
   private loadNews() {
-    // this.dataService.getNews()
-    //   .subscribe((res : any[]) => {
-    //     this.news = res;
-    //   });
+    this.dataService.getAllNews().pipe(take(1))
+      .subscribe((res) => {
+        this.news = res;
+      });
     // this.news$ = forkJoin(this.dataService.getDummyNews(), this.dataService.getAllNews())
     //   .pipe(
     //     map(([s1, s2]) => [...s1, ...s2]),
     //   );
-    this.news$ = this.dataService.getAllNews();
+    // this.news$ = this.dataService.getAllNews();
   }
 
   showNewsErrorPicture(imgElement){
