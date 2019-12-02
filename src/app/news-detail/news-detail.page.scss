@@ -23,5 +23,10 @@
 ion-slides.zoomSlide {
     padding: 5px;
     background-color: --ion-color-dark;
+    width: 100%;
     max-height: 100vh;
- }
+}
+
+ion-slides.zoomSlide img {
+    width: 100%;
+  }
