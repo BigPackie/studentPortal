@@ -14,7 +14,6 @@ import { TimedItem, NewsItem } from '../services/models';
 export class Tab1Page {
 
   news : NewsItem[];
-  news$ : Observable<NewsItem[]>;
 
   slideOpts = {
     initialSlide: 1,
@@ -22,8 +21,7 @@ export class Tab1Page {
     autoplay: {
       delay: 4000,
       disableOnInteraction: false,
-    },
-    zoom: true
+    }
   }
 
 
@@ -52,7 +50,6 @@ export class Tab1Page {
     //   .pipe(
     //     map(([s1, s2]) => [...s1, ...s2]),
     //   );
-    // this.news$ = this.dataService.getAllNews();
   }
 
   showNewsErrorPicture(imgElement){
