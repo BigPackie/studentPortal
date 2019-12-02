@@ -7,10 +7,21 @@
 }
 
 .center {
-margin: 0;
-position: absolute;
-top: 50%;
-left: 50%;
--ms-transform: translate(-50%, -50%);
-transform: translate(-50%, -50%);
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
+
+.loading {
+    --color: var(--ion-color-medium);
+    color: var(--ion-color-medium);
+}
+
+ion-slides.zoomSlide {
+    padding: 5px;
+    background-color: --ion-color-dark;
+    max-height: 100vh;
+ }

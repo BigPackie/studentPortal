@@ -7,15 +7,17 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
-  <div *ngIf="newsItemDetail$ | async as newsItemDetail; else newsDetailLoading">
-      <img [src]="getNewsDetailPicture(newsItemDetail)" (error)="showNewsDetailErrorPicture($event.srcElement)"
-      alt="There might be some issues with the connection."/>
-  </div>
+<ion-content color="dark">
+    <ion-slides class="zoomSlide" [options]="zoomSlideOpts" *ngIf="newsItemDetail$ | async as newsItemDetail; else newsDetailLoading">
+      <ion-slide>
+        <img [src]="getNewsDetailPicture(newsItemDetail)" (error)="showNewsDetailErrorPicture($event.srcElement)"
+        alt="There might be some issues with the connection."/>
+      </ion-slide>
+    </ion-slides>
 </ion-content>
 
 <ng-template #newsDetailLoading>
-  <div class="center ion-text-center">
+  <div class="center ion-text-center loading">
       <ion-spinner></ion-spinner>
       <div>Loading newsDetail...</div>
   </div>

@@ -18,6 +18,7 @@ export class Tab1Page {
   slideOpts = {
     initialSlide: 1,
     speed: 1000,
+    pager: true,
     autoplay: {
       delay: 4000,
       disableOnInteraction: false,

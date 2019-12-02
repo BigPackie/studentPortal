@@ -15,6 +15,11 @@ export class NewsDetailPage implements OnInit {
 
   newsItemDetail$: Observable<NewsItemDetail>;
 
+  zoomSlideOpts = {
+    zoom: true,
+    watchOverflow : true,
+  }
+
   constructor(private route: ActivatedRoute, private dataService: DataService) { }
 
   ngOnInit() {
