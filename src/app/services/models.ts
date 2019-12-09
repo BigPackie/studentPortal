@@ -13,6 +13,8 @@ export interface TimedItem {
 
 export interface NewsItem extends TimedItem {
     overviewImageBase64: string; //image encoded in base 64 string, only option for transfering in JSON. At mongo db, it can be stored as binary using binData type
+    deleted: boolean;
+    name: string;
 }
 
 export interface NewsItemDetail {
