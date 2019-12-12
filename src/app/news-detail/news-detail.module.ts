@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { NewsDetailPage } from './news-detail.page';
 
+import { QuillModule } from 'ngx-quill'
+
 const routes: Routes = [
   {
     path: '',
@@ -19,6 +21,10 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    QuillModule.forRoot({
+      format:"html",
+      theme:"snow"
+    }),
     RouterModule.forChild(routes)
   ],
   declarations: [NewsDetailPage]

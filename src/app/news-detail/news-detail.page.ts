@@ -13,7 +13,7 @@ import { ErrorPictures } from '../services/errorPictures';
 })
 export class NewsDetailPage implements OnInit {
 
-  newsItemDetail$: Observable<NewsItemDetail>;
+  newsItemDetail: NewsItemDetail;
 
   zoomSlideOpts = {
     zoom: true,
@@ -25,16 +25,16 @@ export class NewsDetailPage implements OnInit {
   ngOnInit() {
     const newsDetailId = this.route.snapshot.paramMap.get('id');
     console.log(`Getting data for news detail ${newsDetailId}`);
-    this.newsItemDetail$ = this.dataService.getNewsDetail(newsDetailId).pipe(take(1))
+    this.dataService.getNewsDetail(newsDetailId)
+      .pipe(take(1))
+      .subscribe((newsDetail) => {
+        this.newsItemDetail = newsDetail;
+      });
   }
 
   showNewsDetailErrorPicture(imgElement) {
     console.warn("Picture loading failed, loading error picture.");
     imgElement.src = ErrorPictures.newsDetailErrorPicture;
-  }
-
-  getNewsDetailPicture(newsDetail: NewsItemDetail): string {
-    return newsDetail.imageBase64;
   }
 
 }

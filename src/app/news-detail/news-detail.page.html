@@ -8,12 +8,15 @@
 </ion-header>
 
 <ion-content color="dark">
-    <ion-slides class="zoomSlide" [options]="zoomSlideOpts" *ngIf="newsItemDetail$ | async as newsItemDetail; else newsDetailLoading">
-      <ion-slide>
-        <img [src]="getNewsDetailPicture(newsItemDetail)" (error)="showNewsDetailErrorPicture($event.srcElement)"
+    <ion-slides class="zoomSlide" [options]="zoomSlideOpts" *ngIf="newsItemDetail; else newsDetailLoading">
+      <ion-slide *ngIf="newsItemDetail?.imageBase64">
+        <img [src]="newsItemDetail.imageBase64" (error)="showNewsDetailErrorPicture($event.srcElement)"
         alt="There might be some issues with the connection."/>
       </ion-slide>
     </ion-slides>
+    <div *ngIf="newsItemDetail?.description" class="quill-editor-container">
+      <quill-view [content]="newsItemDetail.description"></quill-view>
+    </div>
 </ion-content>
 
 <ng-template #newsDetailLoading>
