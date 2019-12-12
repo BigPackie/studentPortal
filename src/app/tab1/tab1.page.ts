@@ -43,7 +43,7 @@ export class Tab1Page {
   
 
   private loadNews() {
-    this.dataService.getAllNews().pipe(take(1))
+    this.dataService.getNews().pipe(take(1))
       .subscribe((res) => {
         this.news = res;
       });

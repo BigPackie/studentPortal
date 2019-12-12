@@ -40,8 +40,8 @@ export class DataService {
     return this.api.get(undefined, "messages", {id: id});
   }
 
-  getAllNews(): Observable<NewsItem[]> {
-    return this.api.get<NewsItem[]>(undefined, "database/news");
+  getNews(): Observable<NewsItem[]> {
+    return this.api.get<NewsItem[]>(undefined, "database/news/active");
   }
 
   getNewsDetail(id: string): Observable<NewsItemDetail> {
