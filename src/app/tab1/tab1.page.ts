@@ -59,13 +59,7 @@ export class Tab1Page {
   }
 
   getNewsItemPicture(newsItem: NewsItem): string{ 
-
-    if(newsItem.overviewImageBase64.includes('base64')){
-        //let base64string = "data:image/png;base64," + this.arrayBufferToBase64(newsItem.overviewImageBase64['data']);
-        return newsItem.overviewImageBase64;
-    }
-
-    return IMG_SRC_TYPE_PREFIX.Base64 + newsItem.overviewImageBase64;
+    return  newsItem.overviewImageBase64;
   }
 
   showPromotionDetail(){

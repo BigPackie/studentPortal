@@ -37,4 +37,12 @@ export class NewsDetailPage implements OnInit {
     imgElement.src = ErrorPictures.newsDetailErrorPicture;
   }
 
+  getDetailImageHeight(): string{
+    if(this.newsItemDetail.description){
+      return '50vh';
+    }
+
+    return '100vh'
+  }
+
 }

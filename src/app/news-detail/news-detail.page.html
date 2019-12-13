@@ -8,7 +8,8 @@
 </ion-header>
 
 <ion-content color="dark">
-    <ion-slides class="zoomSlide" [options]="zoomSlideOpts" *ngIf="newsItemDetail; else newsDetailLoading">
+    <ion-slides class="zoomSlide" [options]="zoomSlideOpts"  *ngIf="newsItemDetail; else newsDetailLoading"
+    [style.max-height]="getDetailImageHeight()">
       <ion-slide *ngIf="newsItemDetail?.imageBase64">
         <img [src]="newsItemDetail.imageBase64" (error)="showNewsDetailErrorPicture($event.srcElement)"
         alt="There might be some issues with the connection."/>
