@@ -15,6 +15,8 @@ export class Tab1Page {
 
   news : NewsItem[];
 
+  promotions : NewsItem[];
+
   slideOpts = {
     initialSlide: 1,
     speed: 1000,
@@ -31,6 +33,7 @@ export class Tab1Page {
   //reload data every time the user enters this tab
   ionViewWillEnter(){
     this.loadNews();
+    this.loadPromotions();
 
     //just for testing, if subscribing like this also have to unsubscrie in ng on destroy
     // this.dataService.getTestMessage(666).subscribe((message) => console.log(message));
@@ -53,9 +56,21 @@ export class Tab1Page {
     //   );
   }
 
+  private loadPromotions() {
+    this.dataService.getPromotions().pipe(take(1))
+      .subscribe((res) => {
+        this.promotions = res;
+      });
+  }
+
   showNewsErrorPicture(imgElement){
     console.warn("Picture loading failed, loading error picture.");
     imgElement.src = ErrorPictures.newsErrorPicture;
+  }
+
+  showPromotionErrorPicture(imgElement){
+    console.warn("Picture loading failed, loading error picture.");
+    imgElement.src = ErrorPictures.promotionsErrorPicture;
   }
 
   getNewsItemPicture(newsItem: NewsItem): string{ 

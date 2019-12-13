@@ -23,31 +23,14 @@
   <ion-card color="dark" class="promotions" >
     <div class="custom-card-header">
       <span>{{ 'TAB1.PROMOTIONS' | translate }}</span>
-      <ion-badge color="light">9</ion-badge>
+      <ion-badge *ngIf="promotions" color="light">{{promotions.length}}</ion-badge>
     </div>
-    <ion-grid>
+    <ion-grid *ngIf="news;else promotionsLoading">
       <ion-row>
-        <ion-col size="12" class="ion-activatable">
+        <ion-col *ngFor="let promotion of promotions" size="12" class="ion-activatable">
           <ion-ripple-effect></ion-ripple-effect>
-          <img src="assets/img/promotions/promotion-1.jpg" (click)="showPromotionDetail()"/>
-        </ion-col>
-        <ion-col size="12">
-          <img src="assets/img/promotions/promotion-1.jpg" />
-        </ion-col>
-        <ion-col size="12">
-          <img src="assets/img/promotions/promotion-1.jpg" />
-        </ion-col>
-        <ion-col size="12">
-          <img src="assets/img/promotions/promotion-1.jpg" />
-        </ion-col>
-        <ion-col size="12">
-          <img src="assets/img/promotions/promotion-1.jpg" />
-        </ion-col>
-        <ion-col size="12">
-          <img src="assets/img/promotions/promotion-1.jpg" />
-        </ion-col>
-        <ion-col size="12">
-          <img src="assets/img/promotions/promotion-1.jpg" />
+          <img [src]="promotion.overviewImageBase64" (error)="showPromotionErrorPicture($event.srcElement)" 
+            alt="There might be some issues with the connection." (click)="showPromotionDetail()"/>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -57,4 +40,9 @@
 <ng-template #newsLoading><div class="ion-text-center">
     <ion-spinner></ion-spinner>
     <div>Loading news...</div>
+</div></ng-template> <!--this does not handle error state of the observable-->
+
+<ng-template #promotionsLoading><div class="ion-text-center">
+  <ion-spinner></ion-spinner>
+  <div>Loading promotions...</div>
 </div></ng-template> <!--this does not handle error state of the observable-->

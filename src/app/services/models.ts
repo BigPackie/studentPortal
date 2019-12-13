@@ -22,3 +22,15 @@ export interface NewsItemDetail {
     description: string,
     imageBase64: string
 }
+
+export interface Promotion extends TimedItem {
+    overviewImageBase64: string; 
+    deleted: boolean;
+    name: string;
+}
+
+export interface PromotionDetail {
+    _id: string,
+    description: string,
+    imageBase64: string
+}
