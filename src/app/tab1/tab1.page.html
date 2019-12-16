@@ -30,7 +30,7 @@
         <ion-col *ngFor="let promotion of promotions" size="12" class="ion-activatable">
           <ion-ripple-effect></ion-ripple-effect>
           <img [src]="promotion.overviewImageBase64" (error)="showPromotionErrorPicture($event.srcElement)" 
-            alt="There might be some issues with the connection." (click)="showPromotionDetail()"/>
+            alt="There might be some issues with the connection." routerLink="/tabs/tab1/promotion-detail/{{promotion._id}}"/>
         </ion-col>
       </ion-row>
     </ion-grid>

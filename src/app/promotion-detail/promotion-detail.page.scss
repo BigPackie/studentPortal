@@ -1,0 +1,32 @@
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.loading {
+    --color: var(--ion-color-medium);
+    color: var(--ion-color-medium);
+}
+
+ion-slides.zoomSlide {
+    padding: 5px;
+    background-color: --ion-color-dark;
+    width: 100%;
+    max-height: 100vh;
+}
+
+ion-slides.zoomSlide img {
+    width: 100%;
+  }
