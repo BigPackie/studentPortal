@@ -1,9 +1,20 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'ACCOUNT' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div *ngIf="username | async" class="ion-padding-top ion-text-center">
+    <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
+    <h2>{{username | async}}</h2>
 
+    <ion-list inset>
+      <ion-item button (click)="support()">{{ 'SUPPORT' | translate}}</ion-item>
+      <ion-item button (click)="presentLogoutConfirm()">{{ 'LOGOUT' | translate}}</ion-item>
+    </ion-list>
+  </div>
 </ion-content>

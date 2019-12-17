@@ -26,5 +26,14 @@
     "LANGUAGE.THAI":"ภาษาไทย",
     "LANGUAGE.ENGLISH":"ภาษาอังกฤษ",
     "CONFIRM":"ยืนยัน",
-    "DECLINE":"ยกเลิก"
+    "DECLINE":"ยกเลิก",
+    "LOGIN": "เข้าสู่ระบบ",
+    "SUPPORT" : "สนับสนุน",
+    "LOGOUT" : "ออกจากระบบ",
+    "USERNAME": "ชื่อผู้ใช้",
+    "PASSWORD": "รหัสผ่าน",
+    "VALIDATION": {
+        "USERNAME" : "ต้องระบุชื่อผู้ใช้!",
+        "PASSWORD" : "ต้องการรหัสผ่าน!"
+    }
 }

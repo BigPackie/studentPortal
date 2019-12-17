@@ -2,10 +2,10 @@
     <ion-list-header>{{ 'ACCOUNT' | translate }}</ion-list-header>
     <ion-item detail button *ngIf="isLoggedIn | async" (click)="goToProfile()">  <!-- show a modal with login or logout button based on context-->
         <ion-label>{{ 'ACCOUNT.USER' | translate }}</ion-label>
-        <ion-note slot="end" color="default">Anonymus</ion-note>
+        <ion-note slot="end" color="default">{{username | async}}</ion-note>
     </ion-item>
     <ion-item detail *ngIf="!(isLoggedIn | async)" (click)="goToLogin()">  <!-- show a modal with login or logout button based on context-->
-      <ion-label>LOGIN</ion-label>
+      <ion-label>{{ 'LOGIN' | translate }}</ion-label>
   </ion-item>
     <ion-list-header>{{ 'SETTINGS' | translate }}</ion-list-header> 
     <ion-item>
@@ -18,6 +18,6 @@
     <ion-list-header>{{ 'INFO' | translate }}</ion-list-header> 
     <ion-item>
       <ion-label>App version</ion-label>
-      <ion-note slot="end" color="default">0.01</ion-note>
+      <ion-note slot="end" color="default">0.3</ion-note>
     </ion-item>
   </ion-list>

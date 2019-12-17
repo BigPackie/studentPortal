@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { LoggedInAuthGuard } from './logged-in.auth.guard';
+import { NotLoggedInAuthGuard } from './not-logged-in.auth.guard';
 
 const routes: Routes = [
   {
@@ -8,11 +10,13 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule),
+    canActivate: [NotLoggedInAuthGuard]
   },
   {
     path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
+    loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule),
+    canActivate: [LoggedInAuthGuard]
   },
 ];
 @NgModule({

@@ -4,15 +4,15 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
 
-    <ion-title>Login</ion-title>
+    <ion-title>{{ 'LOGIN' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <form #loginForm="ngForm" novalidate>
-    <ion-list>
+    <ion-list inset>
       <ion-item>
-        <ion-label position="stacked" color="primary">Username</ion-label>
+        <ion-label position="stacked" color="primary">{{ 'USERNAME' | translate }}</ion-label>
         <ion-input [(ngModel)]="loginDetails.username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
           required>
         </ion-input>
@@ -20,26 +20,26 @@
 
       <ion-text color="danger">
         <p [hidden]="username.valid || submitted == false" class="ion-padding-start">
-          Username is required
+          {{ 'VALIDATION.USERNAME' | translate}}
         </p>
       </ion-text>
 
       <ion-item>
-        <ion-label position="stacked" color="primary">Password</ion-label>
+        <ion-label position="stacked" color="primary">{{ 'PASSWORD' | translate }}</ion-label>
         <ion-input [(ngModel)]="loginDetails.password" name="password" type="password" #password="ngModel" required>
         </ion-input>
       </ion-item>
 
       <ion-text color="danger">
         <p [hidden]="password.valid || submitted == false" class="ion-padding-start">
-          Password is required
+          {{ 'VALIDATION.PASSWORD' | translate}}
         </p>
       </ion-text>
     </ion-list>
 
     <ion-row>
       <ion-col>
-        <ion-button (click)="onLogin(loginForm)" type="submit" expand="block">Login</ion-button>
+        <ion-button (click)="onLogin(loginForm)" type="submit" expand="block">{{ 'LOGIN' | translate }}</ion-button>
       </ion-col>
     </ion-row>
   </form>

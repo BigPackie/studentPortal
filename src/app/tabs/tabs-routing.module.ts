@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { LoggedInAuthGuard } from '../logged-in.auth.guard';
 
 const routes: Routes = [
   {
@@ -35,7 +36,8 @@ const routes: Routes = [
             loadChildren: () =>
               import('../tab2/tab2.module').then(m => m.Tab2PageModule)
           }
-        ]
+        ],
+        canActivate: [LoggedInAuthGuard] ////TODO: guard for children routes
       },
       {
         path: 'tab3',
@@ -45,7 +47,8 @@ const routes: Routes = [
             loadChildren: () =>
               import('../tab3/tab3.module').then(m => m.Tab3PageModule)
           }
-        ]
+        ],
+        canActivate: [LoggedInAuthGuard]  //TODO: guard for children routes
       },
       {
         path: 'tab4',

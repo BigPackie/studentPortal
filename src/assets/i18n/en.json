@@ -26,5 +26,14 @@
     "LANGUAGE.THAI":"Thai",
     "LANGUAGE.ENGLISH":"English",
     "CONFIRM":"Confirm",
-    "DECLINE":"Cancel"
+    "DECLINE":"Cancel",
+    "LOGIN": "Login",
+    "SUPPORT" : "Support",
+    "LOGOUT" : "Logout",
+    "USERNAME": "Username",
+    "PASSWORD": "Password",
+    "VALIDATION": {
+        "USERNAME" : "Username is required!",
+        "PASSWORD" : "Password is required!"
+    }
 }
