@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { SettingsPopoverComponent } from "./settings/settings-popover/settings-popover.component";
 import { SettingsContainerComponent } from './settings/settings-container/settings-container.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { RouterModule } from '@angular/router';
 
 const COMPONENTS = [
   SettingsPopoverComponent,
@@ -17,7 +18,8 @@ const COMPONENTS = [
     CommonModule,
     FormsModule,
     IonicModule.forRoot(),
-    TranslateModule
+    TranslateModule,
+    RouterModule,
   ],
   declarations: [
     COMPONENTS

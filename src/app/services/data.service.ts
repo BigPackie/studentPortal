@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { map } from "rxjs/operators";
 import { TimedItem, NewsItem, NewsItemDetail, Promotion, PromotionDetail } from './models';
+import { Storage } from '@ionic/storage';
 import { toBase64String } from '@angular/compiler/src/output/source_map';
 
 export enum IMG_SRC_TYPE_PREFIX {
@@ -15,12 +16,17 @@ enum DATA_RESOURCES {
     Promotions = 'dummy/dummy-promotions.json'
 }
 
+enum STORAGE_KEY {
+  HAS_LOGGED_IN = "hasLoggedIn",
+  USER_NAME = "username"
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-   constructor(private api: Api) { }
+   constructor(private api: Api, private storage: Storage) { }
 
   getDummyNews(): Observable<NewsItem[]> {
     return this.api.get<NewsItem[]>(undefined, DATA_RESOURCES.News)
@@ -54,5 +60,38 @@ export class DataService {
 
   getPromotionDetail(id: string): Observable<PromotionDetail> {
     return this.api.get<NewsItemDetail>(undefined, "database/promotionDetail", {id});
+  }
+
+  // --- user related data ---
+
+  login(username: string): Promise<any> {
+    return this.storage.set(STORAGE_KEY.HAS_LOGGED_IN, true).then(() => {
+      this.setUsername(username);
+      return window.dispatchEvent(new CustomEvent('user:login'));
+    });
+  }
+
+  logout(): Promise<any> {
+    return this.storage.remove(STORAGE_KEY.HAS_LOGGED_IN).then(() => {
+      return this.storage.remove(STORAGE_KEY.USER_NAME);
+    }).then(() => {
+      window.dispatchEvent(new CustomEvent('user:logout'));
+    });
+  }
+
+  setUsername(username: string): Promise<any> {
+    return this.storage.set(STORAGE_KEY.USER_NAME, username);
+  }
+
+  getUsername(): Promise<string> {
+    return this.storage.get(STORAGE_KEY.USER_NAME).then((value) => {
+      return value;
+    });
+  }
+
+  isLoggedIn(): Promise<boolean> {
+    return this.storage.get(STORAGE_KEY.HAS_LOGGED_IN).then((value) => {
+      return value === true;
+    });
   }
 }

@@ -34,3 +34,8 @@ export interface PromotionDetail {
     description: string,
     imageBase64: string
 }
+
+export class LoginData {
+    username: string;
+    password: string
+}
