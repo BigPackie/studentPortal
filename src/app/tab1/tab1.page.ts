@@ -24,7 +24,9 @@ export class Tab1Page {
     autoplay: {
       delay: 4000,
       disableOnInteraction: false,
-    }
+    },
+    spaceBetween: 5,
+    slidesPerView: 1
   }
 
 

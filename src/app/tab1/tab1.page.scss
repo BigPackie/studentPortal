@@ -3,8 +3,18 @@ ion-card.news {
   --background: var(--ion-color-dark);
   margin: 5px;
 }
+
 ion-card.news>.custom-card-header {
-  background: linear-gradient(rgba(255, 0, 0, 0.9),rgba(255, 0, 0, 0.0));
+  //background: linear-gradient(rgba(255, 0, 0, 0.9),rgba(255, 0, 0, 0.0));
+  background: linear-gradient(rgba(var(--ion-color-icit-blue-rgb), 0.7),rgba(var(--ion-color-icit-blue-rgb), 0.0));
+  color: var(--ion-color-dark-contrast,white);
+  font-weight: bold;
+  padding: 5px;
+}
+
+ion-card.promotions>.custom-card-header {
+  //background: linear-gradient(rgba(255, 0, 0, 0.9),rgba(255, 0, 0, 0.0));
+  background: linear-gradient(rgba(var(--ion-color-icit-green-rgb), 0.7),rgba(var(--ion-color-icit-green-rgb), 0.0));
   color: var(--ion-color-dark-contrast,white);
   font-weight: bold;
   padding: 5px;

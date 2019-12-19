@@ -14,7 +14,7 @@
       <ion-badge *ngIf="news" color="dark">{{news.length}}</ion-badge>
     </div>
     <ion-slides class="news" [options]="slideOpts" pager="true" *ngIf="news;else newsLoading">
-      <ion-slide *ngFor="let item of news">
+      <ion-slide *ngFor="let item of news" class="ion-activatable">
         <img [src]="getNewsItemPicture(item)" (error)="showNewsErrorPicture($event.srcElement)"
           alt="There might be some issues with the connection."  routerLink="/tabs/tab1/news-detail/{{item._id}}"/>
       </ion-slide>
@@ -23,7 +23,7 @@
   <ion-card color="dark" class="promotions" >
     <div class="custom-card-header">
       <span>{{ 'TAB1.PROMOTIONS' | translate }}</span>
-      <ion-badge *ngIf="promotions" color="light">{{promotions.length}}</ion-badge>
+      <ion-badge *ngIf="promotions" color="dark">{{promotions.length}}</ion-badge>
     </div>
     <ion-grid *ngIf="news;else promotionsLoading">
       <ion-row>

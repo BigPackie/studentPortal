@@ -28,3 +28,73 @@
 /* for quill text editor to work properly */
 @import "~quill/dist/quill.core.css";
 @import "~quill/dist/quill.snow.css";
+
+
+:root {
+
+    --ion-color-icit-green: #008d36;
+    --ion-color-icit-green-rgb: 0,141,54;
+    --ion-color-icit-green-contrast: #ffffff;
+    --ion-color-icit-green-contrast-rgb: 255,255,255;
+    --ion-color-icit-green-shade: #007c30;
+    --ion-color-icit-green-tint: #1a984a;
+
+    --ion-color-icit-orange: #f29100;
+    --ion-color-icit-orange-rgb: 242,145,0;
+    --ion-color-icit-orange-contrast: #000000;
+    --ion-color-icit-orange-contrast-rgb: 0,0,0;
+    --ion-color-icit-orange-shade: #d58000;
+    --ion-color-icit-orange-tint: #f39c1a;
+
+    --ion-color-icit-yellow: #f8d000;
+    --ion-color-icit-yellow-rgb: 248,208,0;
+    --ion-color-icit-yellow-contrast: #000000;
+    --ion-color-icit-yellow-contrast-rgb: 0,0,0;
+    --ion-color-icit-yellow-shade: #dab700;
+    --ion-color-icit-yellow-tint: #f9d51a;
+
+    --ion-color-icit-blue: #1c5d96;
+    --ion-color-icit-blue-rgb: 28,93,150;
+    --ion-color-icit-blue-contrast: #ffffff;
+    --ion-color-icit-blue-contrast-rgb: 255,255,255;
+    --ion-color-icit-blue-shade: #195284;
+    --ion-color-icit-blue-tint: #336da1;
+}
+
+.ion-color-icit-green {
+    --ion-color-base: var(--ion-color-icit-green);
+    --ion-color-base-rgb: var(--ion-color-icit-green-rgb);
+    --ion-color-contrast: var(--ion-color-icit-green-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-favorite-icit-green-rgb);
+    --ion-color-shade: var(--ion-color-icit-green-shade);
+    --ion-color-tint: var(--ion-color-icit-green-tint);
+}
+
+.ion-color-icit-orange {
+    --ion-color-base: var(--ion-color-icit-orange);
+    --ion-color-base-rgb: var(--ion-color-icit-orange-rgb);
+    --ion-color-contrast: var(--ion-color-icit-orange-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-favorite-icit-orange-rgb);
+    --ion-color-shade: var(--ion-color-icit-orange-shade);
+    --ion-color-tint: var(--ion-color-icit-orange-tint);
+}
+
+.ion-color-icit-yellow {
+    --ion-color-base: var(--ion-color-icit-yellow);
+    --ion-color-base-rgb: var(--ion-color-icit-yellow-rgb);
+    --ion-color-contrast: var(--ion-color-icit-yellow-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-favorite-icit-yellow-rgb);
+    --ion-color-shade: var(--ion-color-icit-yellow-shade);
+    --ion-color-tint: var(--ion-color-icit-yellow-tint);
+}
+
+.ion-color-icit-blue {
+    --ion-color-base: var(--ion-color-icit-blue);
+    --ion-color-base-rgb: var(--ion-color-icit-blue-rgb);
+    --ion-color-contrast: var(--ion-color-icit-blue-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-favorite-icit-blue-rgb);
+    --ion-color-shade: var(--ion-color-icit-blue-shade);
+    --ion-color-tint: var(--ion-color-icit-blue-tint);
+}
+
+

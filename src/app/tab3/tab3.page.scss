@@ -1,1 +1,33 @@
 
+ion-item {
+    --padding-start: 5px;
+    --padding-end: 0px;
+    --inner-padding-end: 0px;
+}
+
+ion-item > ion-icon {
+    font-size: 30px;
+}
+
+ion-item > ion-note {
+    margin:0px;
+    padding-left: 0px; 
+    position: absolute;
+    right: 12px;
+}
+
+
+ion-thumbnail {
+    // max-width:33vh;
+    // min-width: 33vh;
+    // height:6em;
+    // width: 8em;
+    height:25vmin;
+    width: 30vmin;
+    margin-right: 8px;
+ }
+
+// ion-thumbnail img {
+//     width:auto !important;
+//     height:auto !important;
+// }
