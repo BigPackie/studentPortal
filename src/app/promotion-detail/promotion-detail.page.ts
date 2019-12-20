@@ -32,8 +32,17 @@ export class PromotionDetailPage implements OnInit {
   }
 
   showPromotionDetailErrorPicture(imgElement) {
+    if (!this.promotionDetail) {
+      return;
+    }
+
     console.warn("Picture loading failed, loading error picture.");
-    imgElement.src = ErrorPictures.promotionsErrorPicture;
+
+    if (this.promotionDetail.description) {
+      imgElement.src = ErrorPictures.promotionHalfDetailErrorPicture;
+    } else {
+      imgElement.src = ErrorPictures.promotionDetailErrorPicture;
+    }
   }
 
   getDetailImageHeight(): string{

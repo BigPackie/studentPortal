@@ -67,12 +67,12 @@ export class Tab1Page {
 
   showNewsErrorPicture(imgElement){
     console.warn("Picture loading failed, loading error picture.");
-    imgElement.src = ErrorPictures.newsErrorPicture;
+    imgElement.src = ErrorPictures.newsItemErrorPicture;
   }
 
   showPromotionErrorPicture(imgElement){
     console.warn("Picture loading failed, loading error picture.");
-    imgElement.src = ErrorPictures.promotionsErrorPicture;
+    imgElement.src = ErrorPictures.promotionErrorPicture;
   }
 
   getNewsItemPicture(newsItem: NewsItem): string{ 

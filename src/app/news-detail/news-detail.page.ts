@@ -33,8 +33,17 @@ export class NewsDetailPage implements OnInit {
   }
 
   showNewsDetailErrorPicture(imgElement) {
+    if (!this.newsItemDetail) {
+      return;
+    }
+
     console.warn("Picture loading failed, loading error picture.");
-    imgElement.src = ErrorPictures.newsDetailErrorPicture;
+
+    if (this.newsItemDetail.description) {
+      imgElement.src = ErrorPictures.newsItemHalfDetailErrorPicture;
+    } else {
+      imgElement.src = ErrorPictures.newsItemDetailErrorPicture;
+    }
   }
 
   getDetailImageHeight(): string{

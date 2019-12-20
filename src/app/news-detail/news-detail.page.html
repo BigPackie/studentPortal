@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
         <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
     </ion-buttons>
-    <ion-title>newsDetail</ion-title>
+    <ion-title>newsDetail</ion-title> <!--  maybe could be news title? pass it as page param? -->
   </ion-toolbar>
 </ion-header>
 
@@ -17,6 +17,9 @@
     </ion-slides>
     <div *ngIf="newsItemDetail?.description" class="quill-editor-container">
       <quill-view [content]="newsItemDetail.description"></quill-view>
+    </div>
+    <div *ngIf="newsItemDetail && !newsItemDetail.imageBase64 && !newsItemDetail.description" class="center ion-text-center">
+      No details available for the news.
     </div>
 </ion-content>
 

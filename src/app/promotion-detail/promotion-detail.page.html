@@ -18,6 +18,9 @@
     <div *ngIf="promotionDetail?.description" class="quill-editor-container">
       <quill-view [content]="promotionDetail.description"></quill-view>
     </div>
+    <div *ngIf="promotionDetail && !promotionDetail.imageBase64 && !promotionDetail.description" class="center ion-text-center">
+        No details available for the promotion.
+      </div>
 </ion-content>
 
 <ng-template #promotionDetailLoading>
