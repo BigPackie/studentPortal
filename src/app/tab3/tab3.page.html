@@ -8,19 +8,21 @@
 </ion-header>
 
 <ion-content fullscreen>
+    <ion-toolbar id="swapper">
+        <ion-segment color="icit-blue" mode="md" [(ngModel)]="segmentFilter" (ionChange)="updateNews()">
+            <ion-segment-button layout="icon-end" mode="md" value="claim">
+                <ion-label>Claim</ion-label>
+                <ion-icon name="cart"></ion-icon>
+              </ion-segment-button>
+            <ion-segment-button layout="icon-end" mode="md" value="history">
+                <ion-label>History</ion-label>
+                <ion-icon name="time"></ion-icon>
+              </ion-segment-button>
+          </ion-segment>
+      </ion-toolbar>
   <ion-list-header class="milestones" sticky>
-      <ion-toolbar style="width: 75vmin;">
-          <ion-segment mode="md" [(ngModel)]="segmentFilter" (ionChange)="updateNews()">
-              <ion-segment-button  layout="icon-hide" mode="md" value="active">
-                  <ion-label>Milestones</ion-label>
-                </ion-segment-button>
-              <ion-segment-button layout="label-hide"  mode="md" value="recent">
-                  <ion-icon name="time"></ion-icon>
-                </ion-segment-button>
-            </ion-segment>
-        </ion-toolbar>
-    <!-- <ion-label>Milestones</ion-label> -->
-    <ion-chip color="icit-blue" outline="true">
+    <ion-label color="icit-green">Milestones</ion-label>
+    <ion-chip color="icit-green" outline="true">
       <ion-label>2500</ion-label>
       <ion-icon name="film"></ion-icon>
     </ion-chip>
@@ -36,7 +38,7 @@
         </ion-thumbnail>
         <ion-label class="ion-text-wrap">
           <h2>The allmighty duck!</h2>
-          <ion-text color="icit-green">
+          <ion-text color="success">
             <h3>Unlocked</h3>
           </ion-text>
           <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
@@ -78,21 +80,11 @@
   </ion-list>
 
   <ion-list-header class="rewards">
-      <!-- <div style="overflow: hidden" > -->
-          <ion-label class="ion-activatable" style="position: relative;"> 
-            Rewards
-            <ion-ripple-effect type="bounded"></ion-ripple-effect>
-          </ion-label>
-<!--        
-      </div> -->
-     
-      <ion-chip color="icit-orange" outline="false">
-        <ion-label>525</ion-label>
-        <ion-icon name="bug"></ion-icon>
-      </ion-chip>
-      <ion-button (click)="onClick()" size="medium" fill="clear" color="light">
-          <ion-icon slot="icon-only" name="time"></ion-icon>
-        </ion-button>
+    <ion-label color="icit-orange">Rewards</ion-label>
+    <ion-chip color="icit-orange" outline="false">
+      <ion-label>525</ion-label>
+      <ion-icon name="bug"></ion-icon>
+    </ion-chip>
   </ion-list-header>
   <!-- <ion-item-divider>
           <ion-label>Label</ion-label>

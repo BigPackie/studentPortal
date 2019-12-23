@@ -31,17 +31,24 @@ ion-thumbnail {
  ion-list-header {
      --background: white;
      position: sticky;
-     z-index: 100000;
+     z-index: 2;
+     padding-right: 16px;
  }
 
  ion-list-header.milestones {
-    top:0px;
+    top:53px;
     // background: red;
 }
 
 ion-list-header.rewards {
     // background: green;
-    top: 0px;
+    top: 53px;
+}
+
+#swapper {
+    position: sticky;
+    top:0px;
+    z-index: 2;
 }
 
 // ion-thumbnail img {
