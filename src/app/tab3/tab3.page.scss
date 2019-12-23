@@ -27,6 +27,23 @@ ion-thumbnail {
     margin-right: 8px;
  }
 
+
+ ion-list-header {
+     --background: white;
+     position: sticky;
+     z-index: 100000;
+ }
+
+ ion-list-header.milestones {
+    top:0px;
+    // background: red;
+}
+
+ion-list-header.rewards {
+    // background: green;
+    top: 0px;
+}
+
 // ion-thumbnail img {
 //     width:auto !important;
 //     height:auto !important;
