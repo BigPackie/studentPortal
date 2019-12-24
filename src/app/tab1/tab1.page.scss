@@ -2,6 +2,7 @@
 ion-card.news {
   --background: var(--ion-color-dark);
   margin: 5px;
+  min-height: 30vh;
 }
 
 ion-card.news>.custom-card-header {
@@ -60,4 +61,21 @@ ion-card.promotions>ion-grid img{
   height: 100%;;
   width: auto;
   margin: auto;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }

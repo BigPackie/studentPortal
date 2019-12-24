@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header translucent>
   <ion-toolbar color="light">
     <ion-buttons slot="end">
       <app-settings-popover></app-settings-popover>
@@ -7,13 +7,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content id="home-tab" color="medium"> 
-  <ion-card class="news">
+<ion-content id="home-tab" color="medium" fullscreen> 
+  <ion-card color="dark" class="news">
     <div class="custom-card-header">
       <span>{{ 'TAB1.NEWS' | translate }}</span>
       <ion-badge *ngIf="news" color="dark">{{news.length}}</ion-badge>
     </div>
-    <ion-slides class="news" [options]="slideOpts" pager="true" *ngIf="news;else newsLoading">
+    <ion-slides class="news" [options]="slideOpts" pager="true" *ngIf="news && news.length >= 1;else newsLoading">
       <ion-slide *ngFor="let item of news" class="ion-activatable">
         <img [src]="getNewsItemPicture(item)" (error)="showNewsErrorPicture($event.srcElement)"
           alt="There might be some issues with the connection."  routerLink="/tabs/tab1/news-detail/{{item._id}}"/>
@@ -25,7 +25,7 @@
       <span>{{ 'TAB1.PROMOTIONS' | translate }}</span>
       <ion-badge *ngIf="promotions" color="dark">{{promotions.length}}</ion-badge>
     </div>
-    <ion-grid *ngIf="news;else promotionsLoading">
+    <ion-grid *ngIf="promotions && promotions.length >= 1;else promotionsLoading">
       <ion-row>
         <ion-col *ngFor="let promotion of promotions" size="12" class="ion-activatable">
           <ion-ripple-effect></ion-ripple-effect>
@@ -37,12 +37,24 @@
   </ion-card>
 </ion-content>
 
-<ng-template #newsLoading><div class="ion-text-center">
+<ng-template #newsLoading>
+  <div *ngIf="!news" class="ion-text-center vertical-center center">
     <ion-spinner></ion-spinner>
     <div>Loading news...</div>
-</div></ng-template> <!--this does not handle error state of the observable-->
+  </div>
+  <div *ngIf="news && news.length == 0" class="vertical-center center">
+   There are no news.
+  </div>
+</ng-template>
+<!--this does not handle error state of the observable-->
 
-<ng-template #promotionsLoading><div class="ion-text-center">
-  <ion-spinner></ion-spinner>
-  <div>Loading promotions...</div>
-</div></ng-template> <!--this does not handle error state of the observable-->
+<ng-template #promotionsLoading>
+  <div *ngIf="!promotions" class="ion-text-center vertical-center center">
+    <ion-spinner></ion-spinner>
+    <div>Loading promotions...</div>
+  </div>
+  <div *ngIf="promotions && promotions.length == 0"  class="vertical-center center">
+    There are no promotions.
+   </div>
+</ng-template>
+<!--this does not handle error state of the observable-->

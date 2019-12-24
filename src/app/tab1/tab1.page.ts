@@ -3,7 +3,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { ErrorPictures } from '../services/errorPictures';
 import { DataService, IMG_SRC_TYPE_PREFIX } from '../services/data.service';
 import { Observable, forkJoin } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { map, take, delay } from 'rxjs/operators';
 import { TimedItem, NewsItem } from '../services/models';
 
 @Component({
