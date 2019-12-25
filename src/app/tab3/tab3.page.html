@@ -8,180 +8,162 @@
 </ion-header>
 
 <ion-content fullscreen>
-    <ion-toolbar id="swapper">
-        <ion-segment color="icit-blue" mode="md" [(ngModel)]="segmentFilter" (ionChange)="updateNews()">
-            <ion-segment-button layout="icon-end" mode="md" value="claim">
-                <ion-label>Claim</ion-label>
-                <ion-icon name="cart"></ion-icon>
-              </ion-segment-button>
-            <ion-segment-button layout="icon-end" mode="md" value="history">
-                <ion-label>History</ion-label>
-                <ion-icon name="time"></ion-icon>
-              </ion-segment-button>
-          </ion-segment>
-      </ion-toolbar>
-  <ion-list-header class="milestones" sticky>
-    <ion-label color="icit-green">Milestones</ion-label>
-    <ion-chip color="icit-green" outline="true">
-      <ion-label>2500</ion-label>
-      <ion-icon name="film"></ion-icon>
-    </ion-chip>
-  </ion-list-header>
-  <!-- <ion-item-divider sticky>
+  <ion-toolbar id="swapper">
+    <ion-segment color="icit-blue" mode="md" [(ngModel)]="mode" (ionChange)="updatePageContent()">
+      <ion-segment-button layout="icon-end" mode="md" value="rewards">
+        <ion-label>Claim</ion-label>
+        <ion-icon name="cart"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button layout="icon-end" mode="md" value="history">
+        <ion-label>History</ion-label>
+        <ion-icon name="time"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <div id="rewards" *ngIf="mode == 'rewards'">
+  
+    <!-- <ion-item-divider sticky>
           <ion-label>Label seperate</ion-label>
         </ion-item-divider> -->
-  <ion-list lines="full">
-    <ion-item-sliding (ionDrag)="drag($event.detail, $event.srcElement)">
-      <ion-item>
-        <ion-thumbnail slot="start">
-          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
-        </ion-thumbnail>
-        <ion-label class="ion-text-wrap">
-          <h2>The allmighty duck!</h2>
-          <ion-text color="success">
-            <h3>Unlocked</h3>
-          </ion-text>
-          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-        </ion-label>
-        <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-        <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
-      </ion-item>
-      <ion-item-options side="end">
-        <ion-item-option color="white">
-          <div [style.opacity]="slidingItemOpacity"><strong>SOME_CODE_FOR_EXCHANGE</strong></div>
+    <ion-list lines="full">
+        <ion-list-header class="milestones">
+            <ion-label color="icit-green">Milestones</ion-label>
+            <ion-chip color="icit-green" outline="true">
+              <ion-label>2500</ion-label>
+              <ion-icon name="film"></ion-icon>
+            </ion-chip>
+          </ion-list-header>
+      <ion-item-sliding (ionDrag)="drag($event.detail, $event.srcElement)">
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
+          </ion-thumbnail>
+          <ion-label class="ion-text-wrap">
+            <h2>The allmighty duck!</h2>
+            <ion-text color="success">
+              <h3>Unlocked</h3>
+            </ion-text>
+            <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
+          </ion-label>
+          <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
+          <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="white">
+            <div [style.opacity]="slidingItemOpacity"><strong>SOME_CODE_FOR_EXCHANGE</strong></div>
 
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
 
-    <ion-item-sliding (ionDrag)="drag($event.detail, $event.srcElement)">
-      <ion-item>
-        <ion-thumbnail slot="start">
-          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
-        </ion-thumbnail>
-        <ion-label class="ion-text-wrap">
-          <h2>The allmighty duck!</h2>
-          <ion-text color="danger">
-            <h3>45 points needed</h3>
-          </ion-text>
-          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-        </ion-label>
-        <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-        <ion-icon name="lock" slot="end"></ion-icon>
-      </ion-item>
-      <ion-item-options side="end" *ngIf="false">
-        <ion-item-option color="white">
-          <div [style.opacity]="slidingItemOpacity"><strong>SOME_CODE_FOR_EXCHANGE</strong></div>
+      <ion-item-sliding (ionDrag)="drag($event.detail, $event.srcElement)">
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
+          </ion-thumbnail>
+          <ion-label class="ion-text-wrap">
+            <h2>The allmighty duck!</h2>
+            <ion-text color="danger">
+              <h3>45 points needed</h3>
+            </ion-text>
+            <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
+          </ion-label>
+          <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
+          <ion-icon name="lock" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item-options side="end" *ngIf="false">
+          <ion-item-option color="white">
+            <div [style.opacity]="slidingItemOpacity"><strong>SOME_CODE_FOR_EXCHANGE</strong></div>
 
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
 
-  </ion-list>
+    </ion-list>
 
-  <ion-list-header class="rewards">
-    <ion-label color="icit-orange">Rewards</ion-label>
-    <ion-chip color="icit-orange" outline="false">
-      <ion-label>525</ion-label>
-      <ion-icon name="bug"></ion-icon>
-    </ion-chip>
-  </ion-list-header>
-  <!-- <ion-item-divider>
+    
+    <!-- <ion-item-divider>
           <ion-label>Label</ion-label>
         </ion-item-divider> -->
-  <ion-list lines="full">
-    <ion-item-sliding (ionDrag)="drag($event.detail, $event.srcElement)">
-      <ion-item>
-        <ion-thumbnail slot="start">
-          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
-        </ion-thumbnail>
-        <ion-label class="ion-text-wrap">
-          <h2>The allmighty duck!</h2>
-          <ion-text color="danger">
-            <h3>50 points</h3>
-          </ion-text>
-          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-        </ion-label>
-        <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-        <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
-      </ion-item>
-      <ion-item-options side="end">
-        <ion-item-option color="white">
-          <div [style.opacity]="slidingItemOpacity"><strong>SOME_CODE_FOR_EXCHANGE</strong></div>
+    <ion-list lines="full">
+        <ion-list-header class="rewards">
+            <ion-label color="icit-orange">Rewards</ion-label>
+            <ion-chip color="icit-orange" outline="false">
+              <ion-label>525</ion-label>
+              <ion-icon name="bug"></ion-icon>
+            </ion-chip>
+          </ion-list-header>
+      <ion-item-sliding (ionDrag)="drag($event.detail, $event.srcElement)">
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
+          </ion-thumbnail>
+          <ion-label class="ion-text-wrap">
+            <h2>The allmighty duck!</h2>
+            <ion-text color="danger">
+              <h3>50 points</h3>
+            </ion-text>
+            <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
+          </ion-label>
+          <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
+          <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="white">
+            <div [style.opacity]="slidingItemOpacity"><strong>SOME_CODE_FOR_EXCHANGE</strong></div>
 
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
 
-    <ion-item-sliding (ionDrag)="drag($event.detail, $event.srcElement)">
-      <ion-item>
-        <ion-thumbnail slot="start">
-          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
-        </ion-thumbnail>
-        <ion-label class="ion-text-wrap">
-          <h2>The allmighty duck!</h2>
-          <ion-text color="danger">
-            <h3>50 points</h3>
-          </ion-text>
-          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-        </ion-label>
-        <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-        <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
-      </ion-item>
-      <ion-item-options side="end">
-        <ion-item-option color="white">
-          <div [style.opacity]="slidingItemOpacity"><strong>SOME_CODE_FOR_EXCHANGE</strong></div>
+      <ion-item-sliding (ionDrag)="drag($event.detail, $event.srcElement)">
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
+          </ion-thumbnail>
+          <ion-label class="ion-text-wrap">
+            <h2>The allmighty duck!</h2>
+            <ion-text color="danger">
+              <h3>50 points</h3>
+            </ion-text>
+            <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
+          </ion-label>
+          <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
+          <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="white">
+            <div [style.opacity]="slidingItemOpacity"><strong>SOME_CODE_FOR_EXCHANGE</strong></div>
 
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
 
-    <ion-item-sliding (ionDrag)="drag($event.detail, $event.srcElement)">
-      <ion-item>
-        <ion-thumbnail slot="start">
-          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
-        </ion-thumbnail>
-        <ion-label class="ion-text-wrap">
-          <h2>The allmighty duck!</h2>
-          <ion-text color="danger">
-            <h3>50 points</h3>
-          </ion-text>
-          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-        </ion-label>
-        <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-        <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
-      </ion-item>
-      <ion-item-options side="end">
-        <ion-item-option color="white">
-          <div [style.opacity]="slidingItemOpacity"><strong>SOME_CODE_FOR_EXCHANGE</strong></div>
+      <ion-item-sliding (ionDrag)="drag($event.detail, $event.srcElement)">
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
+          </ion-thumbnail>
+          <ion-label class="ion-text-wrap">
+            <h2>The allmighty duck!</h2>
+            <ion-text color="danger">
+              <h3>50 points</h3>
+            </ion-text>
+            <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
+          </ion-label>
+          <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
+          <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="white">
+            <div [style.opacity]="slidingItemOpacity"><strong>SOME_CODE_FOR_EXCHANGE</strong></div>
 
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
 
-    <ion-item-sliding>
-      <ion-item>
-        <ion-thumbnail slot="start">
-          <img src="assets/img/error-reward.jpg">
-        </ion-thumbnail>
-        <ion-label class="ion-text-wrap">
-          <h2>The allmighty duck!</h2>
-          <ion-text color="danger">
-            <h3>50 points</h3>
-          </ion-text>
-          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-        </ion-label>
-        <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-        <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
-      </ion-item>
-      <ion-item-options side="end">
-        <ion-item-option color="light" expandable>
-          SOME_CODE_FOR_EXCHANGE
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-
-    <ion-item-sliding>
+      <ion-item-sliding>
         <ion-item>
           <ion-thumbnail slot="start">
             <img src="assets/img/error-reward.jpg">
@@ -204,101 +186,263 @@
       </ion-item-sliding>
 
       <ion-item-sliding>
-          <ion-item>
-            <ion-thumbnail slot="start">
-              <img src="assets/img/error-reward.jpg">
-            </ion-thumbnail>
-            <ion-label class="ion-text-wrap">
-              <h2>The allmighty duck!</h2>
-              <ion-text color="danger">
-                <h3>50 points</h3>
-              </ion-text>
-              <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-            </ion-label>
-            <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-            <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
-          </ion-item>
-          <ion-item-options side="end">
-            <ion-item-option color="light" expandable>
-              SOME_CODE_FOR_EXCHANGE
-            </ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img src="assets/img/error-reward.jpg">
+          </ion-thumbnail>
+          <ion-label class="ion-text-wrap">
+            <h2>The allmighty duck!</h2>
+            <ion-text color="danger">
+              <h3>50 points</h3>
+            </ion-text>
+            <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
+          </ion-label>
+          <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
+          <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="light" expandable>
+            SOME_CODE_FOR_EXCHANGE
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
 
-        <ion-item-sliding>
-            <ion-item>
-              <ion-thumbnail slot="start">
-                <img src="assets/img/error-reward.jpg">
-              </ion-thumbnail>
-              <ion-label class="ion-text-wrap">
-                <h2>The allmighty duck!</h2>
-                <ion-text color="danger">
-                  <h3>50 points</h3>
-                </ion-text>
-                <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-              </ion-label>
-              <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-              <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
-            </ion-item>
-            <ion-item-options side="end">
-              <ion-item-option color="light" expandable>
-                SOME_CODE_FOR_EXCHANGE
-              </ion-item-option>
-            </ion-item-options>
-          </ion-item-sliding>
+      <ion-item-sliding>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img src="assets/img/error-reward.jpg">
+          </ion-thumbnail>
+          <ion-label class="ion-text-wrap">
+            <h2>The allmighty duck!</h2>
+            <ion-text color="danger">
+              <h3>50 points</h3>
+            </ion-text>
+            <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
+          </ion-label>
+          <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
+          <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="light" expandable>
+            SOME_CODE_FOR_EXCHANGE
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
 
-          <ion-item-sliding>
-              <ion-item>
-                <ion-thumbnail slot="start">
-                  <img src="assets/img/error-reward.jpg">
-                </ion-thumbnail>
-                <ion-label class="ion-text-wrap">
-                  <h2>The allmighty duck!</h2>
-                  <ion-text color="danger">
-                    <h3>50 points</h3>
-                  </ion-text>
-                  <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-                </ion-label>
-                <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-                <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
-              </ion-item>
-              <ion-item-options side="end">
-                <ion-item-option color="light" expandable>
-                  SOME_CODE_FOR_EXCHANGE
-                </ion-item-option>
-              </ion-item-options>
-            </ion-item-sliding>
+      <ion-item-sliding>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img src="assets/img/error-reward.jpg">
+          </ion-thumbnail>
+          <ion-label class="ion-text-wrap">
+            <h2>The allmighty duck!</h2>
+            <ion-text color="danger">
+              <h3>50 points</h3>
+            </ion-text>
+            <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
+          </ion-label>
+          <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
+          <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="light" expandable>
+            SOME_CODE_FOR_EXCHANGE
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+
+      <ion-item-sliding>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img src="assets/img/error-reward.jpg">
+          </ion-thumbnail>
+          <ion-label class="ion-text-wrap">
+            <h2>The allmighty duck!</h2>
+            <ion-text color="danger">
+              <h3>50 points</h3>
+            </ion-text>
+            <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
+          </ion-label>
+          <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
+          <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="light" expandable>
+            SOME_CODE_FOR_EXCHANGE
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
 
 
-    <ion-item-sliding id="item100">
-      <ion-item href="#">
-        <ion-label>
-          <h2>HubStruck Notifications</h2>
-          <p>A new message in your network</p>
-          <p>Oceanic Next has joined your network</p>
+      <ion-item-sliding id="item100">
+        <ion-item href="#">
+          <ion-label>
+            <h2>HubStruck Notifications</h2>
+            <p>A new message in your network</p>
+            <p>Oceanic Next has joined your network</p>
+          </ion-label>
+          <ion-note slot="end">
+            10:45 AM
+          </ion-note>
+        </ion-item>
+
+        <ion-item-options side="start">
+          <ion-item-option>
+            <ion-icon slot="icon-only" name="heart"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+
+        <ion-item-options side="end">
+          <ion-item-option color="danger">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-item-option>
+          <ion-item-option>
+            <ion-icon slot="icon-only" name="star"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+
+    </ion-list>
+  </div>
+
+  <div id="history" *ngIf="mode == 'history'">
+
+    <ion-list lines="full">
+      <ion-list-header class="milestones">
+        <ion-label color="icit-green">Milestones history</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
+        </ion-thumbnail>
+        <ion-label class="ion-text-wrap">
+          <h2>The allmighty duck!</h2>
+          <ion-text color="icit-blue">
+            <h3>50 points | 20.3.2020 18:59</h3>
+          </ion-text>
+          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
         </ion-label>
-        <ion-note slot="end">
-          10:45 AM
-        </ion-note>
+        <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
+        </ion-thumbnail>
+        <ion-label class="ion-text-wrap">
+          <h2>The allmighty duck!</h2>
+          <ion-text color="icit-blue">
+            <h3>50 points | 20.3.2020 18:59</h3>
+          </ion-text>
+          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
+        </ion-label>
+        <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
       </ion-item>
 
-      <ion-item-options side="start">
-        <ion-item-option>
-          <ion-icon slot="icon-only" name="heart"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
+    </ion-list>
 
-      <ion-item-options side="end">
-        <ion-item-option color="danger">
-          <ion-icon slot="icon-only" name="trash"></ion-icon>
-        </ion-item-option>
-        <ion-item-option>
-          <ion-icon slot="icon-only" name="star"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
 
-  </ion-list>
+    <ion-list lines="full">
+      <ion-list-header class="rewards">
+        <ion-label color="icit-orange">Rewards history</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
+        </ion-thumbnail>
+        <ion-label class="ion-text-wrap">
+          <h2>The allmighty duck!</h2>
+          <ion-text color="icit-blue">
+            <h3>50 points | 20.3.2020 18:59</h3>
+          </ion-text>
+          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
+        </ion-label>
+        <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
+        </ion-thumbnail>
+        <ion-label class="ion-text-wrap">
+          <h2>The allmighty duck!</h2>
+          <ion-text color="icit-blue">
+            <h3>50 points | 20.3.2020 18:59</h3>
+          </ion-text>
+          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
+        </ion-label>
+        <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
+        </ion-thumbnail>
+        <ion-label class="ion-text-wrap">
+          <h2>The allmighty duck!</h2>
+          <ion-text color="icit-blue">
+            <h3>50 points | 20.3.2020 18:59</h3>
+          </ion-text>
+          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
+        </ion-label>
+        <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
+        </ion-thumbnail>
+        <ion-label class="ion-text-wrap">
+          <h2>The allmighty duck!</h2>
+          <ion-text color="icit-blue">
+            <h3>50 points | 20.3.2020 18:59</h3>
+          </ion-text>
+          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
+        </ion-label>
+        <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
+        </ion-thumbnail>
+        <ion-label class="ion-text-wrap">
+          <h2>The allmighty duck!</h2>
+          <ion-text color="icit-blue">
+            <h3>50 points | 20.3.2020 18:59</h3>
+          </ion-text>
+          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
+        </ion-label>
+        <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
+        </ion-thumbnail>
+        <ion-label class="ion-text-wrap">
+          <h2>The allmighty duck!</h2>
+          <ion-text color="icit-blue">
+            <h3>50 points | 20.3.2020 18:59</h3>
+          </ion-text>
+          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
+        </ion-label>
+        <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
+        </ion-thumbnail>
+        <ion-label class="ion-text-wrap">
+          <h2>The allmighty duck!</h2>
+          <ion-text color="icit-blue">
+            <h3>50 points | 20.3.2020 18:59</h3>
+          </ion-text>
+          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
+        </ion-label>
+        <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
+      </ion-item>
+
+
+    </ion-list>
+
+  </div>
+
+
 
 
 </ion-content>
