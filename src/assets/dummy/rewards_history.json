@@ -1,0 +1,32 @@
+{
+    "api_status": true,
+    "api_message": "Success: get exchange history",
+    "api_status_code": 200,
+    "api_time": "2020-01-02 14:25:11",
+    "username": "siwakornlo",
+    "current_point_exchanged": [
+        {
+            "date": "2020-01-02 14:25:11",
+            "name" : "The almighty duck!",
+            "point" : 20,
+            "img": "https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg",
+            "description": "Listen, I've had a pretty messed up day... I was caught and then killed and cooked."
+        },
+        {
+            "date": "2020-01-02 14:25:11",
+            "name" : "Another duck",
+            "point" : 40,
+            "img": "https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg",
+            "description": "Live forever!!!!!!!!"
+        }
+    ],
+    "accumulative_point_exchanged": [
+        {
+            "date": "2020-01-02 09:10:11",
+            "name" : "The almighty duck!",
+            "point" : 500,
+            "img": "https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg",
+            "desc": "Listen, I've had a pretty messed up day... I was caught and then killed and cooked."
+        }
+    ]
+}

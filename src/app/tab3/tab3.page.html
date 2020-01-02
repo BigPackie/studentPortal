@@ -34,17 +34,17 @@
               <ion-icon name="film"></ion-icon>
             </ion-chip>
           </ion-list-header>
-      <ion-item-sliding (ionDrag)="drag($event.detail, $event.srcElement)">
+      <ion-item-sliding *ngFor="let milestone of accumulativePointRewards" (ionDrag)="drag($event.detail, $event.srcElement)">
         <ion-item>
           <ion-thumbnail slot="start">
-            <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
+            <img [src]="milestone.img">
           </ion-thumbnail>
           <ion-label class="ion-text-wrap">
-            <h2>The allmighty duck!</h2>
+            <h2>{{ milestone.name }}</h2>
             <ion-text color="success">
               <h3>Unlocked</h3>
             </ion-text>
-            <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
+            <p>{{ milestone.description }}</p>
           </ion-label>
           <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
           <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>

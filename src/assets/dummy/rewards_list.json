@@ -1,0 +1,68 @@
+{
+    "api_status": true,
+    "api_status_code": 200,
+    "api_message": "Success: get reward list",
+    "api_time": "2020-01-02 14:21:53",
+    "username": "siwakornlo",
+    "current_point_reward": [
+        {
+            "id" : 0,
+            "name" : "The almighty duck!",
+            "point" : 20,
+            "img": "https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg",
+            "description": "Listen, I've had a pretty messed up day... I was caught and then killed and cooked."
+        },
+        {
+            "id" : 1,
+            "name" : "Another duck",
+            "point" : 40,
+            "img": "https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg",
+            "description": "Live forever!!!!!!!!"
+        },
+        {
+            "id" : 2,
+            "name" : "Black duck",
+            "point" : 50,
+            "img": "https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg",
+            "description": "You shall pay for your deeds!"
+        },
+        {
+            "id" : 3,
+            "name" : "White duck",
+            "point" : 50,
+            "img": "https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg",
+            "description": "The righteous man always wins."
+        },
+        {
+            "id" : 4,
+            "name" : "Gray duck",
+            "point" : 100,
+            "img": "https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg",
+            "description": "Take my offer or leave it."
+        },
+        {
+            "id" : 5,
+            "name" : "Super duck",
+            "point" : 200,
+            "img": "https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg",
+            "description": "Don't fret citizens, I'll save you"
+        }
+    ],
+    "accumulative_point_reward": [
+        {
+            "id" : 0,
+            "name" : "The almighty duck!",
+            "point" : 500,
+            "img": "https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg",
+            "description": "Listen, I've had a pretty messed up day... I was caught and then killed and cooked."
+        },
+        {
+            "id" : 1,
+            "name" : "The almighty duck from the oher dimension!",
+            "point" : 1000,
+            "img": "https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg",
+            "description": "Live everywhere!!!!!"
+        }
+    ]
+
+}

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataService } from '../services/data.service';
 import { NgForm } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,7 +16,7 @@ export class ProfilePage implements OnInit {
   //TODO: check the server, if the user is still logged in, if no, show toast and navigate to login page
   //TODO: other sensitive pages should be guarded by a similar mechanic.
   constructor(private router: Router,
-    private dataService: DataService,
+    private userService: UserService,
     private alertController: AlertController) {
 
   }
@@ -28,11 +28,11 @@ export class ProfilePage implements OnInit {
 
   //TODO: maybe get always from the server and not locally cached?
   loadUserData(){
-    this.username = this.dataService.getUsername();
+    this.username = this.userService.getUsername();
   }
 
   logout() {
-    this.dataService.logout().then(() => this.router.navigateByUrl('/tabs/tab1', {replaceUrl: true}));
+    this.userService.logout().then(() => this.router.navigateByUrl('/tabs/tab1', {replaceUrl: true}));
   }
 
   support() {

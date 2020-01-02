@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateConfigService } from 'src/app/services/translate-config.service';
-import { DataService } from 'src/app/services/data.service';
 import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { TouchSequence } from 'selenium-webdriver';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-settings-container',
@@ -16,11 +16,11 @@ export class SettingsContainerComponent implements OnInit {
   isLoggedIn : Promise<boolean>;
   username: Promise<string>;
 
-  constructor(private popoverController: PopoverController, private translateConfigService: TranslateConfigService, private dataService: DataService, private router: Router) { }
+  constructor(private popoverController: PopoverController, private translateConfigService: TranslateConfigService, private userService: UserService, private router: Router) { }
 
   ionViewDidEnter() {
-    this.isLoggedIn = this.dataService.isLoggedIn();
-    this.username = this.dataService.getUsername();
+    this.isLoggedIn = this.userService.isLoggedIn();
+    this.username = this.userService.getUsername();
   }
 
   ngOnInit() {

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { DataService } from '../services/data.service';
+import { take } from 'rxjs/operators';
+import { Reward, RewardHistory } from '../services/models';
 
 enum Mode { 
   REWARDS = "rewards",
@@ -16,7 +19,13 @@ export class Tab3Page {
 
   mode : Mode = Mode.REWARDS;
 
-  constructor() {}
+  currentPointRewards: Reward[];
+  accumulativePointRewards: Reward[];
+
+  currentPointRewardsHistory: RewardHistory[];
+  accumulativePointRewardsHistory: RewardHistory[];
+
+  constructor(private dataService: DataService) {}
 
   ionViewDidEnter(){
     this.updatePageContent();
@@ -47,10 +56,22 @@ export class Tab3Page {
 
   loadRewards(){
     console.log(`loading rewards`);
+    this.dataService.getDummyRewardsList().pipe(take(1))
+    .subscribe((res) => {
+      console.log(res);
+      this.currentPointRewards = res.current_point_reward;
+      this.accumulativePointRewards = res.accumulative_point_reward;
+    });
   }
 
   loadRewardsHistory(){
-    console.log(`loading history of rewads`)
+    console.log(`loading history of rewads`);
+    this.dataService.getDummyRewardsHistory().pipe(take(1))
+    .subscribe((res) => {
+      console.log(res);
+      this.currentPointRewardsHistory = res.current_point_exchanged;
+      this.accumulativePointRewardsHistory = res.accumulative_point_exchanged;
+    });
   }
 
 }

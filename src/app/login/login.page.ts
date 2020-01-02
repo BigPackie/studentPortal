@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { DataService } from '../services/data.service';
 import { LoginData } from '../services/models';
 import { LoadingController } from '@ionic/angular';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,7 @@ export class LoginPage implements OnInit {
 
   constructor(private router: Router,
      private route: ActivatedRoute,
-     private dataService : DataService, 
+     private userService : UserService, 
      private loadingController: LoadingController) { }
 
   ngOnInit() {
@@ -50,7 +51,7 @@ export class LoginPage implements OnInit {
         setTimeout(resolve, 2000);
       });
 
-      this.dataService.login(this.loginDetails.username)
+      this.userService.login(this.loginDetails.username)
       .then(() => this.router.navigateByUrl(this.redirectUrl, { replaceUrl: true })
       .finally(() => loggingIn.dismiss()));
     }

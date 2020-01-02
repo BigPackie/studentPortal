@@ -39,3 +39,15 @@ export class LoginData {
     username: string;
     password: string
 }
+
+export interface Reward {
+    id? : number,
+    name: string,
+    point: number,
+    img: string,
+    desc: string
+}
+
+export interface RewardHistory extends Reward {
+    date:  string
+}

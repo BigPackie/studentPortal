@@ -13,12 +13,9 @@ export enum IMG_SRC_TYPE_PREFIX {
 
 enum DATA_RESOURCES {
     News = 'dummy/dummy-news.json',
-    Promotions = 'dummy/dummy-promotions.json'
-}
-
-enum STORAGE_KEY {
-  HAS_LOGGED_IN = "hasLoggedIn",
-  USER_NAME = "username"
+    Promotions = 'dummy/dummy-promotions.json',
+    RewardsList = 'dummy/rewards_list.json',
+    RewardsHistory = 'dummy/rewards_history.json'
 }
 
 @Injectable({
@@ -42,6 +39,16 @@ export class DataService {
    //  );
   }
 
+  getDummyRewardsList(): Observable<any> {
+    return this.api.get<any>('assets', DATA_RESOURCES.RewardsList);
+    //return this.api.get<any>('https://reward.icit.kmutnb.ac.th','getRewardList');
+  }
+
+  getDummyRewardsHistory(): Observable<any> {
+    return this.api.get<any>('assets', DATA_RESOURCES.RewardsHistory);
+    //return this.api.get<any>('https://reward.icit.kmutnb.ac.th','getExchangeHistory');
+  }
+
   getTestMessage(id: number): Observable<any> {
     return this.api.get(undefined, "messages", {id: id});
   }
@@ -60,38 +67,5 @@ export class DataService {
 
   getPromotionDetail(id: string): Observable<PromotionDetail> {
     return this.api.get<NewsItemDetail>(undefined, "database/promotionDetail", {id});
-  }
-
-  // --- user related data ---
-
-  login(username: string): Promise<any> {
-    return this.storage.set(STORAGE_KEY.HAS_LOGGED_IN, true).then(() => {
-      this.setUsername(username);
-      return window.dispatchEvent(new CustomEvent('user:login'));
-    });
-  }
-
-  logout(): Promise<any> {
-    return this.storage.remove(STORAGE_KEY.HAS_LOGGED_IN).then(() => {
-      return this.storage.remove(STORAGE_KEY.USER_NAME);
-    }).then(() => {
-      window.dispatchEvent(new CustomEvent('user:logout'));
-    });
-  }
-
-  setUsername(username: string): Promise<any> {
-    return this.storage.set(STORAGE_KEY.USER_NAME, username);
-  }
-
-  getUsername(): Promise<string> {
-    return this.storage.get(STORAGE_KEY.USER_NAME).then((value) => {
-      return value;
-    });
-  }
-
-  isLoggedIn(): Promise<boolean> {
-    return this.storage.get(STORAGE_KEY.HAS_LOGGED_IN).then((value) => {
-      return value === true;
-    });
   }
 }

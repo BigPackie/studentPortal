@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, EMPTY } from 'rxjs';
 import { smartRetry } from './smartRetry';
 import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class Api {
   
   //private baseUrl: string = 'assets';
 
-  private baseUrl: string = "http://10.12.4.97:3000";
+  private baseUrl: string = environment.newsServicesUrl;
 
   constructor(public http: HttpClient) {
 

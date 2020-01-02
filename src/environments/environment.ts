@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  newsServicesUrl: "http://10.12.4.97:3000"
 };
 
 /*
