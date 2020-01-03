@@ -14,13 +14,13 @@ export class SettingsContainerComponent implements OnInit {
 
   chosenLanguage : string;
   isLoggedIn : Promise<boolean>;
-  username: Promise<string>;
+  username: string;
 
   constructor(private popoverController: PopoverController, private translateConfigService: TranslateConfigService, private userService: UserService, private router: Router) { }
 
   ionViewDidEnter() {
     this.isLoggedIn = this.userService.isLoggedIn();
-    this.username = this.userService.getUsername();
+    this.userService.getUserData().then((userData) => this.username = userData.username);
   }
 
   ngOnInit() {

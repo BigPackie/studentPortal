@@ -2,7 +2,7 @@
     <ion-list-header>{{ 'ACCOUNT' | translate }}</ion-list-header>
     <ion-item detail button *ngIf="isLoggedIn | async" (click)="goToProfile()">  <!-- show a modal with login or logout button based on context-->
         <ion-label>{{ 'ACCOUNT.USER' | translate }}</ion-label>
-        <ion-note slot="end" color="default">{{username | async}}</ion-note>
+        <ion-note slot="end" color="default">{{username}}</ion-note>
     </ion-item>
     <ion-item detail *ngIf="!(isLoggedIn | async)" (click)="goToLogin()">  <!-- show a modal with login or logout button based on context-->
       <ion-label>{{ 'LOGIN' | translate }}</ion-label>

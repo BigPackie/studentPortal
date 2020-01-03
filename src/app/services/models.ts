@@ -40,6 +40,17 @@ export class LoginData {
     password: string
 }
 
+export interface UserData {
+    username: string,
+    displayname: string,
+    firstname_en: string,
+    lastname_en: string,
+    pid: string,
+    email: string,
+    birthdate: string,
+    account_type: string,
+}
+
 export interface Reward {
     id? : number,
     name: string,

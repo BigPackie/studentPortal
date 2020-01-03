@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { UserService } from '../services/user.service';
+import { UserData } from '../services/models';
 
 @Component({
   selector: 'app-profile',
@@ -11,7 +12,7 @@ import { UserService } from '../services/user.service';
 })
 export class ProfilePage implements OnInit {
 
-  username: Promise<string>;
+  user$: Promise<UserData>;
 
   //TODO: check the server, if the user is still logged in, if no, show toast and navigate to login page
   //TODO: other sensitive pages should be guarded by a similar mechanic.
@@ -28,11 +29,12 @@ export class ProfilePage implements OnInit {
 
   //TODO: maybe get always from the server and not locally cached?
   loadUserData(){
-    this.username = this.userService.getUsername();
+    this.user$ = this.userService.getUserData();
   }
 
   logout() {
     this.userService.logout().then(() => this.router.navigateByUrl('/tabs/tab1', {replaceUrl: true}));
+    //TODO: revoke token on server side
   }
 
   support() {
