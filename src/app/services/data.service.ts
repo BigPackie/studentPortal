@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Api } from '../api/api';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { map } from "rxjs/operators";
 import { TimedItem, NewsItem, NewsItemDetail, Promotion, PromotionDetail } from './models';
 import { Storage } from '@ionic/storage';
 import { toBase64String } from '@angular/compiler/src/output/source_map';
+import { environment } from 'src/environments/environment';
 
 export enum IMG_SRC_TYPE_PREFIX {
   Base64 = "data:image/jpeg;base64,"
@@ -39,14 +40,22 @@ export class DataService {
    //  );
   }
 
-  getDummyRewardsList(): Observable<any> {
+  getRewardsList(): Observable<any> {
     return this.api.get<any>('assets', DATA_RESOURCES.RewardsList);
-    //return this.api.get<any>('https://reward.icit.kmutnb.ac.th','getRewardList');
+    //return this.api.get<any>(environment.rewardServicesUrl,'getRewardList');
   }
 
-  getDummyRewardsHistory(): Observable<any> {
-    return this.api.get<any>('assets', DATA_RESOURCES.RewardsHistory);
-    //return this.api.get<any>('https://reward.icit.kmutnb.ac.th','getExchangeHistory');
+  getRewardsHistory(): Observable<any> {
+    //return this.api.get<any>('assets', DATA_RESOURCES.RewardsHistory);
+    return this.api.get<any>(environment.rewardServicesUrl,'getExchangeHistory');
+  }
+
+  getUserPoints(): Observable<any> {
+    return this.api.get<any>(environment.rewardServicesUrl,'getUserPoint');
+  }
+
+  getRewardExchangeToken(id: any): Observable<any> {
+    return of("849834adf4498gfd");
   }
 
   getTestMessage(id: number): Observable<any> {

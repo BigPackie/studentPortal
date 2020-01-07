@@ -12,7 +12,7 @@
   <form #loginForm="ngForm" novalidate>
     <ion-list inset>
       <ion-item>
-        <ion-label position="stacked" color="primary">{{ 'USERNAME' | translate }}</ion-label>
+        <ion-label position="stacked" color="primary">{{ 'NAME.USER' | translate }}</ion-label>
         <ion-input [(ngModel)]="loginDetails.username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
           required>
         </ion-input>

@@ -22,12 +22,6 @@ export class UserService {
 
 
    login(loginData: LoginData): Observable<any> {
-
-    // const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Content-Type':  'application/x-www-form-urlencoded',
-    //   })
-    // };
     return this.api.post(environment.rewardServicesUrl,'authen', loginData /*,httpOptions*/);
   }
 
@@ -39,6 +33,15 @@ export class UserService {
   }
 
   logout(): Promise<any> {
+
+      // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Authorization':  'Bearer <JWT>',
+    //   })
+    // };
+
+    //TODO: call api to clear/rewoke token
+
     return this.storage.clear().then(() => {
       window.dispatchEvent(new CustomEvent('user:logout'));
     });

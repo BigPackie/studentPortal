@@ -9,13 +9,14 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateConfigService } from './services/translate-config.service';
 import { ComponentsModule } from './components/components.module';
 import { IonicStorageModule, Storage } from '@ionic/storage';
+import { AuthRequestInterceptor } from './interceptors/authRequestInterceptor';
 
 export function LanguageLoader(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -42,7 +43,8 @@ export function LanguageLoader(http: HttpClient) {
     StatusBar,
     SplashScreen,
     TranslateConfigService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthRequestInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

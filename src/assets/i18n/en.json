@@ -30,7 +30,14 @@
     "LOGIN": "Login",
     "SUPPORT" : "Support",
     "LOGOUT" : "Logout",
-    "USERNAME": "Username",
+    "NAME": {
+        "USER" : "Username",
+        "DISPLAY": "Name",
+        "FIRST": "First name",
+        "LAST":"Last name"
+    },
+    "EMAIL": "Email",
+    "BIRTHDATE": "Birth date",
     "PASSWORD": "Password",
     "VALIDATION": {
         "USERNAME" : "Username is required!",

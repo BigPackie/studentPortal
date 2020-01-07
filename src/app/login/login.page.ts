@@ -68,7 +68,7 @@ export class LoginPage implements OnInit {
         }
 
         await this.userService.saveLoggedInUser(response.userInfo, response.api_token)
-          // .catch((err) => this.loginFailed(err));
+     
         this.router.navigateByUrl(this.redirectUrl, { replaceUrl: true })
       })
 

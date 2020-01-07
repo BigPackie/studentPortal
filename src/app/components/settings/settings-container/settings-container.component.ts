@@ -20,7 +20,7 @@ export class SettingsContainerComponent implements OnInit {
 
   ionViewDidEnter() {
     this.isLoggedIn = this.userService.isLoggedIn();
-    this.userService.getUserData().then((userData) => this.username = userData.username);
+    this.userService.getUserData().then((userData) => {this.username = userData ? userData.username : null});
   }
 
   ngOnInit() {
