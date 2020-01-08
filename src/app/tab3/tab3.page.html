@@ -30,27 +30,27 @@
         <ion-list-header class="milestones">
             <ion-label color="icit-green">Milestones</ion-label>
             <ion-chip color="icit-green" outline="true">
-              <ion-label>2500</ion-label>
+              <ion-label>{{ accumulativePoint }}</ion-label>
               <ion-icon name="film"></ion-icon>
             </ion-chip>
           </ion-list-header>
-      <ion-item-sliding *ngIf="accumulativePointRewards && accumulativePointRewards[0] as milestoneFirst" (ionDrag)="drag($event.detail, $event.srcElement)">
+          <!-- try to put it into separate objects and not array like this-->
+      <ion-item-sliding *ngIf="milestoneFirst" [disabled]="milestoneFirst.redemptionCode == null || milestoneFirst.redemptionCode == ''" (ionDrag)="drag($event.detail, $event.srcElement)">
         <ion-item>
           <ion-thumbnail slot="start">
             <img [src]="milestoneFirst.img">
           </ion-thumbnail>
           <ion-label class="ion-text-wrap">
             <h2>{{ milestoneFirst.name }}</h2>
-            <div [innerHtml]="getMilestonesPointsText(milestoneFirst?.point, false)"></div>
+            <div [innerHtml]="getMilestonesPointsText(milestoneFirst.point, false)"></div>
             <p>{{ milestoneFirst.description }}</p>
           </ion-label>
           <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-          <ion-icon [name]="mileStoneUnlocked(milestoneFirst?.point) ? 'md-arrow-dropleft' : 'lock'"  slot="end"></ion-icon>
+          <ion-icon [name]="getMilestoneStatusIconName(milestoneFirst)"  slot="end" (click)="getMilestoneRedemptionCode(milestoneFirst)"></ion-icon>
         </ion-item>
-        <ion-item-options side="end"  *ngIf="mileStoneUnlocked(milestoneFirst?.point)">
-          <ion-item-option color="white">
-            <div [style.opacity]="slidingItemOpacity"><strong>SOME_CODE_FOR_EXCHANGE</strong></div>
-
+        <ion-item-options side="end">
+          <ion-item-option color="white" *ngIf="milestoneFirst.redemptionCode && isMileStoneUnlocked(milestoneFirst.point)">
+            <div [style.opacity]="slidingItemOpacity"><strong>{{ milestoneFirst.redemptionCode }}</strong></div>
           </ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
@@ -66,9 +66,9 @@
             <p>{{ milestoneSecond.description }}</p>
           </ion-label>
           <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-          <ion-icon [name]="mileStoneUnlocked(milestoneSecond?.point) ? 'md-arrow-dropleft' : 'lock'" slot="end"></ion-icon>
+          <ion-icon [name]="isMileStoneUnlocked(milestoneSecond?.point) ? 'md-arrow-dropleft' : 'lock'" slot="end"></ion-icon>
         </ion-item>
-        <ion-item-options side="end"  *ngIf="mileStoneUnlocked(milestoneSecond?.point)">
+        <ion-item-options side="end"  *ngIf="isMileStoneUnlocked(milestoneSecond?.point)">
           <ion-item-option color="white">
             <div [style.opacity]="slidingItemOpacity"><strong>SOME_CODE_FOR_EXCHANGE</strong></div>
 
@@ -111,7 +111,7 @@
         <ion-list-header class="rewards">
             <ion-label color="icit-orange">Rewards</ion-label>
             <ion-chip color="icit-orange" outline="false">
-              <ion-label>525</ion-label>
+              <ion-label>{{ currentPoint }}</ion-label>
               <ion-icon name="bug"></ion-icon>
             </ion-chip>
           </ion-list-header>

@@ -53,6 +53,7 @@ export interface UserData {
 
 export interface Reward {
     id? : number,
+    redemptionCode? : string;
     name: string,
     point: number,
     img: string,

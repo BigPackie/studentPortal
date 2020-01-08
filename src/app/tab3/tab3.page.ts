@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { take } from 'rxjs/operators';
 import { Reward, RewardHistory } from '../services/models';
@@ -22,6 +22,8 @@ export class Tab3Page {
 
   currentPoint: number = 0;
   accumulativePoint: number = 0;
+
+  milestoneFirst: Reward;
 
   currentPointRewards: Reward[];
   accumulativePointRewards: Reward[]; //do not contains already claimed rewards
@@ -67,6 +69,10 @@ export class Tab3Page {
       console.log(res);
       this.currentPointRewards = res.current_point_reward;
       this.accumulativePointRewards = res.accumulative_point_reward;
+
+      if(res.accumulative_point_reward && res.accumulative_point_reward[0]) {
+        this.milestoneFirst = res.accumulative_point_reward[0];
+      }
     });
   }
 
@@ -85,10 +91,40 @@ export class Tab3Page {
     this.dataService.getUserPoints().pipe(take(1))
     .subscribe((res) => {
       console.log(res);
-      this.currentPoint = res.current_point
+      this.currentPoint = res.current_point;
      // this.accumulativePoint = res.accumulative_point;
-     this.accumulativePoint = 500;
+      this.accumulativePoint = 500;
     });
+  }
+
+  getMilestoneStatusIconName(reward: Reward){
+    
+    let icon = "lock";
+
+    if(this.isMileStoneUnlocked(reward.point) && reward.redemptionCode){
+      icon = "md-arrow-dropleft";
+    } else if (this.isMileStoneUnlocked(reward.point) && !reward.redemptionCode) {
+      icon = "unlock"
+    }
+
+    return icon;
+  }
+
+  getMilestoneRedemptionCode(milestone: Reward) {
+
+    if(milestone.id == null || milestone.id == undefined) {
+      console.error(`Reward has no id. Cannot redeem.`);
+      return;
+    }
+
+    if(this.isMileStoneUnlocked(milestone.point) && !milestone.redemptionCode){
+      this.dataService.getRewardExchangeToken(milestone.id).pipe(take(1))
+      .subscribe((res) => {
+        milestone.redemptionCode = res.exchange_token;
+        console.log(`Redemption code ${milestone.redemptionCode} set for reward ${milestone.id}`)
+      });
+     
+    }
   }
 
   getMilestonesPointsText(milestonePoints: number, latestMilestone: boolean){
@@ -98,7 +134,7 @@ export class Tab3Page {
 
     let element = "";
 
-    console.log(`accumated points: ${this.accumulativePoint}, milestone required: ${milestonePoints}`);
+   // console.log(`accumated points: ${this.accumulativePoint}, milestone required: ${milestonePoints}`);
 
     if (this.accumulativePoint >= milestonePoints) {
       if (latestMilestone) {
@@ -119,8 +155,8 @@ export class Tab3Page {
 
   }
 
-  mileStoneUnlocked(points: number): boolean{
-    console.log(`milestone points: ${points} and accumulated points: ${this.accumulativePoint} result: ${this.accumulativePoint >= points}`)
+  isMileStoneUnlocked(points: number): boolean{
+   // console.log(`milestone points: ${points} and accumulated points: ${this.accumulativePoint} result: ${this.accumulativePoint >= points}`)
     return  this.accumulativePoint >= points;
   }
 

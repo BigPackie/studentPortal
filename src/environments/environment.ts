@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   newsServicesUrl: "http://10.12.4.97:3000",
-  rewardServicesUrl: "http://reward.icit.kmutnb.ac.th"
+  rewardServicesUrl: "https://reward.icit.kmutnb.ac.th"
 };
 
 /*

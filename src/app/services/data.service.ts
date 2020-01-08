@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Api } from '../api/api';
 import { Observable, of } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
-import { map } from "rxjs/operators";
+import { map, delay } from "rxjs/operators";
 import { TimedItem, NewsItem, NewsItemDetail, Promotion, PromotionDetail } from './models';
 import { Storage } from '@ionic/storage';
 import { toBase64String } from '@angular/compiler/src/output/source_map';
@@ -55,7 +55,7 @@ export class DataService {
   }
 
   getRewardExchangeToken(id: any): Observable<any> {
-    return of("849834adf4498gfd");
+    return of({exchange_token: "88888888"}).pipe(delay(2000));
   }
 
   getTestMessage(id: number): Observable<any> {
