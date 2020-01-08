@@ -57,7 +57,31 @@ export interface Reward {
     name: string,
     point: number,
     img: string,
-    desc: string
+    desc: string,
+    status: RewardStatus;
+}
+
+/**
+ * Represents the life cycle of a reward (milestone, reward) on the client side.
+ * 
+ */
+export enum RewardStatus {
+    LOCKED,
+
+    /**
+     * In this state user is able to call WS to get the exchange token
+     */
+    UNLOCKED,
+
+    /**
+     * Getting the exchange token from backend
+     */
+    REDEEMING,
+
+    /**
+     * Echange token received from backend
+     */
+    REDEEMED
 }
 
 export interface RewardHistory extends Reward {

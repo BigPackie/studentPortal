@@ -1,8 +1,9 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { DataService } from '../services/data.service';
-import { take } from 'rxjs/operators';
-import { Reward, RewardHistory } from '../services/models';
+import { take, tap } from 'rxjs/operators';
+import { Reward, RewardHistory, RewardStatus } from '../services/models';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Observable, forkJoin } from 'rxjs';
 
 enum Mode { 
   REWARDS = "rewards",
@@ -47,33 +48,61 @@ export class Tab3Page {
 
     switch (this.mode) {
       case Mode.REWARDS:
-        this.loadPoints();
-        this.loadRewards();
+        this.loadRewardsData();
         break;
       case Mode.HISTORY:
         this.loadRewardsHistory();
         break;
     
       default:
-        this.loadPoints();
-        this.loadRewards();
+        this.loadRewardsData();
         break;
     }
 
   }
 
-  loadRewards(){
-    console.log(`loading rewards`);
-    this.dataService.getRewardsList().pipe(take(1))
-    .subscribe((res) => {
-      console.log(res);
-      this.currentPointRewards = res.current_point_reward;
-      this.accumulativePointRewards = res.accumulative_point_reward;
+  loadRewardsData() {
+    forkJoin([
+      this.loadRewards(),
+      this.loadPoints()
+    ]
+    ).subscribe(
+        (data) => {
+          console.log(`Getting reward list and user point finished successfully`);
+          if (this.accumulativePointRewards && this.accumulativePointRewards[0]) {
+            this.milestoneFirst = this.accumulativePointRewards[0];
+            this.milestoneFirst.status = this.isMileStoneUnlocked(this.milestoneFirst.point) ? RewardStatus.UNLOCKED : RewardStatus.LOCKED;
+          }
+        },
+        (err) => {
+          console.error(`Retrieving reward list or user points failed`);
+        }
+      )
+  }
 
-      if(res.accumulative_point_reward && res.accumulative_point_reward[0]) {
-        this.milestoneFirst = res.accumulative_point_reward[0];
-      }
-    });
+  private loadRewards() {
+    console.log(`loading rewards`);
+    return this.dataService.getRewardsList().pipe(
+      take(1),
+      tap((res) => {
+        console.log(res);
+        this.currentPointRewards = res.current_point_reward;
+        this.accumulativePointRewards = res.accumulative_point_reward;
+      })
+    )
+  }
+
+  private loadPoints() {
+    console.log(`loading points`);
+    return this.dataService.getUserPoints().pipe(
+      take(1),
+      tap((res) => {
+        console.log(res);
+        this.currentPoint = res.current_point;
+        // this.accumulativePoint = res.accumulative_point;
+        this.accumulativePoint = 500;
+      })
+    )
   }
 
   loadRewardsHistory(){
@@ -86,28 +115,15 @@ export class Tab3Page {
     });
   }
 
-  loadPoints(){
-    console.log(`loading points`);
-    this.dataService.getUserPoints().pipe(take(1))
-    .subscribe((res) => {
-      console.log(res);
-      this.currentPoint = res.current_point;
-     // this.accumulativePoint = res.accumulative_point;
-      this.accumulativePoint = 500;
-    });
-  }
+  getMilestoneStatusIconName(reward: Reward): string{
 
-  getMilestoneStatusIconName(reward: Reward){
-    
-    let icon = "lock";
+    console.log(`Milestone: ${JSON.stringify(this.milestoneFirst)}`);
 
-    if(this.isMileStoneUnlocked(reward.point) && reward.redemptionCode){
-      icon = "md-arrow-dropleft";
-    } else if (this.isMileStoneUnlocked(reward.point) && !reward.redemptionCode) {
-      icon = "unlock"
+    if(reward.status == RewardStatus.LOCKED){
+      return "lock";
+    } else {
+      return "md-arrow-dropleft";
     }
-
-    return icon;
   }
 
   getMilestoneRedemptionCode(milestone: Reward) {

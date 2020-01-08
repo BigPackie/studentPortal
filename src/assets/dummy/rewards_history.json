@@ -1,6 +1,6 @@
 {
     "api_status": true,
-    "api_message": "Success: get exchange history",
+    "api_message": "Dummy local Success: get exchange history",
     "api_status_code": 200,
     "api_time": "2020-01-02 14:25:11",
     "username": "siwakornlo",
