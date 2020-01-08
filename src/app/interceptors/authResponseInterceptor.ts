@@ -23,12 +23,20 @@ export class AuthResponseInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
+        //if not a response from a secured request, just let it pass
+        if(!request.url.includes(environment.rewardServicesUrl)){
+            return next.handle(request);
+        }
+        //TODO: properly handle error, redirect user if authorization error occurs
+        //otherwise tap into it
         return next.handle(request).pipe(
-            filter(event => event instanceof HttpResponse), // proceed when there is a response; ignore other events
-            filter(event => request.url.includes(environment.rewardServicesUrl)),
+            //filter here seemed to complete stop the response, but why?
             tap(
-                (event: HttpResponse<any>) => {
-                    console.log("Intercepting successful secured response from server ");
+                (event) => {
+                    // There may be other events besides the response.
+                    if (event instanceof HttpResponse){
+                        console.log("Intercepting successful secured response from server ");
+                    }
                 },
                 // Operation failed; error is an HttpErrorResponse
                 (error) => {

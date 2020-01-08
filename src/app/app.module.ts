@@ -17,6 +17,7 @@ import { TranslateConfigService } from './services/translate-config.service';
 import { ComponentsModule } from './components/components.module';
 import { IonicStorageModule, Storage } from '@ionic/storage';
 import { AuthRequestInterceptor } from './interceptors/authRequestInterceptor';
+import { AuthResponseInterceptor } from './interceptors/authResponseInterceptor';
 
 export function LanguageLoader(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -44,7 +45,8 @@ export function LanguageLoader(http: HttpClient) {
     SplashScreen,
     TranslateConfigService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthRequestInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: AuthRequestInterceptor, multi: true}, //order of interceptors matters
+    { provide: HTTP_INTERCEPTORS, useClass: AuthResponseInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
