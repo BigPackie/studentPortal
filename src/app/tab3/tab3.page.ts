@@ -1,9 +1,10 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { DataService } from '../services/data.service';
-import { take, tap } from 'rxjs/operators';
+import { take, tap, finalize } from 'rxjs/operators';
 import { Reward, RewardHistory, RewardStatus } from '../services/models';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Observable, forkJoin } from 'rxjs';
+import { IonItemSliding } from '@ionic/angular';
 
 enum Mode { 
   REWARDS = "rewards",
@@ -16,6 +17,8 @@ enum Mode {
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+
+  RewardStatus = RewardStatus; //to make the enum work in the template
 
   slidingItemOpacity: number = 0;
 
@@ -126,24 +129,39 @@ export class Tab3Page {
     }
   }
 
-  getMilestoneRedemptionCode(milestone: Reward) {
+  async getMilestoneRedemptionCode(milestone: Reward, slidingItem: IonItemSliding) {
 
-    if(milestone.id == null || milestone.id == undefined) {
+    console.log("triggered swipe event");
+
+    if (milestone.id == null || milestone.id == undefined) {
       console.error(`Reward has no id. Cannot redeem.`);
       return;
     }
 
-    if(this.isMileStoneUnlocked(milestone.point) && !milestone.redemptionCode){
-      this.dataService.getRewardExchangeToken(milestone.id).pipe(take(1))
-      .subscribe((res) => {
-        milestone.redemptionCode = res.exchange_token;
-        console.log(`Redemption code ${milestone.redemptionCode} set for reward ${milestone.id}`)
-      });
-     
+    if( milestone.status == RewardStatus.REDEEMING){
+      console.warn(`Already redeeming code, wait a moment.`);
+      return;
+    }
+
+    if (milestone.status == RewardStatus.UNLOCKED) {
+      milestone.status = RewardStatus.REDEEMING;
+      await this.refreshSlider(slidingItem);
+      this.dataService.getRewardExchangeToken(milestone.id)
+        .pipe(
+          take(1),
+        )
+        .subscribe((res) => {
+          milestone.redemptionCode = res.exchange_token;
+          milestone.status = RewardStatus.REDEEMED;
+          this.refreshSlider(slidingItem);
+          console.log(`Redemption code ${milestone.redemptionCode} set for reward ${milestone.id}`)
+        },
+        error => {milestone.status = RewardStatus.UNLOCKED;});
+
     }
   }
 
-  getMilestonesPointsText(milestonePoints: number, latestMilestone: boolean){
+  getMilestonesPointsText(milestone: Reward, latestMilestone: boolean){
     //if not enough accumulated points, return:  "x points needed" in red; x = reward points - current points
     //if enough current poinst, return: Unlocked
     //if latestMilestone = true && unlocked then  return: "Claim previous first"
@@ -152,28 +170,37 @@ export class Tab3Page {
 
    // console.log(`accumated points: ${this.accumulativePoint}, milestone required: ${milestonePoints}`);
 
-    if (this.accumulativePoint >= milestonePoints) {
+    if ( milestone.status == RewardStatus.UNLOCKED ) {
       if (latestMilestone) {
         element = `<ion-text color="warning"><h3>Redeem previous first</h3></ion-text>`;
       } else {
         element = `<ion-text color="success"><h3>Unlocked</h3></ion-text>`;
       }
-    } else if (this.accumulativePoint < milestonePoints) {
-      element = `<ion-text color="danger"><h3>Needs ${milestonePoints - this.accumulativePoint} more to unlock </h3></ion-text>`;
+    } else if ( milestone.status == RewardStatus.LOCKED ) {
+      element = `<ion-text color="danger"><h3>Needs ${milestone.point - this.accumulativePoint} more to unlock </h3></ion-text>`;
     }
   
     return this.sanitizer.bypassSecurityTrustHtml(element);
   }
 
-  getRewardPointsText(points: number){
 
-    
+  getRewardPointsText(points: number){
 
   }
 
   isMileStoneUnlocked(points: number): boolean{
    // console.log(`milestone points: ${points} and accumulated points: ${this.accumulativePoint} result: ${this.accumulativePoint >= points}`)
     return  this.accumulativePoint >= points;
+  }
+
+  /**
+   * If the <ion-item-sliding> is open, and you change the with of a the <ion-item-option> (for example make it smaller)
+   * then the amount of opennes is not adjusted. This method adjusts the openned of the sliding item relative to the new width of it's option
+   * 
+   * @param slidingItem <ion-item-sliding> element marked with "#slidingCase"
+   */
+  private refreshSlider(slidingItem: IonItemSliding): Promise<any>{
+    return slidingItem.close().finally(() =>  slidingItem.open("end"));
   }
 
 }

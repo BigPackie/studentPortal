@@ -66,6 +66,7 @@ export interface Reward {
  * 
  */
 export enum RewardStatus {
+    
     LOCKED,
 
     /**
