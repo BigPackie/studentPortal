@@ -42,5 +42,18 @@
     "VALIDATION": {
         "USERNAME" : "Username is required!",
         "PASSWORD" : "Password is required!"
+    },
+    "LOADING": "Loading",
+    "RECEIVE_CODE": "Swipe left again to receive code",
+    "MILESTONES": "Milestones",
+    "REWARDS": "Rewards",
+    "CLAIM": "Claim",
+    "HISTORY": "History",
+    "REWARD": {
+        "LOCKED": "Locked",
+        "UNLOCKED": "Unlocked",
+        "POINTS_NEEDED": "more points to unlock",
+        "REDEEM_FIRST": "Redeem previous first",
+        "CODE_RECEIVED": "Code received"
     }
 }

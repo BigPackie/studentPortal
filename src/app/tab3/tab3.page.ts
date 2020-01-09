@@ -5,6 +5,7 @@ import { Reward, RewardHistory, RewardStatus } from '../services/models';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Observable, forkJoin } from 'rxjs';
 import { IonItemSliding } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 enum Mode { 
   REWARDS = "rewards",
@@ -27,7 +28,9 @@ export class Tab3Page {
   currentPoint: number = 0;
   accumulativePoint: number = 0;
 
+  //always only the first milestone can be redeemed. If redeemed, needs to fetch data again, and second becomes first
   milestoneFirst: Reward;
+  milestoneSecond: Reward;
 
   currentPointRewards: Reward[];
   accumulativePointRewards: Reward[]; //do not contains already claimed rewards
@@ -35,7 +38,7 @@ export class Tab3Page {
   currentPointRewardsHistory: RewardHistory[];
   accumulativePointRewardsHistory: RewardHistory[];
 
-  constructor(private dataService: DataService, private sanitizer: DomSanitizer) {}
+  constructor(private dataService: DataService, private sanitizer: DomSanitizer, private translate: TranslateService) {}
 
   ionViewDidEnter(){
     this.updatePageContent();
@@ -76,6 +79,11 @@ export class Tab3Page {
             this.milestoneFirst = this.accumulativePointRewards[0];
             this.milestoneFirst.status = this.isMileStoneUnlocked(this.milestoneFirst.point) ? RewardStatus.UNLOCKED : RewardStatus.LOCKED;
           }
+
+          if (this.accumulativePointRewards && this.accumulativePointRewards[1]) {
+            this.milestoneSecond = this.accumulativePointRewards[1];
+            this.milestoneSecond.status = this.isMileStoneUnlocked(this.milestoneSecond.point) ? RewardStatus.UNLOCKED : RewardStatus.LOCKED;
+          }
         },
         (err) => {
           console.error(`Retrieving reward list or user points failed`);
@@ -103,7 +111,7 @@ export class Tab3Page {
         console.log(res);
         this.currentPoint = res.current_point;
         // this.accumulativePoint = res.accumulative_point;
-        this.accumulativePoint = 500;
+        this.accumulativePoint = 525;
       })
     )
   }
@@ -119,9 +127,6 @@ export class Tab3Page {
   }
 
   getMilestoneStatusIconName(reward: Reward): string{
-
-    console.log(`Milestone: ${JSON.stringify(this.milestoneFirst)}`);
-
     if(reward.status == RewardStatus.LOCKED){
       return "lock";
     } else {
@@ -161,6 +166,7 @@ export class Tab3Page {
     }
   }
 
+  //TODO: maybe redo in the template with ngIf directives
   getMilestonesPointsText(milestone: Reward, latestMilestone: boolean){
     //if not enough accumulated points, return:  "x points needed" in red; x = reward points - current points
     //if enough current poinst, return: Unlocked
@@ -170,14 +176,25 @@ export class Tab3Page {
 
    // console.log(`accumated points: ${this.accumulativePoint}, milestone required: ${milestonePoints}`);
 
-    if ( milestone.status == RewardStatus.UNLOCKED ) {
+    if (milestone.status == RewardStatus.UNLOCKED) {
       if (latestMilestone) {
-        element = `<ion-text color="warning"><h3>Redeem previous first</h3></ion-text>`;
+        this.translate.get('REWARD.REDEEM_FIRST').pipe(take(1)).subscribe((res: string) => {
+          element = `<ion-text color="warning"><h3>${res}</h3></ion-text>`;
+        });
       } else {
-        element = `<ion-text color="success"><h3>Unlocked</h3></ion-text>`;
+        this.translate.get('REWARD.UNLOCKED').pipe(take(1)).subscribe((res: string) => {
+          element = `<ion-text color="success"><h3>${res}</h3></ion-text>`;
+        });
       }
-    } else if ( milestone.status == RewardStatus.LOCKED ) {
-      element = `<ion-text color="danger"><h3>Needs ${milestone.point - this.accumulativePoint} more to unlock </h3></ion-text>`;
+    } else if (milestone.status == RewardStatus.REDEEMED) {
+      this.translate.get('REWARD.CODE_RECEIVED').pipe(take(1)).subscribe((res: string) => {
+        element = `<ion-text color="success"><h3>${res}</h3></ion-text>`;
+      });
+    } else if (milestone.status == RewardStatus.LOCKED) {
+      this.translate.get('REWARD.POINTS_NEEDED').pipe(take(1)).subscribe((res: string) => {
+        element = `<ion-text color="danger"><h3>${milestone.point - this.accumulativePoint} ${res}</h3></ion-text>`;
+      });
+
     }
   
     return this.sanitizer.bypassSecurityTrustHtml(element);

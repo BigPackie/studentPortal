@@ -11,30 +11,28 @@
   <ion-toolbar id="swapper">
     <ion-segment color="icit-blue" mode="md" [(ngModel)]="mode" (ionChange)="updatePageContent()">
       <ion-segment-button layout="icon-end" mode="md" value="rewards">
-        <ion-label>Claim</ion-label>
+        <ion-label>{{ 'CLAIM' | translate}}</ion-label>
         <ion-icon name="cart"></ion-icon>
       </ion-segment-button>
       <ion-segment-button layout="icon-end" mode="md" value="history">
-        <ion-label>History</ion-label>
+        <ion-label>{{ 'HISTORY' | translate}}</ion-label>
         <ion-icon name="time"></ion-icon>
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 
   <div id="rewards" *ngIf="mode == 'rewards'">
-  
-    <!-- <ion-item-divider sticky>
-          <ion-label>Label seperate</ion-label>
-        </ion-item-divider> -->
     <ion-list lines="full">
-        <ion-list-header class="milestones">
-            <ion-label color="icit-green">Milestones</ion-label>
-            <ion-chip color="icit-green" outline="true">
-              <ion-label>{{ accumulativePoint }}</ion-label>
-              <ion-icon name="film"></ion-icon>
-            </ion-chip>
-          </ion-list-header>
-      <ion-item-sliding #slidingCase *ngIf="milestoneFirst" [disabled]="milestoneFirst.status == RewardStatus.LOCKED" (ionDrag)="drag($event.detail, $event.srcElement)">
+      <ion-list-header class="milestones">
+        <ion-label color="icit-green">{{ 'MILESTONES' | translate}}</ion-label>
+        <ion-chip color="icit-green" outline="true">
+          <ion-label>{{ accumulativePoint }}</ion-label>
+          <ion-icon name="film"></ion-icon>
+        </ion-chip>
+      </ion-list-header>
+
+      <ion-item-sliding #slidingCase *ngIf="milestoneFirst" [disabled]="milestoneFirst.status == RewardStatus.LOCKED"
+        (ionDrag)="drag($event.detail, $event.srcElement)">
         <ion-item>
           <ion-thumbnail slot="start">
             <img [src]="milestoneFirst.img">
@@ -44,70 +42,40 @@
             <div [innerHtml]="getMilestonesPointsText(milestoneFirst, false)"></div>
             <p>{{ milestoneFirst.description }}</p>
           </ion-label>
-          <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-          <ion-icon [name]="getMilestoneStatusIconName(milestoneFirst)"  slot="end"></ion-icon>
+          <ion-icon [name]="getMilestoneStatusIconName(milestoneFirst)" slot="end"></ion-icon>
         </ion-item>
         <ion-item-options side="end" (ionSwipe)="getMilestoneRedemptionCode(milestoneFirst, slidingCase)">
-          <ion-item-option class="almost-full-width justify-content-center" color="white" *ngIf="milestoneFirst.status == RewardStatus.UNLOCKED">
-              <div [style.opacity]="slidingItemOpacity">Swipe left fully to receive code</div>
-            </ion-item-option>
-          <ion-item-option class="full-width justify-content-center" color="white" *ngIf="milestoneFirst.status == RewardStatus.REDEEMING">
-              <div style="display: inline-flex; align-items: center;">
-                  <div>Loading</div>
-                  <ion-spinner name="dots" color="dark"></ion-spinner>
-                </div>
-            </ion-item-option>
+          <ion-item-option class="almost-full-width justify-content-center" color="white"
+            *ngIf="milestoneFirst.status == RewardStatus.UNLOCKED">
+            <div [style.opacity]="slidingItemOpacity">{{ 'RECEIVE_CODE' | translate}}</div>
+          </ion-item-option>
+          <ion-item-option class="full-width justify-content-center" color="white"
+            *ngIf="milestoneFirst.status == RewardStatus.REDEEMING">
+            <app-item-option-loading></app-item-option-loading>
+          </ion-item-option>
           <ion-item-option color="white" *ngIf="milestoneFirst.status == RewardStatus.REDEEMED">
-            <div><div class="fadein"><strong>{{ milestoneFirst.redemptionCode }}</strong></div></div>
+            <div>
+              <div class="fadein"><strong>{{ milestoneFirst.redemptionCode }}</strong></div>
+            </div>
           </ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
-
-      <ion-item-sliding *ngIf="accumulativePointRewards && accumulativePointRewards[1] as milestoneSecond" (ionDrag)="drag($event.detail, $event.srcElement)">
-        <ion-item>
-          <ion-thumbnail slot="start">
-            <img [src]="milestoneSecond.img">
-          </ion-thumbnail>
-          <ion-label class="ion-text-wrap">
-            <h2>{{ milestoneSecond.name }}</h2>
-            <div [innerHtml]="getMilestonesPointsText(milestoneSecond?.point, true)"></div>
-            <p>{{ milestoneSecond.description }}</p>
-          </ion-label>
-          <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-          <ion-icon [name]="isMileStoneUnlocked(milestoneSecond?.point) ? 'md-arrow-dropleft' : 'lock'" slot="end"></ion-icon>
-        </ion-item>
-        <ion-item-options side="end"  *ngIf="isMileStoneUnlocked(milestoneSecond?.point)">
-          <ion-item-option color="white">
-            <div [style.opacity]="slidingItemOpacity"><strong>SOME_CODE_FOR_EXCHANGE</strong></div>
-
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
-
-
-
-      <ion-item-sliding (ionDrag)="drag($event.detail, $event.srcElement)">
-        <ion-item>
-          <ion-thumbnail slot="start">
-            <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
-          </ion-thumbnail>
-          <ion-label class="ion-text-wrap">
-            <h2>The allmighty duck!</h2>
-            <ion-text color="danger">
-              <h3>45 points needed</h3>
-            </ion-text>
-            <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-          </ion-label>
-          <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-          <ion-icon name="lock" slot="end"></ion-icon>
-        </ion-item>
-        <ion-item-options side="end" *ngIf="false">
-          <ion-item-option color="white">
-            <div [style.opacity]="slidingItemOpacity"><strong>SOME_CODE_FOR_EXCHANGE</strong></div>
-
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
+  
+      <ion-item-sliding #slidingCase *ngIf="milestoneSecond" 
+      [disabled]="true"
+      (ionDrag)="drag($event.detail, $event.srcElement)">
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img [src]="milestoneSecond.img">
+        </ion-thumbnail>
+        <ion-label class="ion-text-wrap">
+          <h2>{{ milestoneSecond.name }}</h2>
+          <div [innerHtml]="getMilestonesPointsText(milestoneSecond, true)"></div>
+          <p>{{ milestoneSecond.description }}</p>
+        </ion-label>
+        <ion-icon [name]="getMilestoneStatusIconName(milestoneSecond)" slot="end"></ion-icon>
+      </ion-item>
+    </ion-item-sliding>
 
     </ion-list>
 
@@ -117,7 +85,7 @@
         </ion-item-divider> -->
     <ion-list lines="full">
         <ion-list-header class="rewards">
-            <ion-label color="icit-orange">Rewards</ion-label>
+            <ion-label color="icit-orange">{{ 'REWARDS' | translate}}</ion-label>
             <ion-chip color="icit-orange" outline="false">
               <ion-label>{{ currentPoint }}</ion-label>
               <ion-icon name="bug"></ion-icon>
@@ -338,7 +306,7 @@
 
     <ion-list lines="full">
       <ion-list-header class="milestones">
-        <ion-label color="icit-green">Milestones history</ion-label>
+        <ion-label color="icit-green">{{ 'MILESTONES' | translate}} {{ 'HISTORY' | translate}}</ion-label>
       </ion-list-header>
       <ion-item>
         <ion-thumbnail slot="start">
@@ -372,7 +340,7 @@
 
     <ion-list lines="full">
       <ion-list-header class="rewards">
-        <ion-label color="icit-orange">Rewards history</ion-label>
+        <ion-label color="icit-orange">{{ 'REWARDS' | translate}} {{ 'HISTORY' | translate}}</ion-label>
       </ion-list-header>
       <ion-item>
         <ion-thumbnail slot="start">

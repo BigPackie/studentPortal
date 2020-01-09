@@ -42,5 +42,18 @@
     "VALIDATION": {
         "USERNAME" : "ต้องระบุชื่อผู้ใช้!",
         "PASSWORD" : "ต้องการรหัสผ่าน!"
+    },
+    "LOADING": "กำลังโหลด",
+    "RECEIVE_CODE": "ปัดไปทางซ้ายอีกครั้งเพื่อรับรหัส",
+    "MILESTONES": "ขั้น",
+    "REWARDS": "บำเหน็จ",
+    "CLAIM": "ข้อเรียกร้อง",
+    "HISTORY": "ประวัติศาสตร์",
+    "REWARD": {
+        "LOCKED": "ล็อค",
+        "UNLOCKED": "ปลดล็อค",
+        "POINTS_NEEDED": "คะแนนมากขึ้นเพื่อปลดล็อค",
+        "REDEEM_FIRST": "แลกก่อนหน้านี้ก่อน",
+        "CODE_RECEIVED": "รับรหัสแล้ว"
     }
 }

@@ -22,11 +22,6 @@ export class TranslateConfigService {
     if (this._isAllowedLanguage(language)) {
       this.translate.use(language);
       console.log(`Language set to '${language}'`);
-
-      console.log(`Testing translation.`);
-      this.translate.get('test').subscribe((res: string) => {
-        console.log(res);
-      });
     } else {
       console.warn(`${language} is not available!`);
     }

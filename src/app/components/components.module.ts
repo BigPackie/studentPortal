@@ -7,10 +7,12 @@ import { SettingsPopoverComponent } from "./settings/settings-popover/settings-p
 import { SettingsContainerComponent } from './settings/settings-container/settings-container.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
+import { ItemOptionLoadingComponent } from './item-option-loading/item-option-loading.component';
 
 const COMPONENTS = [
   SettingsPopoverComponent,
-  SettingsContainerComponent
+  SettingsContainerComponent,
+  ItemOptionLoadingComponent
 ];
 
 @NgModule({
