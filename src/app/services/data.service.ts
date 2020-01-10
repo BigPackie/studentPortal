@@ -41,8 +41,8 @@ export class DataService {
   }
 
   getRewardsList(): Observable<any> {
-    return this.api.get<any>('assets', DATA_RESOURCES.RewardsList);
-    //return this.api.get<any>(environment.rewardServicesUrl,'getRewardList');
+    //return this.api.get<any>('assets', DATA_RESOURCES.RewardsList);
+    return this.api.get<any>(environment.rewardServicesUrl,'getRewardList');
   }
 
   getRewardsHistory(): Observable<any> {

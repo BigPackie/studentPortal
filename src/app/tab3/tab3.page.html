@@ -91,6 +91,7 @@
         </ion-chip>
       </ion-list-header>
       <ion-item-sliding #slidingCaseReward *ngFor="let reward of currentPointRewards"
+        [disabled]="reward.status == RewardStatus.LOCKED"
         (ionDrag)="drag($event.detail, $event.srcElement)">
         <ion-item>
           <ion-thumbnail slot="start">

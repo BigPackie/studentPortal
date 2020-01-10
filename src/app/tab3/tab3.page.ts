@@ -113,10 +113,8 @@ export class Tab3Page {
       take(1),
       tap((res) => {
         console.log(res);
-        //this.currentPoint = res.current_point;
-        this.currentPoint = 40;
-        // this.accumulativePoint = res.accumulative_point;
-        this.accumulativePoint = 525;
+        this.currentPoint = res.current_point;       
+        this.accumulativePoint = res.accumulative_point;
       })
     )
   }
