@@ -27,7 +27,7 @@
         <ion-label color="icit-green">{{ 'MILESTONES' | translate}}</ion-label>
         <ion-chip color="icit-green" outline="true">
           <ion-label>{{ accumulativePoint }}</ion-label>
-          <ion-icon name="film"></ion-icon>
+          <ion-icon name="md-film"></ion-icon>
         </ion-chip>
       </ion-list-header>
 
@@ -87,12 +87,11 @@
         <ion-label color="icit-orange">{{ 'REWARDS' | translate}}</ion-label>
         <ion-chip color="icit-orange" outline="false">
           <ion-label>{{ currentPoint }}</ion-label>
-          <ion-icon name="bug"></ion-icon>
+          <ion-icon name="md-bug"></ion-icon>
         </ion-chip>
       </ion-list-header>
       <ion-item-sliding #slidingCaseReward *ngFor="let reward of currentPointRewards"
-        [disabled]="reward.status == RewardStatus.LOCKED"
-        (ionDrag)="drag($event.detail, $event.srcElement)">
+        [disabled]="reward.status == RewardStatus.LOCKED" (ionDrag)="drag($event.detail, $event.srcElement)">
         <ion-item>
           <ion-thumbnail slot="start">
             <img [src]="reward.img">
@@ -103,18 +102,18 @@
               <ion-text color="success" *ngIf="reward.status == RewardStatus.REDEEMED">
                 <h3>
                   <ion-label class="points-type">
-                      {{reward.point}}
-                      <ion-icon name="bug"></ion-icon>
-                    </ion-label>
+                    {{reward.point}}
+                    <ion-icon name="md-bug"></ion-icon>
+                  </ion-label>
                   {{ 'REWARD.CODE_RECEIVED' | translate }}
                 </h3>
               </ion-text>
               <ion-text color="success" *ngIf="reward.status == RewardStatus.UNLOCKED">
                 <h3>
                   <ion-label class="points-type">
-                      {{reward.point}}
-                      <ion-icon name="bug"></ion-icon>
-                    </ion-label>
+                    {{reward.point}}
+                    <ion-icon name="md-bug"></ion-icon>
+                  </ion-label>
                   {{ 'REWARD.UNLOCKED' | translate }}
                 </h3>
               </ion-text>
@@ -122,7 +121,7 @@
                 <h3>
                   <ion-label class="points-type">
                     {{reward.point}}
-                    <ion-icon name="bug"></ion-icon>
+                    <ion-icon name="md-bug"></ion-icon>
                   </ion-label>
                   ({{ getMissingRewardPoints(reward.point) }} {{ 'REWARD.POINTS_NEEDED' | translate }})
                 </h3>
@@ -158,33 +157,25 @@
       <ion-list-header class="milestones">
         <ion-label color="icit-green">{{ 'MILESTONES' | translate}} {{ 'HISTORY' | translate}}</ion-label>
       </ion-list-header>
-      <ion-item>
+      <ion-item *ngFor="let item of accumulativePointRewardsHistory">
         <ion-thumbnail slot="start">
-          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
+          <img [src]="item.img">
         </ion-thumbnail>
         <ion-label class="ion-text-wrap">
-          <h2>The allmighty duck!</h2>
+          <h2>{{ item.name }}</h2>
           <ion-text color="icit-blue">
-            <h3>50 points | 20.3.2020 18:59</h3>
+            <h3>
+              <ion-label class="points-type">
+                {{item.point}}
+                <ion-icon name="md-bug"></ion-icon>
+              </ion-label>
+              | {{item.date | date:'dd/MM/yyyy HH:mm:ss'}}
+            </h3>
           </ion-text>
-          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
+          <p>{{ item.description }}</p>
         </ion-label>
         <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
       </ion-item>
-      <ion-item>
-        <ion-thumbnail slot="start">
-          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
-        </ion-thumbnail>
-        <ion-label class="ion-text-wrap">
-          <h2>The allmighty duck!</h2>
-          <ion-text color="icit-blue">
-            <h3>50 points | 20.3.2020 18:59</h3>
-          </ion-text>
-          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-        </ion-label>
-        <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-      </ion-item>
-
     </ion-list>
 
 
@@ -192,94 +183,22 @@
       <ion-list-header class="rewards">
         <ion-label color="icit-orange">{{ 'REWARDS' | translate}} {{ 'HISTORY' | translate}}</ion-label>
       </ion-list-header>
-      <ion-item>
+      <ion-item *ngFor="let item of currentPointRewardsHistory">
         <ion-thumbnail slot="start">
-          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
+          <img [src]="item.img">
         </ion-thumbnail>
         <ion-label class="ion-text-wrap">
-          <h2>The allmighty duck!</h2>
+          <h2>{{ item.name }}</h2>
           <ion-text color="icit-blue">
-            <h3>50 points | 20.3.2020 18:59</h3>
+            <h3>
+              <ion-label class="points-type">
+                {{item.point}}
+                <ion-icon name="md-film"></ion-icon>
+              </ion-label>
+              | {{item.date | date:'dd/MM/yyyy HH:mm:ss'}}
+            </h3>
           </ion-text>
-          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-        </ion-label>
-        <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail slot="start">
-          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
-        </ion-thumbnail>
-        <ion-label class="ion-text-wrap">
-          <h2>The allmighty duck!</h2>
-          <ion-text color="icit-blue">
-            <h3>50 points | 20.3.2020 18:59</h3>
-          </ion-text>
-          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-        </ion-label>
-        <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail slot="start">
-          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
-        </ion-thumbnail>
-        <ion-label class="ion-text-wrap">
-          <h2>The allmighty duck!</h2>
-          <ion-text color="icit-blue">
-            <h3>50 points | 20.3.2020 18:59</h3>
-          </ion-text>
-          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-        </ion-label>
-        <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail slot="start">
-          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
-        </ion-thumbnail>
-        <ion-label class="ion-text-wrap">
-          <h2>The allmighty duck!</h2>
-          <ion-text color="icit-blue">
-            <h3>50 points | 20.3.2020 18:59</h3>
-          </ion-text>
-          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-        </ion-label>
-        <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail slot="start">
-          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
-        </ion-thumbnail>
-        <ion-label class="ion-text-wrap">
-          <h2>The allmighty duck!</h2>
-          <ion-text color="icit-blue">
-            <h3>50 points | 20.3.2020 18:59</h3>
-          </ion-text>
-          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-        </ion-label>
-        <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail slot="start">
-          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
-        </ion-thumbnail>
-        <ion-label class="ion-text-wrap">
-          <h2>The allmighty duck!</h2>
-          <ion-text color="icit-blue">
-            <h3>50 points | 20.3.2020 18:59</h3>
-          </ion-text>
-          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-        </ion-label>
-        <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail slot="start">
-          <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
-        </ion-thumbnail>
-        <ion-label class="ion-text-wrap">
-          <h2>The allmighty duck!</h2>
-          <ion-text color="icit-blue">
-            <h3>50 points | 20.3.2020 18:59</h3>
-          </ion-text>
-          <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
+          <p>{{ item.description }}</p>
         </ion-label>
         <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
       </ion-item>
