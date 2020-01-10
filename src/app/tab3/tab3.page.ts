@@ -84,6 +84,10 @@ export class Tab3Page {
             this.milestoneSecond = this.accumulativePointRewards[1];
             this.milestoneSecond.status = this.isMileStoneUnlocked(this.milestoneSecond.point) ? RewardStatus.UNLOCKED : RewardStatus.LOCKED;
           }
+
+          this.currentPointRewards.forEach(reward => {
+           reward.status =  this.isRewardUnlocked(reward.point) ? RewardStatus.UNLOCKED : RewardStatus.LOCKED;
+          });
         },
         (err) => {
           console.error(`Retrieving reward list or user points failed`);
@@ -109,7 +113,8 @@ export class Tab3Page {
       take(1),
       tap((res) => {
         console.log(res);
-        this.currentPoint = res.current_point;
+        //this.currentPoint = res.current_point;
+        this.currentPoint = 40;
         // this.accumulativePoint = res.accumulative_point;
         this.accumulativePoint = 525;
       })
@@ -126,7 +131,7 @@ export class Tab3Page {
     });
   }
 
-  getMilestoneStatusIconName(reward: Reward): string{
+  getRewardStatusIconName(reward: Reward): string{
     if(reward.status == RewardStatus.LOCKED){
       return "lock";
     } else {
@@ -134,34 +139,34 @@ export class Tab3Page {
     }
   }
 
-  async getMilestoneRedemptionCode(milestone: Reward, slidingItem: IonItemSliding) {
+  async getRewardRedemptionCode(reward: Reward, slidingItem: IonItemSliding) {
 
     console.log("triggered swipe event");
 
-    if (milestone.id == null || milestone.id == undefined) {
+    if (reward.id == null || reward.id == undefined) {
       console.error(`Reward has no id. Cannot redeem.`);
       return;
     }
 
-    if( milestone.status == RewardStatus.REDEEMING){
+    if( reward.status == RewardStatus.REDEEMING){
       console.warn(`Already redeeming code, wait a moment.`);
       return;
     }
 
-    if (milestone.status == RewardStatus.UNLOCKED) {
-      milestone.status = RewardStatus.REDEEMING;
+    if (reward.status == RewardStatus.UNLOCKED) {
+      reward.status = RewardStatus.REDEEMING;
       await this.refreshSlider(slidingItem);
-      this.dataService.getRewardExchangeToken(milestone.id)
+      this.dataService.getRewardExchangeToken(reward.id)
         .pipe(
           take(1),
         )
         .subscribe((res) => {
-          milestone.redemptionCode = res.exchange_token;
-          milestone.status = RewardStatus.REDEEMED;
+          reward.redemptionCode = res.exchange_token;
+          reward.status = RewardStatus.REDEEMED;
           this.refreshSlider(slidingItem);
-          console.log(`Redemption code ${milestone.redemptionCode} set for reward ${milestone.id}`)
+          console.log(`Redemption code ${reward.redemptionCode} set for reward ${reward.id}`)
         },
-        error => {milestone.status = RewardStatus.UNLOCKED;});
+        error => {reward.status = RewardStatus.UNLOCKED;});
 
     }
   }
@@ -200,14 +205,17 @@ export class Tab3Page {
     return this.sanitizer.bypassSecurityTrustHtml(element);
   }
 
-
-  getRewardPointsText(points: number){
-
+  getMissingRewardPoints(rewardPoints: number) : number{
+    return rewardPoints - this.currentPoint;
   }
 
   isMileStoneUnlocked(points: number): boolean{
    // console.log(`milestone points: ${points} and accumulated points: ${this.accumulativePoint} result: ${this.accumulativePoint >= points}`)
     return  this.accumulativePoint >= points;
+  }
+
+  isRewardUnlocked(points: number): boolean{
+    return this.currentPoint >= points;
   }
 
   /**

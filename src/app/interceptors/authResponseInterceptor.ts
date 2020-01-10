@@ -12,12 +12,14 @@ import { UserService } from '../services/user.service';
 import { Observable, from } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { switchMap, filter, tap, catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 
 @Injectable()
 export class AuthResponseInterceptor implements HttpInterceptor {
 
-    constructor(public userService: UserService) { 
+    constructor(private router: Router, private userService: UserService, private toastController: ToastController) { 
 
     }
 
@@ -32,15 +34,31 @@ export class AuthResponseInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(
             //filter here seemed to complete stop the response, but why?
             tap(
-                (event) => {
+                async (event) => {
                     // There may be other events besides the response.
                     if (event instanceof HttpResponse){
-                        console.log("Intercepting successful secured response from server ");
+                        console.log(`Intercepting successful secured response from server`);
+                        
+                        if (event.body.success == false && event.body.api_status_code == 401) {
+                            console.error("Not authorized!");
+                            //authorization failed, 
+                            const toast = await this.toastController.create({
+                                header: 'Not Logged in.',
+                                message: 'Please log in.',
+                                position: 'top',
+                                duration: 3000
+                              });
+
+                            this.userService.logout()
+                            .then(() => toast.present())
+                            .then(() => this.router.navigateByUrl('/login', { replaceUrl: true })); 
+                        }
+                    
                     }
                 },
                 // Operation failed; error is an HttpErrorResponse
                 (error) => {
-                    console.error(`Secured request failed. Probably authorization issue: ${error}`)
+                    console.error(`Secured request failed: ${error}`)
                     return event;
                 }
             )

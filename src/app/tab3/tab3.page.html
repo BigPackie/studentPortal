@@ -42,9 +42,9 @@
             <div [innerHtml]="getMilestonesPointsText(milestoneFirst, false)"></div>
             <p>{{ milestoneFirst.description }}</p>
           </ion-label>
-          <ion-icon [name]="getMilestoneStatusIconName(milestoneFirst)" slot="end"></ion-icon>
+          <ion-icon [name]="getRewardStatusIconName(milestoneFirst)" slot="end"></ion-icon>
         </ion-item>
-        <ion-item-options side="end" (ionSwipe)="getMilestoneRedemptionCode(milestoneFirst, slidingCase)">
+        <ion-item-options side="end" (ionSwipe)="getRewardRedemptionCode(milestoneFirst, slidingCase)">
           <ion-item-option class="almost-full-width justify-content-center" color="white"
             *ngIf="milestoneFirst.status == RewardStatus.UNLOCKED">
             <div [style.opacity]="slidingItemOpacity">{{ 'RECEIVE_CODE' | translate}}</div>
@@ -60,245 +60,94 @@
           </ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
-  
-      <ion-item-sliding #slidingCase *ngIf="milestoneSecond" 
-      [disabled]="true"
-      (ionDrag)="drag($event.detail, $event.srcElement)">
-      <ion-item>
-        <ion-thumbnail slot="start">
-          <img [src]="milestoneSecond.img">
-        </ion-thumbnail>
-        <ion-label class="ion-text-wrap">
-          <h2>{{ milestoneSecond.name }}</h2>
-          <div [innerHtml]="getMilestonesPointsText(milestoneSecond, true)"></div>
-          <p>{{ milestoneSecond.description }}</p>
-        </ion-label>
-        <ion-icon [name]="getMilestoneStatusIconName(milestoneSecond)" slot="end"></ion-icon>
-      </ion-item>
-    </ion-item-sliding>
+
+      <ion-item-sliding #slidingCase *ngIf="milestoneSecond" [disabled]="true"
+        (ionDrag)="drag($event.detail, $event.srcElement)">
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img [src]="milestoneSecond.img">
+          </ion-thumbnail>
+          <ion-label class="ion-text-wrap">
+            <h2>{{ milestoneSecond.name }}</h2>
+            <div [innerHtml]="getMilestonesPointsText(milestoneSecond, true)"></div>
+            <p>{{ milestoneSecond.description }}</p>
+          </ion-label>
+          <ion-icon [name]="getRewardStatusIconName(milestoneSecond)" slot="end"></ion-icon>
+        </ion-item>
+      </ion-item-sliding>
 
     </ion-list>
 
-    
+
     <!-- <ion-item-divider>
           <ion-label>Label</ion-label>
         </ion-item-divider> -->
     <ion-list lines="full">
-        <ion-list-header class="rewards">
-            <ion-label color="icit-orange">{{ 'REWARDS' | translate}}</ion-label>
-            <ion-chip color="icit-orange" outline="false">
-              <ion-label>{{ currentPoint }}</ion-label>
-              <ion-icon name="bug"></ion-icon>
-            </ion-chip>
-          </ion-list-header>
-      <ion-item-sliding *ngFor="let reward of currentPointRewards" (ionDrag)="drag($event.detail, $event.srcElement)">
+      <ion-list-header class="rewards">
+        <ion-label color="icit-orange">{{ 'REWARDS' | translate}}</ion-label>
+        <ion-chip color="icit-orange" outline="false">
+          <ion-label>{{ currentPoint }}</ion-label>
+          <ion-icon name="bug"></ion-icon>
+        </ion-chip>
+      </ion-list-header>
+      <ion-item-sliding #slidingCaseReward *ngFor="let reward of currentPointRewards"
+        (ionDrag)="drag($event.detail, $event.srcElement)">
         <ion-item>
           <ion-thumbnail slot="start">
             <img [src]="reward.img">
           </ion-thumbnail>
           <ion-label class="ion-text-wrap">
             <h2>{{ reward.name }}</h2>
-            <ion-text color="danger">
-              <h3>50 points</h3>
-            </ion-text>
+            <div>
+              <ion-text color="success" *ngIf="reward.status == RewardStatus.REDEEMED">
+                <h3>
+                  <ion-label class="points-type">
+                      {{reward.point}}
+                      <ion-icon name="bug"></ion-icon>
+                    </ion-label>
+                  {{ 'REWARD.CODE_RECEIVED' | translate }}
+                </h3>
+              </ion-text>
+              <ion-text color="success" *ngIf="reward.status == RewardStatus.UNLOCKED">
+                <h3>
+                  <ion-label class="points-type">
+                      {{reward.point}}
+                      <ion-icon name="bug"></ion-icon>
+                    </ion-label>
+                  {{ 'REWARD.UNLOCKED' | translate }}
+                </h3>
+              </ion-text>
+              <ion-text color="danger" *ngIf="reward.status == RewardStatus.LOCKED">
+                <h3>
+                  <ion-label class="points-type">
+                    {{reward.point}}
+                    <ion-icon name="bug"></ion-icon>
+                  </ion-label>
+                  ({{ getMissingRewardPoints(reward.point) }} {{ 'REWARD.POINTS_NEEDED' | translate }})
+                </h3>
+              </ion-text>
+            </div>
             <p>{{ reward.description }}</p>
           </ion-label>
           <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-          <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
+          <ion-icon [name]="getRewardStatusIconName(reward)" slot="end"></ion-icon>
         </ion-item>
-        <ion-item-options side="end">
-          <ion-item-option color="white">
-            <div [style.opacity]="slidingItemOpacity"><strong>SOME_CODE_FOR_EXCHANGE</strong></div>
-
+        <ion-item-options side="end" (ionSwipe)="getRewardRedemptionCode(reward, slidingCaseReward)">
+          <ion-item-option *ngIf="reward.status == RewardStatus.UNLOCKED"
+            class="almost-full-width justify-content-center" color="white">
+            <div [style.opacity]="slidingItemOpacity">{{ 'RECEIVE_CODE' | translate}}</div>
+          </ion-item-option>
+          <ion-item-option *ngIf="reward.status == RewardStatus.REDEEMING" class="full-width justify-content-center"
+            color="white">
+            <app-item-option-loading></app-item-option-loading>
+          </ion-item-option>
+          <ion-item-option *ngIf="reward.status == RewardStatus.REDEEMED" color="white">
+            <div>
+              <div class="fadein"><strong>{{ reward.redemptionCode }}</strong></div>
+            </div>
           </ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
-
-      <ion-item-sliding (ionDrag)="drag($event.detail, $event.srcElement)">
-        <ion-item>
-          <ion-thumbnail slot="start">
-            <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
-          </ion-thumbnail>
-          <ion-label class="ion-text-wrap">
-            <h2>The allmighty duck!</h2>
-            <ion-text color="danger">
-              <h3>50 points</h3>
-            </ion-text>
-            <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-          </ion-label>
-          <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-          <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
-        </ion-item>
-        <ion-item-options side="end">
-          <ion-item-option color="white">
-            <div [style.opacity]="slidingItemOpacity"><strong>SOME_CODE_FOR_EXCHANGE</strong></div>
-
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
-
-      <ion-item-sliding (ionDrag)="drag($event.detail, $event.srcElement)">
-        <ion-item>
-          <ion-thumbnail slot="start">
-            <img src="https://i.pinimg.com/originals/56/15/c7/5615c733afac85a0b706b9abefc9a0c4.jpg">
-          </ion-thumbnail>
-          <ion-label class="ion-text-wrap">
-            <h2>The allmighty duck!</h2>
-            <ion-text color="danger">
-              <h3>50 points</h3>
-            </ion-text>
-            <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-          </ion-label>
-          <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-          <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
-        </ion-item>
-        <ion-item-options side="end">
-          <ion-item-option color="white">
-            <div [style.opacity]="slidingItemOpacity"><strong>SOME_CODE_FOR_EXCHANGE</strong></div>
-
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
-
-      <ion-item-sliding>
-        <ion-item>
-          <ion-thumbnail slot="start">
-            <img src="assets/img/error-reward.jpg">
-          </ion-thumbnail>
-          <ion-label class="ion-text-wrap">
-            <h2>The allmighty duck!</h2>
-            <ion-text color="danger">
-              <h3>50 points</h3>
-            </ion-text>
-            <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-          </ion-label>
-          <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-          <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
-        </ion-item>
-        <ion-item-options side="end">
-          <ion-item-option color="light" expandable>
-            SOME_CODE_FOR_EXCHANGE
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
-
-      <ion-item-sliding>
-        <ion-item>
-          <ion-thumbnail slot="start">
-            <img src="assets/img/error-reward.jpg">
-          </ion-thumbnail>
-          <ion-label class="ion-text-wrap">
-            <h2>The allmighty duck!</h2>
-            <ion-text color="danger">
-              <h3>50 points</h3>
-            </ion-text>
-            <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-          </ion-label>
-          <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-          <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
-        </ion-item>
-        <ion-item-options side="end">
-          <ion-item-option color="light" expandable>
-            SOME_CODE_FOR_EXCHANGE
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
-
-      <ion-item-sliding>
-        <ion-item>
-          <ion-thumbnail slot="start">
-            <img src="assets/img/error-reward.jpg">
-          </ion-thumbnail>
-          <ion-label class="ion-text-wrap">
-            <h2>The allmighty duck!</h2>
-            <ion-text color="danger">
-              <h3>50 points</h3>
-            </ion-text>
-            <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-          </ion-label>
-          <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-          <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
-        </ion-item>
-        <ion-item-options side="end">
-          <ion-item-option color="light" expandable>
-            SOME_CODE_FOR_EXCHANGE
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
-
-      <ion-item-sliding>
-        <ion-item>
-          <ion-thumbnail slot="start">
-            <img src="assets/img/error-reward.jpg">
-          </ion-thumbnail>
-          <ion-label class="ion-text-wrap">
-            <h2>The allmighty duck!</h2>
-            <ion-text color="danger">
-              <h3>50 points</h3>
-            </ion-text>
-            <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-          </ion-label>
-          <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-          <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
-        </ion-item>
-        <ion-item-options side="end">
-          <ion-item-option color="light" expandable>
-            SOME_CODE_FOR_EXCHANGE
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
-
-      <ion-item-sliding>
-        <ion-item>
-          <ion-thumbnail slot="start">
-            <img src="assets/img/error-reward.jpg">
-          </ion-thumbnail>
-          <ion-label class="ion-text-wrap">
-            <h2>The allmighty duck!</h2>
-            <ion-text color="danger">
-              <h3>50 points</h3>
-            </ion-text>
-            <p>Listen, I've had a pretty messed up day... I was caught and then killed and cooked.</p>
-          </ion-label>
-          <!-- <ion-note slot="end" color="secondary">Redeemed 5x</ion-note> -->
-          <ion-icon name="md-arrow-dropleft" slot="end"></ion-icon>
-        </ion-item>
-        <ion-item-options side="end">
-          <ion-item-option color="light" expandable>
-            SOME_CODE_FOR_EXCHANGE
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
-
-
-      <ion-item-sliding id="item100">
-        <ion-item href="#">
-          <ion-label>
-            <h2>HubStruck Notifications</h2>
-            <p>A new message in your network</p>
-            <p>Oceanic Next has joined your network</p>
-          </ion-label>
-          <ion-note slot="end">
-            10:45 AM
-          </ion-note>
-        </ion-item>
-
-        <ion-item-options side="start">
-          <ion-item-option>
-            <ion-icon slot="icon-only" name="heart"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
-
-        <ion-item-options side="end">
-          <ion-item-option color="danger">
-            <ion-icon slot="icon-only" name="trash"></ion-icon>
-          </ion-item-option>
-          <ion-item-option>
-            <ion-icon slot="icon-only" name="star"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
-
     </ion-list>
   </div>
 
