@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Tab2Page } from './tab2.page';
 import { TranslateModule } from '@ngx-translate/core';
 import { ComponentsModule } from '../components/components.module';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @NgModule({
   imports: [
@@ -15,6 +16,9 @@ import { ComponentsModule } from '../components/components.module';
     RouterModule.forChild([{ path: '', component: Tab2Page }]),
     TranslateModule,
     ComponentsModule,
+  ],
+  providers: [
+    InAppBrowser
   ],
   declarations: [Tab2Page]
 })

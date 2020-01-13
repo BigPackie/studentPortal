@@ -9,57 +9,81 @@
 
 <ion-content class="ion-padding" fullscreen>
   <h1>
-    ICIT Student portal
+    {{ appName }}
   </h1>
   <p>
-    <b>ICIT Student portal mobile application</b>
+    <b>Mobile application for ICIT</b>
   </p>
   <p>
-      <em>Version: 0.5</em>
-     </p>
-     <ion-note color="danger">
-       Application is not yet complete. Some features and content might be missing, bugs might be present. 
-       Please report all the bugs via email.
-     </ion-note>
-    <p>
-     The purpose of this application is to inform students about <strong>news</strong> and ongoing <strong>promotions</strong> 
-     as well as their <strong>points</strong> received by using <strong>ICIT Services</strong>. Points may be exchanged for <strong>rewards</strong> by 
-     visting the reward exchange kiosk and displaying the chosen <strong>reward's code</strong> on the rewards tab.
-    </p>
+    <em>Version: {{ version }}</em>
+    <em> code: {{ versionCode }}</em>
+  </p>
+  <ion-note color="danger">
+    Application is not yet complete. Some features and content might be missing, bugs might be present.
+    Please report all the bugs via email.
+  </ion-note>
+  <p>
+    The purpose of this application is to inform students about <strong>news</strong> and ongoing
+    <strong>promotions</strong>
+    as well as their <strong>points</strong> received by using <strong>ICIT Services</strong>. Points may be exchanged
+    for <strong>rewards</strong> by
+    visting the reward exchange kiosk and displaying the chosen <strong>reward's code</strong> on the rewards tab.
+  </p>
 
-    <h4>Contacts</h4>
-    <ion-grid>
-      <ion-row class="ion-align-items-center">
-        <ion-col size="1">
-          <ion-icon name="mail" style="margin-right: 1em;"></ion-icon>
-        </ion-col>
-        <ion-col size="11">
-          <a href="mailto:someEmail@gmail.com?Subject=User%20report" target="_system">
-            someEmail@gmail.com
-          </a>
-        </ion-col>
-      </ion-row>
-      <ion-row class="ion-align-items-center">
-        <ion-col size="1">
-          <ion-icon name="logo-github"></ion-icon>
-        </ion-col>
-        <ion-col size="11">
-          <a href="https://github.com/soemthing/something.git" target="_system">
-            github.com/something/something.git
-          </a>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    
+  <h4>Contacts</h4>
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="1">
+        <ion-icon name="mail" style="margin-right: 1em;"></ion-icon>
+      </ion-col>
+      <ion-col size="11">
+        <a href="mailto:icit_support@kmutnb.ac.th?Subject=ICIT%20App%20user%20report" target="_system">
+          icit_support@kmutnb.ac.th
+        </a>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="1">
+        <ion-icon name="link"></ion-icon>
+      </ion-col>
+      <ion-col size="11">
+        <a href="http://service.icit.kmutnb.ac.th/issue" target="_system">
+          http://service.icit.kmutnb.ac.th/issue
+        </a>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="1">
+        <img src="assets/icon/LINE_SOCIAL_Basic.png">
+      </ion-col>
+      <ion-col size="11">
+        <ion-text color="primary">
+          @icitkmutnb
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="1">
+        <ion-icon name="logo-facebook"></ion-icon>
+      </ion-col>
+      <ion-col size="11">
+        <a href="https://www.facebook.com/ICIT.KMUTNB" target="_system">
+          https://www.facebook.com/ICIT.KMUTNB
+        </a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-    <h4>Credits</h4>
-      <ion-label class="ion-text-wrap"><b>Project Leader:</b> ???</ion-label><br>
-      <ion-label class="ion-text-wrap"><b>Project Supervisor:</b> ??? </ion-label><br>
-      <ion-label class="ion-text-wrap"><b>Project Supervisor:</b> ??? </ion-label><br>
-      <ion-label class="ion-text-wrap"><b>Lead programmer:</b> Patrik Pindes</ion-label><br>
-      <ion-label class="ion-text-wrap"><b>Lead programmer's supervisor:</b> Tum</ion-label><br>
-      <ion-label class="ion-text-wrap"><b>Security:</b> Eee</ion-label><br>
-      <ion-label class="ion-text-wrap"><b>Designer:</b> Patrik Pindes</ion-label><br>
-      <ion-label class="ion-text-wrap"><b>Design contributor:</b> Egg</ion-label><br>
-    
+
+  <h4>Credits</h4>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4">Author:</ion-col>
+      <ion-col size="8">Patrik Pindes</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">Collaborator:</ion-col>
+      <ion-col size="8">Institute of Computer and Information Technology</ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -9,10 +9,10 @@
 
 <ion-content>
   <div *ngIf="user$ | async as user" class="ion-padding-top ion-text-center">
-    <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
+    <!-- <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar"> -->
     <h2>{{user.username}}</h2>
 
-    <ion-list inset>
+    <ion-list lines="none">
       <ion-item>
         <ion-label position="stacked">{{ 'NAME.DISPLAY' | translate }}</ion-label>
         {{ user.displayname }}
@@ -35,9 +35,8 @@
       </ion-item>
     </ion-list>
 
-    <ion-list inset>
-      <ion-item button (click)="support()">{{ 'SUPPORT' | translate}}</ion-item>
-      <ion-item button (click)="presentLogoutConfirm()">{{ 'LOGOUT' | translate}}</ion-item>
-    </ion-list>
+    <ion-button (click)="presentLogoutConfirm()" color="icit-blue">
+      {{ 'LOGOUT' | translate}}
+    </ion-button>    
   </div>
 </ion-content>

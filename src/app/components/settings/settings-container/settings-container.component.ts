@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { TouchSequence } from 'selenium-webdriver';
 import { UserService } from 'src/app/services/user.service';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 
 @Component({
   selector: 'app-settings-container',
@@ -16,11 +17,21 @@ export class SettingsContainerComponent implements OnInit {
   isLoggedIn : Promise<boolean>;
   username: string;
 
-  constructor(private popoverController: PopoverController, private translateConfigService: TranslateConfigService, private userService: UserService, private router: Router) { }
+  version : string;
+
+  constructor(private popoverController: PopoverController, 
+    private translateConfigService: TranslateConfigService, 
+    private userService: UserService, 
+    private router: Router,
+    private appVersion: AppVersion) { }
 
   ionViewDidEnter() {
     this.isLoggedIn = this.userService.isLoggedIn();
     this.userService.getUserData().then((userData) => {this.username = userData ? userData.username : null});
+  }
+
+  ionViewDidLoad() {
+    this.appVersion.getVersionNumber().then((version) =>   this.version = version);
   }
 
   ngOnInit() {
