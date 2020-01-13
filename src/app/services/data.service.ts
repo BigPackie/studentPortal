@@ -54,8 +54,12 @@ export class DataService {
     return this.api.get<any>(environment.rewardServicesUrl,'getUserPoint');
   }
 
-  getRewardExchangeToken(id: any): Observable<any> {
-    return of({exchange_token: "88888888"}).pipe(delay(2000));
+  getCurrentRewardExchangeToken(id: any): Observable<any> {
+    return this.api.post(environment.rewardServicesUrl,'exchangeCurrentPoint',{reward_id: id});
+  }
+
+  getAccumulativeRewardExchangeToken(id: any): Observable<any> {
+    return this.api.post(environment.rewardServicesUrl,'exchangeAccumulativePoint',{reward_id: id});
   }
 
   getTestMessage(id: number): Observable<any> {

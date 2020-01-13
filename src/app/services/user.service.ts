@@ -6,6 +6,7 @@ import { UserData, LoginData } from './models';
 import { HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { verify } from 'crypto';
+import { tap } from 'rxjs/operators';
 
 enum STORAGE_KEY {
   HAS_LOGGED_IN = "hasLoggedIn",
@@ -22,7 +23,7 @@ export class UserService {
 
 
    login(loginData: LoginData): Observable<any> {
-    return this.api.post(environment.rewardServicesUrl,'authen', loginData /*,httpOptions*/);
+    return this.api.post(environment.rewardServicesUrl,'authen', loginData);
   }
 
   saveLoggedInUser(userData: UserData, token: string){
@@ -32,8 +33,7 @@ export class UserService {
     .then(() => window.dispatchEvent(new CustomEvent('user:login')));
   }
 
-  logout(): Promise<any> {
-
+  logout(): Observable<any> {
       // const httpOptions = {
     //   headers: new HttpHeaders({
     //     'Authorization':  'Bearer <JWT>',
@@ -41,8 +41,12 @@ export class UserService {
     // };
 
     //TODO: call api to clear/rewoke token
+    return this.api.post(environment.rewardServicesUrl,'logout', null);
+  }
 
-    return this.storage.clear().then(() => {
+  deleteUser(){
+    return this.storage.clear()
+    .then(() => {
       window.dispatchEvent(new CustomEvent('user:logout'));
     });
   }

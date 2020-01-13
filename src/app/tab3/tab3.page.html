@@ -44,7 +44,7 @@
           </ion-label>
           <ion-icon [name]="getRewardStatusIconName(milestoneFirst)" slot="end"></ion-icon>
         </ion-item>
-        <ion-item-options side="end" (ionSwipe)="getRewardRedemptionCode(milestoneFirst, slidingCase)">
+        <ion-item-options side="end" (ionSwipe)="getMilestoneRedemptionCode(milestoneFirst, slidingCase)">
           <ion-item-option class="almost-full-width justify-content-center" color="white"
             *ngIf="milestoneFirst.status == RewardStatus.UNLOCKED">
             <div [style.opacity]="slidingItemOpacity">{{ 'RECEIVE_CODE' | translate}}</div>

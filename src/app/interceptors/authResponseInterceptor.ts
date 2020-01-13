@@ -11,7 +11,7 @@ import {
 import { UserService } from '../services/user.service';
 import { Observable, from } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { switchMap, filter, tap, catchError } from 'rxjs/operators';
+import { switchMap, filter, tap, catchError, take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 
@@ -48,10 +48,10 @@ export class AuthResponseInterceptor implements HttpInterceptor {
                                 position: 'top',
                                 duration: 3000
                               });
-
-                            this.userService.logout()
-                            .then(() => toast.present())
-                            .then(() => this.router.navigateByUrl('/login', { replaceUrl: true })); 
+                            
+                            await this.userService.deleteUser();
+                            await toast.present();
+                            this.router.navigateByUrl('/login', { replaceUrl: true });                 
                         }
                     
                     }

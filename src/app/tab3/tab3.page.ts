@@ -154,7 +154,39 @@ export class Tab3Page {
     if (reward.status == RewardStatus.UNLOCKED) {
       reward.status = RewardStatus.REDEEMING;
       await this.refreshSlider(slidingItem);
-      this.dataService.getRewardExchangeToken(reward.id)
+      this.dataService.getCurrentRewardExchangeToken(reward.id)
+        .pipe(
+          take(1),
+        )
+        .subscribe((res) => {
+          reward.redemptionCode = res.exchange_token;
+          reward.status = RewardStatus.REDEEMED;
+          this.refreshSlider(slidingItem);
+          console.log(`Redemption code ${reward.redemptionCode} set for reward ${reward.id}`)
+        },
+        error => {reward.status = RewardStatus.UNLOCKED;});
+
+    }
+  }
+
+  async getMilestoneRedemptionCode(reward: Reward, slidingItem: IonItemSliding) {
+
+    console.log("triggered swipe event");
+
+    if (reward.id == null || reward.id == undefined) {
+      console.error(`Reward has no id. Cannot redeem.`);
+      return;
+    }
+
+    if( reward.status == RewardStatus.REDEEMING){
+      console.warn(`Already redeeming code, wait a moment.`);
+      return;
+    }
+
+    if (reward.status == RewardStatus.UNLOCKED) {
+      reward.status = RewardStatus.REDEEMING;
+      await this.refreshSlider(slidingItem);
+      this.dataService.getAccumulativeRewardExchangeToken(reward.id)
         .pipe(
           take(1),
         )

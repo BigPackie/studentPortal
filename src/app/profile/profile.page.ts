@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController, LoadingController } from '@ionic/angular';
 import { UserService } from '../services/user.service';
 import { UserData } from '../services/models';
+import { take, catchError, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -18,6 +19,8 @@ export class ProfilePage implements OnInit {
   //TODO: other sensitive pages should be guarded by a similar mechanic.
   constructor(private router: Router,
     private userService: UserService,
+    private toastController: ToastController,
+    private loadingController: LoadingController,
     private alertController: AlertController) {
 
   }
@@ -27,14 +30,49 @@ export class ProfilePage implements OnInit {
   }
 
 
-  //TODO: maybe get always from the server and not locally cached?
   loadUserData(){
     this.user$ = this.userService.getUserData();
   }
 
-  logout() {
-    this.userService.logout().then(() => this.router.navigateByUrl('/tabs/tab1', {replaceUrl: true}));
-    //TODO: revoke token on server side
+  async logoutFailed(err: any) {
+    console.error(`Logout failed, reason: ${JSON.stringify(err)}`);
+    
+    const toast = await this.toastController.create({
+      header: 'Logout failed.',
+      message: err && err.api_message ? err.api_message : "",
+      position: 'top',
+      duration: 3000
+    });
+
+    toast.present();
+  }
+
+  async logout() {
+
+    const logOut = await this.loadingController.create({
+      message: 'Logging out...',
+    });
+
+    await logOut.present();
+
+    this.userService.logout()
+      .pipe(
+        take(1),
+        catchError((err) => this.logoutFailed(err)),
+        finalize(() => {
+          logOut.dismiss();
+        })
+      ).subscribe(async (response) => {
+        console.log(response);
+
+        if (response.api_status_code != 200) {
+          return await this.logoutFailed(response);
+        }
+
+        await this.userService.deleteUser();
+     
+        this.router.navigateByUrl('/tabs/tab1', {replaceUrl: true});
+      })
   }
 
   support() {
