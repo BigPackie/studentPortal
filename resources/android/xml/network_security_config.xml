@@ -2,5 +2,7 @@
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">10.12.4.97</domain>  <!-- if you have calls to unsecured http, address must be included like this-->
+        <domain includeSubdomains="true">icit.kmutnb.ac.th</domain>
     </domain-config>
 </network-security-config>

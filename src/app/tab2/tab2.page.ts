@@ -11,6 +11,6 @@ export class Tab2Page {
   constructor(private iab: InAppBrowser) {}
 
   ionViewDidEnter(){
-    const browser = this.iab.create('http://icit.kmutnb.ac.th/main/services/');
+    const browser = this.iab.create('http://icit.kmutnb.ac.th/main/services/',"_system");
   }
 }
