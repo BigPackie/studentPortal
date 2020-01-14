@@ -30,13 +30,9 @@ export class SettingsContainerComponent implements OnInit {
     this.userService.getUserData().then((userData) => {this.username = userData ? userData.username : null});
   }
 
-  ionViewDidLoad() {
-    this.appVersion.getVersionNumber().then((version) =>   this.version = version);
-  }
-
   ngOnInit() {
     this.chosenLanguage = this.translateConfigService.getLanguage();
-    
+    this.appVersion.getVersionNumber().then((version) =>   this.version = version);
   }
 
   languageChanged(){

@@ -17,6 +17,7 @@ export class PromotionDetailPage implements OnInit {
   zoomSlideOpts = {
     zoom: true,
     watchOverflow : true,
+    passiveListeners: false,
   }
 
   constructor(private route: ActivatedRoute, private dataService: DataService) { }

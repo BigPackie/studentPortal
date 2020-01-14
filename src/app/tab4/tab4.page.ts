@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AppVersion } from '@ionic-native/app-version/ngx';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab4',
@@ -12,12 +13,12 @@ export class Tab4Page {
   version: string;
   versionCode: any;
 
-  constructor(private appVersion: AppVersion) { }
+  constructor(private appVersion: AppVersion, public platform: Platform) { }
 
-  ionViewDidLoad() {
-    this.appVersion.getAppName().then((name) =>   this.appName = name);
-    this.appVersion.getVersionNumber().then((version) =>   this.version = version);
-    this.appVersion.getVersionCode().then((versionCode) =>   this.versionCode = versionCode);
+  ngOnInit() {
+    this.appVersion.getAppName().then((name) => this.appName = name);
+    this.appVersion.getVersionNumber().then((version) => this.version = version);
+    this.appVersion.getVersionCode().then((versionCode) => this.versionCode = versionCode);
   }
 
 }

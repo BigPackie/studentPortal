@@ -22,6 +22,7 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      console.log("platform ready:", this.platform.platforms())
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
