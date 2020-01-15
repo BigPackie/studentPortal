@@ -12,15 +12,14 @@
     {{ appName }}
   </h1>
   <p>
-    <b>Mobile application for ICIT</b>
+    <b>Mobile application for ICIT, KING MONGKUT'S UNIVERSITY OF TECHNOLOGY NORTH BANGKOK</b>
   </p>
   <p>
     <em>Version: {{ version }}</em>
     <em> ({{ versionCode }})</em>
   </p>
   <ion-note color="danger">
-    Application is not yet complete. Some features and content might be missing, bugs might be present.
-    Please report all the bugs via email.
+      Please report bugs via the support email or/and the form link located in the <em>Contacts</em> section.
   </ion-note>
   <p>
     The purpose of this application is to inform students about <strong>news</strong> and ongoing
@@ -37,7 +36,7 @@
         <ion-icon name="mail" style="margin-right: 1em;"></ion-icon>
       </ion-col>
       <ion-col size="11">
-        <a href="mailto:icit_support@kmutnb.ac.th?Subject=ICIT%20App%20user%20report" target="_system">
+        <a [href]="mailHref" target="_system">
           icit_support@kmutnb.ac.th
         </a>
       </ion-col>
