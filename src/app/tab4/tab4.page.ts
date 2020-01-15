@@ -15,7 +15,9 @@ export class Tab4Page {
   version: string;
   versionCode: any;
 
-  mailHref: string = "mailto:icit_support@kmutnb.ac.th?Subject=ICIT%20App%20user%20report";
+  mailHrefBase: string = "mailto:icit_support@kmutnb.ac.th?Subject=ICIT%20App%20user%20report";
+
+  mailHref: string = this.mailHrefBase;
 
   constructor(private appVersion: AppVersion, public platform: Platform, private userService: UserService) { }
 
@@ -28,10 +30,17 @@ export class Tab4Page {
 
     Promise.all([this.appVersion.getVersionNumber(), this.appVersion.getVersionCode()])
     .then((values) => {
-      this.mailHref = this.mailHref + encodeURIComponent(", version:" + values[0] + "(" + values[1] +")");
-      return  this.userService.getUserData();
-    }).then((userData: UserData) => {
-      this.mailHref = this.mailHref + encodeURIComponent(", user:" + userData.username);
+      this.mailHrefBase = this.mailHrefBase + encodeURIComponent(", version:" + values[0] + "(" + values[1] +")");
+    })
+  }
+
+  ionViewDidEnter(){
+    this.mailHref = this.mailHrefBase;
+    this.userService.getUserData()
+      .then((userData: UserData) => {
+        if(userData){
+          this.mailHref = this.mailHrefBase + encodeURIComponent(", user:" + userData.username);
+        }
     })
   }
 
