@@ -33,7 +33,7 @@ export class Tab1Page {
   constructor(private httpClient: HttpClient, private dataService: DataService) {}
 
   //reload data every time the user enters this tab
-  ionViewWillEnter(){
+  ionViewDidEnter(){
     this.loadNews();
     this.loadPromotions();
 

@@ -39,7 +39,7 @@ export class ProfilePage implements OnInit {
     
     const toast = await this.toastController.create({
       header: 'Logout failed.',
-      message: err && err.api_message ? err.api_message : "",
+      message: "You are not completely logged out" +  (err && err.api_message ? err.api_message : ""),
       position: 'top',
       duration: 3000
     });
@@ -59,8 +59,12 @@ export class ProfilePage implements OnInit {
       .pipe(
         take(1),
         catchError((err) => this.logoutFailed(err)),
-        finalize(() => {
+        finalize(async () => {
+          //even if the server part logout failed, we logout user at the client, so he can relogin.
           logOut.dismiss();
+          await this.userService.deleteUser();
+     
+          this.router.navigateByUrl('/tabs/tab1', {replaceUrl: true});
         })
       ).subscribe(async (response) => {
         console.log(response);
@@ -69,9 +73,7 @@ export class ProfilePage implements OnInit {
           return await this.logoutFailed(response);
         }
 
-        await this.userService.deleteUser();
-     
-        this.router.navigateByUrl('/tabs/tab1', {replaceUrl: true});
+        
       })
   }
 

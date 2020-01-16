@@ -3,10 +3,9 @@ import { Storage } from '@ionic/storage';
 import { Api } from '../api/api';
 import { Observable } from 'rxjs';
 import { UserData, LoginData } from './models';
-import { HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { verify } from 'crypto';
-import { tap } from 'rxjs/operators';
+import { AES, enc } from 'crypto-ts';
+
 
 enum STORAGE_KEY {
   HAS_LOGGED_IN = "hasLoggedIn",
@@ -27,9 +26,11 @@ export class UserService {
   }
 
   saveLoggedInUser(userData: UserData, token: string){
-    return this.setToken(token)
-    .then(() => this.storage.set(STORAGE_KEY.HAS_LOGGED_IN, true))
+    return this.verifyToken(token)
+    .then(() => this.encryptToken(token, userData))
+    .then(enT => this.setToken(enT))
     .then(() => this.setUserData(userData))
+    .then(() => this.storage.set(STORAGE_KEY.HAS_LOGGED_IN, true))
     .then(() => window.dispatchEvent(new CustomEvent('user:login')));
   }
 
@@ -65,23 +66,36 @@ export class UserService {
   //TODO maybe hash token before use and unhash on load, using some symetric algorithm and salt. Maybe the user pid can be used as salt or something.
   // if we have secure storage then we dont have to be concerned about this.
   private setToken(token : string): Promise<any> {
-
-    if (!this.verifyToken(token)){
-      return Promise.reject("user token is invalid");
-    }
-
     return this.storage.set(STORAGE_KEY.TOKEN, token);
   }
 
   getToken(): Promise<string> {
-    return this.storage.get(STORAGE_KEY.TOKEN).then((value) => {
-      return value;
-    });
+   return Promise.all([this.storage.get(STORAGE_KEY.TOKEN), this.getUserData()])
+      .then(([enT, user]) => {
+        //there is no saved token or user, probably because he did not log in yet, just return empty string""
+        if (!enT || user == null || user == undefined){
+          return enT;  
+        } else {
+          return this.decryptToken(enT, user)
+        }
+      }).catch(() => console.warn("Something went wrong when retrieving the token"));
+  }
+  
+  verifyToken(token: string): Promise<boolean> {
+    //TODO maybe need to verify the token validty, the last part is the first two parts hashed, so if we hash with the same alghoritm, the result should be same as last part
+      return Promise.resolve(true);
   }
 
-  verifyToken(token: string): boolean {
-    //TODO maybe need to verify the token validty, the last part is the first two parts hashed, so if we hash with the same alghoritm, the result should be same as last part
-      return true;
+  private encryptToken(token : string, userData: UserData): Promise<any>{
+    const secureKey ="hakuna matata " + userData.username + userData.birthdate;
+
+    return Promise.resolve(AES.encrypt(token, secureKey).toString());
+  }
+
+  private decryptToken(enT : string, userData: UserData): Promise<any>{
+    const secureKey ="hakuna matata " + userData.username + userData.birthdate;
+
+    return Promise.resolve((AES.decrypt(enT, secureKey)).toString(enc.Utf8));
   }
 
   getUserData(): Promise<UserData> {
