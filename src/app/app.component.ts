@@ -23,12 +23,8 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       console.log("platform ready:", this.platform.platforms())
-     
-      if (this.platform.is('android')) {
-        this.statusBar.styleLightContent();
-      } else {
-        this.statusBar.styleDefault();
-      }
+      
+      this.statusBar.styleLightContent();
       
       this.splashScreen.hide();
     });
