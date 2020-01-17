@@ -39,7 +39,7 @@ export class ProfilePage implements OnInit {
     
     const toast = await this.toastController.create({
       header: 'Logout failed.',
-      message: "You are not completely logged out" +  (err && err.api_message ? err.api_message : ""),
+      message: "You are not completely logged out, reason: " +  (err && err.api_message ? err.api_message : "unknown"),
       position: 'top',
       duration: 3000
     });
