@@ -169,7 +169,7 @@
                 {{item.point}}
                 <ion-icon name="md-bug"></ion-icon>
               </ion-label>
-              | {{item.date | date:'dd/MM/yyyy HH:mm:ss'}}
+              | {{item.date | iosDateFormat | date:'dd/MM/yyyy HH:mm:ss'}}
             </h3>
           </ion-text>
           <p>{{ item.description }}</p>

@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Tab3Page } from './tab3.page';
 import { TranslateModule } from '@ngx-translate/core';
 import { ComponentsModule } from '../components/components.module';
+import { IosDateStringFormatPipe } from './iosDatePipe';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { ComponentsModule } from '../components/components.module';
     TranslateModule,
     ComponentsModule,
   ],
-  declarations: [Tab3Page]
+  declarations: [Tab3Page, IosDateStringFormatPipe]
 })
 export class Tab3PageModule {}
