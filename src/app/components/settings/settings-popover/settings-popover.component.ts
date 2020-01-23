@@ -13,10 +13,9 @@ export class SettingsPopoverComponent implements OnInit {
 
   ngOnInit() {}
 
-  async presentPopover(ev: any) {
+  async presentPopover() {
     const popover = await this.popoverController.create({
       component: SettingsContainerComponent,
-      event: ev,
       translucent: true
     });
     return await popover.present();

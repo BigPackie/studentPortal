@@ -12,7 +12,7 @@ import { UserData } from '../services/models';
 export class Tab4Page {
 
   appName: string;
-  version: string;
+  version: string | number;
   versionCode: any;
 
   mailHrefBase: string = "mailto:icit_support@kmutnb.ac.th?Subject=ICIT%20App%20user%20report";
@@ -23,13 +23,12 @@ export class Tab4Page {
 
   ngOnInit() {
     this.appVersion.getAppName()
-    .then((name) => this.appName = name)
-    .then();
-    this.appVersion.getVersionNumber().then((version) => this.version = version);
-    this.appVersion.getVersionCode().then((versionCode) => this.versionCode = versionCode);
+    .then((name) => this.appName = name);
 
     Promise.all([this.appVersion.getVersionNumber(), this.appVersion.getVersionCode()])
     .then((values) => {
+      this.version = values[0];
+      this.versionCode = values[1];
       this.mailHrefBase = this.mailHrefBase + encodeURIComponent(", version:" + values[0] + "(" + values[1] +")");
     })
   }

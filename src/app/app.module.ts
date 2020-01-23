@@ -19,6 +19,9 @@ import { IonicStorageModule, Storage } from '@ionic/storage';
 import { AuthRequestInterceptor } from './interceptors/authRequestInterceptor';
 import { AuthResponseInterceptor } from './interceptors/authResponseInterceptor';
 import { AppVersion } from '@ionic-native/app-version/ngx';
+import { UpdateService } from './services/update.service';
+import { Api } from './api/api';
+import { Market } from '@ionic-native/market/ngx';
 
 export function LanguageLoader(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -44,8 +47,11 @@ export function LanguageLoader(http: HttpClient) {
   providers: [
     StatusBar,
     SplashScreen,
+    UpdateService,
     TranslateConfigService,
     AppVersion,
+    Api,
+    Market,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: AuthRequestInterceptor, multi: true}, //order of interceptors matters
     { provide: HTTP_INTERCEPTORS, useClass: AuthResponseInterceptor, multi: true}

@@ -57,7 +57,7 @@ export interface Reward {
     name: string,
     point: number,
     img: string,
-    desc: string,
+    description: string,
     status: RewardStatus;
 }
 
@@ -87,4 +87,15 @@ export enum RewardStatus {
 
 export interface RewardHistory extends Reward {
     date:  string
+}
+
+export interface AppVersionInfo {
+    /**
+     * Format x.x.x
+     */
+    version: string, 
+    build?: string,
+    updateRequired: boolean,
+    playStoreLink: string,
+    appleStoreLink: string
 }
