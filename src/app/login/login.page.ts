@@ -61,7 +61,6 @@ export class LoginPage implements OnInit {
           loggingIn.dismiss();
         })
       ).subscribe(async (response) => {
-        console.log(response);
 
         if (response.api_status_code != 202) {
           return await this.loginFailed(response);

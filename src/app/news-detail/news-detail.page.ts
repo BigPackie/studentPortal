@@ -25,7 +25,6 @@ export class NewsDetailPage implements OnInit {
 
   ngOnInit() {
     const newsDetailId = this.route.snapshot.paramMap.get('id');
-    console.log(`Getting data for news detail ${newsDetailId}`);
     this.dataService.getNewsDetail(newsDetailId)
       .pipe(take(1))
       .subscribe((newsDetail) => {

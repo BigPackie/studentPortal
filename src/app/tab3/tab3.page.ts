@@ -46,8 +46,6 @@ export class Tab3Page {
 
   drag(eventDetail, item){
     this.slidingItemOpacity = Math.pow(10, eventDetail.ratio*2 - 1) / 10;
-    // console.log('dragging:' + JSON.stringify(eventDetail));
-    // console.log('item:' + JSON.stringify(item.style));
   }
 
   updatePageContent() {
@@ -100,7 +98,6 @@ export class Tab3Page {
     return this.dataService.getRewardsList().pipe(
       take(1),
       tap((res) => {
-        console.log(res);
         this.currentPointRewards = res.current_point_reward;
         this.accumulativePointRewards = res.accumulative_point_reward;
       })
@@ -112,7 +109,6 @@ export class Tab3Page {
     return this.dataService.getUserPoints().pipe(
       take(1),
       tap((res) => {
-        console.log(res);
         this.currentPoint = res.current_point;       
         this.accumulativePoint = res.accumulative_point;
       })
@@ -123,7 +119,6 @@ export class Tab3Page {
     console.log(`loading history of rewads`);
     this.dataService.getRewardsHistory().pipe(take(1))
     .subscribe((res) => {
-      console.log(res);
       this.currentPointRewardsHistory = res.current_point_exchanged;
       this.accumulativePointRewardsHistory = res.accumulative_point_exchanged;
     });
@@ -138,8 +133,6 @@ export class Tab3Page {
   }
 
   async getRewardRedemptionCode(reward: Reward, slidingItem: IonItemSliding) {
-
-    console.log("triggered swipe event");
 
     if (reward.id == null || reward.id == undefined) {
       console.error(`Reward has no id. Cannot redeem.`);
@@ -162,7 +155,6 @@ export class Tab3Page {
           reward.redemptionCode = res.exchange_token;
           reward.status = RewardStatus.REDEEMED;
           this.refreshSlider(slidingItem);
-          console.log(`Redemption code ${reward.redemptionCode} set for reward ${reward.id}`)
         },
         error => {reward.status = RewardStatus.UNLOCKED;});
 
@@ -170,8 +162,6 @@ export class Tab3Page {
   }
 
   async getMilestoneRedemptionCode(reward: Reward, slidingItem: IonItemSliding) {
-
-    console.log("triggered swipe event");
 
     if (reward.id == null || reward.id == undefined) {
       console.error(`Reward has no id. Cannot redeem.`);
@@ -194,7 +184,6 @@ export class Tab3Page {
           reward.redemptionCode = res.exchange_token;
           reward.status = RewardStatus.REDEEMED;
           this.refreshSlider(slidingItem);
-          console.log(`Redemption code ${reward.redemptionCode} set for reward ${reward.id}`)
         },
         error => {reward.status = RewardStatus.UNLOCKED;});
 
@@ -208,8 +197,6 @@ export class Tab3Page {
     //if latestMilestone = true && unlocked then  return: "Claim previous first"
 
     let element = "";
-
-   // console.log(`accumated points: ${this.accumulativePoint}, milestone required: ${milestonePoints}`);
 
     if (milestone.status == RewardStatus.UNLOCKED) {
       if (latestMilestone) {
@@ -239,9 +226,8 @@ export class Tab3Page {
     return rewardPoints - this.currentPoint;
   }
 
-  isMileStoneUnlocked(points: number): boolean{
-   // console.log(`milestone points: ${points} and accumulated points: ${this.accumulativePoint} result: ${this.accumulativePoint >= points}`)
-    return  this.accumulativePoint >= points;
+  isMileStoneUnlocked(points: number): boolean {
+    return this.accumulativePoint >= points;
   }
 
   isRewardUnlocked(points: number): boolean{
@@ -249,8 +235,8 @@ export class Tab3Page {
   }
 
   /**
-   * If the <ion-item-sliding> is open, and you change the with of a the <ion-item-option> (for example make it smaller)
-   * then the amount of opennes is not adjusted. This method adjusts the openned of the sliding item relative to the new width of it's option
+   * If the <ion-item-sliding> is open, and you change the width of a the <ion-item-option> (for example make it smaller)
+   * then the amount of opennes is not adjusted. This method adjusts the opennes of the sliding item relative to the new width of it's option
    * 
    * @param slidingItem <ion-item-sliding> element marked with "#slidingCase"
    */

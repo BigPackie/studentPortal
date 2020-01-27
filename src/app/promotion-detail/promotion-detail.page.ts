@@ -24,7 +24,6 @@ export class PromotionDetailPage implements OnInit {
 
   ngOnInit() {
     const promotionDetailId = this.route.snapshot.paramMap.get('id');
-    console.log(`Getting data for promotion detail ${promotionDetailId}`);
     this.dataService.getPromotionDetail(promotionDetailId)
       .pipe(take(1))
       .subscribe((detail) => {
